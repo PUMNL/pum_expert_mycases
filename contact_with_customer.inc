@@ -23,6 +23,10 @@ function pum_expert_mycases_contact_with_customer($form, &$form_state, $case_id)
         '#value' => t('Save'),
     );
 
+    $form_state['redirect'] = array(
+        array('query' => drupal_get_destination()),
+    );
+
     return $form;
 }
 

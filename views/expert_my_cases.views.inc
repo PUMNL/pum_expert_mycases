@@ -98,15 +98,15 @@ $handler->display->display_options['fields']['end_date']['label'] = 'End Date';
 $handler->display->display_options['fields']['end_date']['date_format'] = 'd_m_y';
 $handler->display->display_options['fields']['end_date']['second_date_format'] = 'long';
 /* Field: Global: Custom text */
-$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['table'] = 'views';
-$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['label'] = '';
-$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Contact with customer';
-$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['nothing']['alter']['path'] = '/expert/my-cases/contact-with-customer/[id_1] ';
-$handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
-$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+$handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+$handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing_2']['label'] = '';
+$handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'View case';
+$handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing_2']['alter']['path'] = '/expert/my-cases/activities/[id_1] ';
+$handler->display->display_options['fields']['nothing_2']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
