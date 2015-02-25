@@ -109,11 +109,6 @@ $handler->display->display_options['arguments']['id']['summary_options']['items_
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/customer/cases';
-$handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'My Cases';
-$handler->display->display_options['menu']['weight'] = '0';
-$handler->display->display_options['menu']['context'] = 0;
-$handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['my_cases_for_expert_'] = array(
     t('Master'),
     t('My cases'),

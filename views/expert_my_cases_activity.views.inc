@@ -119,8 +119,23 @@ $handler->display->display_options['header']['area_4']['id'] = 'area_4';
 $handler->display->display_options['header']['area_4']['table'] = 'views';
 $handler->display->display_options['header']['area_4']['field'] = 'area';
 $handler->display->display_options['header']['area_4']['empty'] = TRUE;
-$handler->display->display_options['header']['area_4']['content'] = '<h3>Activities</h3>';
+$handler->display->display_options['header']['area_4']['content'] = '<h3>Roles</h3>';
 $handler->display->display_options['header']['area_4']['format'] = 'filtered_html';
+/* Header: Global: View area */
+$handler->display->display_options['header']['view_3']['id'] = 'view_3';
+$handler->display->display_options['header']['view_3']['table'] = 'views';
+$handler->display->display_options['header']['view_3']['field'] = 'view';
+$handler->display->display_options['header']['view_3']['label'] = 'Documents';
+$handler->display->display_options['header']['view_3']['empty'] = TRUE;
+$handler->display->display_options['header']['view_3']['view_to_insert'] = 'case_roles_for_expert_:default';
+$handler->display->display_options['header']['view_3']['inherit_arguments'] = TRUE;
+/* Header: Global: Text area */
+$handler->display->display_options['header']['area_5']['id'] = 'area_5';
+$handler->display->display_options['header']['area_5']['table'] = 'views';
+$handler->display->display_options['header']['area_5']['field'] = 'area';
+$handler->display->display_options['header']['area_5']['empty'] = TRUE;
+$handler->display->display_options['header']['area_5']['content'] = '<h3>Activities</h3>';
+$handler->display->display_options['header']['area_5']['format'] = 'filtered_html';
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
