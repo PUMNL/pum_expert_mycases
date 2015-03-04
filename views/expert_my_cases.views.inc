@@ -108,7 +108,7 @@ $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing_2']['label'] = '';
 $handler->display->display_options['fields']['nothing_2']['alter']['text'] = 'View case';
 $handler->display->display_options['fields']['nothing_2']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['nothing_2']['alter']['path'] = '/expert/my-cases/activities/[id_1] ';
+$handler->display->display_options['fields']['nothing_2']['alter']['path'] = '/expert/my-cases/activities/[id_1]';
 $handler->display->display_options['fields']['nothing_2']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
 /* Filter criterion: User: Current */

@@ -249,6 +249,7 @@ $handler->display->display_options['filters']['is_current_revision']['id'] = 'is
 $handler->display->display_options['filters']['is_current_revision']['table'] = 'civicrm_activity';
 $handler->display->display_options['filters']['is_current_revision']['field'] = 'is_current_revision';
 $handler->display->display_options['filters']['is_current_revision']['relationship'] = 'activity_id';
+$handler->display->display_options['filters']['is_current_revision']['value'] = '1';
 /* Filter criterion: CiviCRM Activities: Is Deleted */
 $handler->display->display_options['filters']['is_deleted']['id'] = 'is_deleted';
 $handler->display->display_options['filters']['is_deleted']['table'] = 'civicrm_activity';
