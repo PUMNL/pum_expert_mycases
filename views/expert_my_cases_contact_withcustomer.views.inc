@@ -30,7 +30,7 @@ $handler->display->display_options['header']['area_1']['id'] = 'area_1';
 $handler->display->display_options['header']['area_1']['table'] = 'views';
 $handler->display->display_options['header']['area_1']['field'] = 'area';
 $handler->display->display_options['header']['area_1']['empty'] = TRUE;
-$handler->display->display_options['header']['area_1']['content'] = '<a href="/expert/my-cases/new-contact-with-customer/!1?destination=/expert/my-cases/activities/!1" class="button">Add contact with customer</a>';
+$handler->display->display_options['header']['area_1']['content'] = '<a href="/expert/my-cases/new-contact-with-customer/!1?destination=/expert/my-cases/activities/!1" class="button">Add summary of contact with customer</a>';
 $handler->display->display_options['header']['area_1']['format'] = 'filtered_html';
 $handler->display->display_options['header']['area_1']['tokenize'] = TRUE;
 /* No results behavior: Global: Text area */

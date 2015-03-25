@@ -89,7 +89,7 @@ $handler->display->display_options['header']['area_2']['id'] = 'area_2';
 $handler->display->display_options['header']['area_2']['table'] = 'views';
 $handler->display->display_options['header']['area_2']['field'] = 'area';
 $handler->display->display_options['header']['area_2']['empty'] = TRUE;
-$handler->display->display_options['header']['area_2']['content'] = '<h3>Contact with customer</h3>';
+$handler->display->display_options['header']['area_2']['content'] = '<h3>Summary of contact with customer</h3>';
 $handler->display->display_options['header']['area_2']['format'] = 'filtered_html';
 /* Header: Global: View area */
 $handler->display->display_options['header']['view_1']['id'] = 'view_1';
