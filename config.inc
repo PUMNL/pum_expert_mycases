@@ -17,6 +17,7 @@ class pum_expert_mycases_config {
         $this->contact_with_customer = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Customer', 'option_group_id' => $activity_type_option_group));
 
         $this->conditions[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Conditions', 'option_group_id' => $activity_type_option_group));
+        $this->conditions[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Condition: Customer Contribution.', 'option_group_id' => $activity_type_option_group));
 
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Condition: Customer Contribution.', 'option_group_id' => $activity_type_option_group));
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'private_case_information', 'option_group_id' => $activity_type_option_group));
