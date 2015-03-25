@@ -21,7 +21,14 @@ class pum_expert_mycases_config {
 
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Condition: Customer Contribution.', 'option_group_id' => $activity_type_option_group));
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'private_case_information', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'private_case_information', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Custom Data', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Representative payment', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Start Date', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Assign Case Role', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Remove Case Role', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Status', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Type', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Tags', 'option_group_id' => $activity_type_option_group));
     }
 
     public function getContactWithCustomerActivityTypeId() {
