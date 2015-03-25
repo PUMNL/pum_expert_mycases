@@ -103,6 +103,7 @@ $handler->display->display_options['fields']['fieldset_1']['children'] = array(
   3 => 'state_province',
   4 => 'country',
 );
+$handler->display->display_options['fields']['fieldset_1']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address']['id'] = 'street_address';
 $handler->display->display_options['fields']['street_address']['table'] = 'civicrm_address';
@@ -156,6 +157,7 @@ $handler->display->display_options['fields']['fieldset_2']['children'] = array(
   3 => 'state_province_1',
   4 => 'country_1',
 );
+$handler->display->display_options['fields']['fieldset_2']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address_1']['id'] = 'street_address_1';
 $handler->display->display_options['fields']['street_address_1']['table'] = 'civicrm_address';
@@ -201,6 +203,17 @@ $handler->display->display_options['fields']['country_1']['location_op'] = '0';
 $handler->display->display_options['fields']['country_1']['is_primary'] = 0;
 $handler->display->display_options['fields']['country_1']['is_billing'] = 0;
 $handler->display->display_options['fields']['country_1']['country_display'] = '2';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_3']['id'] = 'fieldset_3';
+$handler->display->display_options['fields']['fieldset_3']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_3']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_3']['label'] = 'Documents';
+$handler->display->display_options['fields']['fieldset_3']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['fieldset_3']['children'] = array(
+  0 => 'documents',
+);
+$handler->display->display_options['fields']['fieldset_3']['fieldset']['collapsible'] = 1;
+$handler->display->display_options['fields']['fieldset_3']['fieldset']['collapsed'] = 1;
 /* Field: Global: View */
 $handler->display->display_options['fields']['documents']['id'] = 'documents';
 $handler->display->display_options['fields']['documents']['table'] = 'views';
@@ -210,6 +223,18 @@ $handler->display->display_options['fields']['documents']['element_label_type'] 
 $handler->display->display_options['fields']['documents']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['documents']['view'] = 'customer_documents_for_expert_';
 $handler->display->display_options['fields']['documents']['arguments'] = '!1';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_4']['id'] = 'fieldset_4';
+$handler->display->display_options['fields']['fieldset_4']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_4']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_4']['label'] = 'Customer data';
+$handler->display->display_options['fields']['fieldset_4']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['fieldset_4']['children'] = array(
+  0 => 'customer_data',
+  1 => 'yearly_information',
+);
+$handler->display->display_options['fields']['fieldset_4']['fieldset']['collapsible'] = 1;
+$handler->display->display_options['fields']['fieldset_4']['fieldset']['collapsed'] = 1;
 /* Field: Global: View */
 $handler->display->display_options['fields']['customer_data']['id'] = 'customer_data';
 $handler->display->display_options['fields']['customer_data']['table'] = 'views';
@@ -219,6 +244,15 @@ $handler->display->display_options['fields']['customer_data']['element_label_typ
 $handler->display->display_options['fields']['customer_data']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['customer_data']['view'] = 'customer_data_for_expert_';
 $handler->display->display_options['fields']['customer_data']['arguments'] = '!1';
+/* Field: Global: View */
+$handler->display->display_options['fields']['yearly_information']['id'] = 'yearly_information';
+$handler->display->display_options['fields']['yearly_information']['table'] = 'views';
+$handler->display->display_options['fields']['yearly_information']['field'] = 'view';
+$handler->display->display_options['fields']['yearly_information']['label'] = 'Yearly information';
+$handler->display->display_options['fields']['yearly_information']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['yearly_information']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['yearly_information']['view'] = 'yearly_information_for_expert_';
+$handler->display->display_options['fields']['yearly_information']['arguments'] = '!1';
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
