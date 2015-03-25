@@ -15,7 +15,7 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Customer';
-$handler->display->display_options['css_class'] = 'pum-list-view';
+$handler->display->display_options['css_class'] = 'pum-grid-view';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
@@ -201,6 +201,17 @@ $handler->display->display_options['fields']['country_1']['location_op'] = '0';
 $handler->display->display_options['fields']['country_1']['is_primary'] = 0;
 $handler->display->display_options['fields']['country_1']['is_billing'] = 0;
 $handler->display->display_options['fields']['country_1']['country_display'] = '2';
+
+/* Field: Global: View */
+$handler->display->display_options['fields']['documents']['id'] = 'documents';
+$handler->display->display_options['fields']['documents']['table'] = 'views';
+$handler->display->display_options['fields']['documents']['field'] = 'view';
+$handler->display->display_options['fields']['documents']['label'] = 'Documents';
+$handler->display->display_options['fields']['documents']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['documents']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['documents']['view'] = 'customer_documents_for_expert_';
+$handler->display->display_options['fields']['documents']['arguments'] = '!1';
+
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
