@@ -253,33 +253,56 @@ $handler->display->display_options['fields']['yearly_information']['element_labe
 $handler->display->display_options['fields']['yearly_information']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['yearly_information']['view'] = 'yearly_information_for_expert_';
 $handler->display->display_options['fields']['yearly_information']['arguments'] = '!1';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_5']['id'] = 'fieldset_5';
+$handler->display->display_options['fields']['fieldset_5']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_5']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_5']['label'] = 'Contact persons';
+$handler->display->display_options['fields']['fieldset_5']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['fieldset_5']['children'] = array(
+  0 => 'authrosied_contacts',
+  1 => 'representatives',
+);
+$handler->display->display_options['fields']['fieldset_5']['fieldset']['collapsible'] = 1;
+$handler->display->display_options['fields']['fieldset_5']['fieldset']['collapsed'] = 1;
 /* Field: Global: View */
-$handler->display->display_options['fields']['view']['id'] = 'view';
-$handler->display->display_options['fields']['view']['table'] = 'views';
-$handler->display->display_options['fields']['view']['field'] = 'view';
-$handler->display->display_options['fields']['view']['label'] = 'Authorised contacts';
-$handler->display->display_options['fields']['view']['element_label_type'] = 'h2';
-$handler->display->display_options['fields']['view']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['view']['view'] = 'authorised_contacts_for_customer';
-$handler->display->display_options['fields']['view']['arguments'] = '!1';
+$handler->display->display_options['fields']['authrosied_contacts']['id'] = 'authrosied_contacts';
+$handler->display->display_options['fields']['authrosied_contacts']['table'] = 'views';
+$handler->display->display_options['fields']['authrosied_contacts']['field'] = 'view';
+$handler->display->display_options['fields']['authrosied_contacts']['label'] = 'Authorised contacts';
+$handler->display->display_options['fields']['authrosied_contacts']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['authrosied_contacts']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['authrosied_contacts']['view'] = 'authorised_contacts_for_customer';
+$handler->display->display_options['fields']['authrosied_contacts']['arguments'] = '!1';
 /* Field: Global: View */
-$handler->display->display_options['fields']['view_1']['id'] = 'view_1';
-$handler->display->display_options['fields']['view_1']['table'] = 'views';
-$handler->display->display_options['fields']['view_1']['field'] = 'view';
-$handler->display->display_options['fields']['view_1']['label'] = 'Representative';
-$handler->display->display_options['fields']['view_1']['element_label_type'] = 'h2';
-$handler->display->display_options['fields']['view_1']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['view_1']['view'] = 'representatives_for_customer';
-$handler->display->display_options['fields']['view_1']['arguments'] = '!1';
+$handler->display->display_options['fields']['representatives']['id'] = 'representatives';
+$handler->display->display_options['fields']['representatives']['table'] = 'views';
+$handler->display->display_options['fields']['representatives']['field'] = 'view';
+$handler->display->display_options['fields']['representatives']['label'] = 'Representative';
+$handler->display->display_options['fields']['representatives']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['representatives']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['representatives']['view'] = 'representatives_for_customer';
+$handler->display->display_options['fields']['representatives']['arguments'] = '!1';
+/* Field: Global: Fieldset */
+$handler->display->display_options['fields']['fieldset_6']['id'] = 'fieldset_6';
+$handler->display->display_options['fields']['fieldset_6']['table'] = 'views';
+$handler->display->display_options['fields']['fieldset_6']['field'] = 'fieldset';
+$handler->display->display_options['fields']['fieldset_6']['label'] = 'Cases';
+$handler->display->display_options['fields']['fieldset_6']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['fieldset_6']['children'] = array(
+  0 => 'cases',
+);
+$handler->display->display_options['fields']['fieldset_6']['fieldset']['collapsible'] = 1;
+$handler->display->display_options['fields']['fieldset_6']['fieldset']['collapsed'] = 1;
 /* Field: Global: View */
-$handler->display->display_options['fields']['view_3']['id'] = 'view_3';
-$handler->display->display_options['fields']['view_3']['table'] = 'views';
-$handler->display->display_options['fields']['view_3']['field'] = 'view';
-$handler->display->display_options['fields']['view_3']['label'] = 'Cases';
-$handler->display->display_options['fields']['view_3']['element_label_type'] = 'h2';
-$handler->display->display_options['fields']['view_3']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['view_3']['view'] = 'my_customer_cases_for_expert_';
-$handler->display->display_options['fields']['view_3']['arguments'] = '!1';
+$handler->display->display_options['fields']['cases']['id'] = 'cases';
+$handler->display->display_options['fields']['cases']['table'] = 'views';
+$handler->display->display_options['fields']['cases']['field'] = 'view';
+$handler->display->display_options['fields']['cases']['label'] = 'Cases';
+$handler->display->display_options['fields']['cases']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['cases']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['cases']['view'] = 'my_customer_cases_for_expert_';
+$handler->display->display_options['fields']['cases']['arguments'] = '!1';
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';
