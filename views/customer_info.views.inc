@@ -201,7 +201,6 @@ $handler->display->display_options['fields']['country_1']['location_op'] = '0';
 $handler->display->display_options['fields']['country_1']['is_primary'] = 0;
 $handler->display->display_options['fields']['country_1']['is_billing'] = 0;
 $handler->display->display_options['fields']['country_1']['country_display'] = '2';
-
 /* Field: Global: View */
 $handler->display->display_options['fields']['documents']['id'] = 'documents';
 $handler->display->display_options['fields']['documents']['table'] = 'views';
@@ -211,7 +210,15 @@ $handler->display->display_options['fields']['documents']['element_label_type'] 
 $handler->display->display_options['fields']['documents']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['documents']['view'] = 'customer_documents_for_expert_';
 $handler->display->display_options['fields']['documents']['arguments'] = '!1';
-
+/* Field: Global: View */
+$handler->display->display_options['fields']['customer_data']['id'] = 'customer_data';
+$handler->display->display_options['fields']['customer_data']['table'] = 'views';
+$handler->display->display_options['fields']['customer_data']['field'] = 'view';
+$handler->display->display_options['fields']['customer_data']['label'] = 'Customer data';
+$handler->display->display_options['fields']['customer_data']['element_label_type'] = 'h2';
+$handler->display->display_options['fields']['customer_data']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['customer_data']['view'] = 'customer_data_for_expert_';
+$handler->display->display_options['fields']['customer_data']['arguments'] = '!1';
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
