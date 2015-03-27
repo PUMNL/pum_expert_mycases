@@ -38,3 +38,23 @@ function pum_expert_mycases_get_role_ids($roles) {
 function pum_expert_mycases_menu() {
     return _pum_expert_mycases_menu();
 }
+
+function _pum_expert_has_user_role_on_case($case_id) {
+  static $roles = array();
+  $case_id = trim($case_id);
+  if (isset($roles[$case_id])) {
+    return $roles[$case_id];
+  }
+
+  $roles[$case_id] = false;
+  $session = CRM_Core_Session::singleton();
+  $case = civicrm_api3('Case', 'getsingle', array('case_id' => $case_id));
+  foreach($case['contacts'] as $contact) {
+    if ($contact['contact_id'] == $session->get('userID')) {
+      $roles[$case_id] = true;
+      break;
+    }
+  }
+
+  return $roles[$case_id];
+}

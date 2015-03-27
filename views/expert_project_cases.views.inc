@@ -182,7 +182,7 @@ $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['label'] = '';
 $handler->display->display_options['fields']['nothing']['alter']['text'] = 'View case';
 $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['nothing']['alter']['path'] = 'expert/my-cases/activities/[id] ';
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'expert/my-cases/activities/[id]';
 $handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 /* Contextual filter: CiviCRM Project: Project ID */

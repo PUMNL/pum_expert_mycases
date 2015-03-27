@@ -89,14 +89,19 @@ $handler->display->display_options['style_options']['info'] = array(
         'empty_column' => 0,
     ),
 );
-/* Header: Global: Text area */
-$handler->display->display_options['header']['area']['id'] = 'area';
-$handler->display->display_options['header']['area']['table'] = 'views';
-$handler->display->display_options['header']['area']['field'] = 'area';
-$handler->display->display_options['header']['area']['empty'] = TRUE;
-$handler->display->display_options['header']['area']['content'] = '<a href="/case-documents/new-document/!1?destination=/expert/my-cases/activities/!1" class="button">Add new document</a>';
-$handler->display->display_options['header']['area']['format'] = 'filtered_html';
-$handler->display->display_options['header']['area']['tokenize'] = TRUE;
+/* Header: Global: PHP */
+$handler->display->display_options['header']['php']['id'] = 'php';
+$handler->display->display_options['header']['php']['table'] = 'views';
+$handler->display->display_options['header']['php']['field'] = 'php';
+$handler->display->display_options['header']['php']['empty'] = TRUE;
+$handler->display->display_options['header']['php']['php_output'] = '<?php
+if (_pum_expert_has_user_role_on_case(reset($view->args)))
+{
+?>
+<a href="/case-documents/new-document/!1?destination=/expert/my-cases/activities/!1" class="button">Add new document</a>
+<?php
+}
+?>';
 /* Relationship: CiviCRM Document contact: Contact ID of document contact */
 $handler->display->display_options['relationships']['contact_id']['id'] = 'contact_id';
 $handler->display->display_options['relationships']['contact_id']['table'] = 'civicrm_document_contact';

@@ -25,14 +25,19 @@ $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'none';
 $handler->display->display_options['style_plugin'] = 'default';
 $handler->display->display_options['row_plugin'] = 'fields';
-/* Header: Global: Text area */
-$handler->display->display_options['header']['area_1']['id'] = 'area_1';
-$handler->display->display_options['header']['area_1']['table'] = 'views';
-$handler->display->display_options['header']['area_1']['field'] = 'area';
-$handler->display->display_options['header']['area_1']['empty'] = TRUE;
-$handler->display->display_options['header']['area_1']['content'] = '<a href="/expert/my-cases/new-contact-with-customer/!1?destination=/expert/my-cases/activities/!1" class="button">Add summary of contact with customer</a>';
-$handler->display->display_options['header']['area_1']['format'] = 'filtered_html';
-$handler->display->display_options['header']['area_1']['tokenize'] = TRUE;
+/* Header: Global: PHP */
+$handler->display->display_options['header']['php']['id'] = 'php';
+$handler->display->display_options['header']['php']['table'] = 'views';
+$handler->display->display_options['header']['php']['field'] = 'php';
+$handler->display->display_options['header']['php']['empty'] = TRUE;
+$handler->display->display_options['header']['php']['php_output'] = '<?php
+if (_pum_expert_has_user_role_on_case(reset($view->args)))
+{
+?>
+<a href="/expert/my-cases/new-contact-with-customer/!1?destination=/expert/my-cases/activities/!1" class="button">Add summary of contact with customer</a>
+<?php
+}
+?>';
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
