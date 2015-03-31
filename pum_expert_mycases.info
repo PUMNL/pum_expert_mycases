@@ -8,7 +8,7 @@ dependencies[] = webform (>=4.0-beta1)
 dependencies[] = views
 dependencies[] = pum_civicrm_views
 dependencies[] = views_civicrm_documents
-dependencies[] = newcustomer
+dependencies[] = pum_customer
 
 files[] = config.inc
 files[] = menu.inc
