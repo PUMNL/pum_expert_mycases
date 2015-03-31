@@ -50,14 +50,6 @@ $handler->display->display_options['fields']['products_and_or_services_offered_8
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['empty_zero'] = TRUE;
-/* Field: CiviCRM Custom: Customer Data: Where and how are the products or services sold */
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['id'] = 'where_and_how_are_the_products_o_88';
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['table'] = $table;
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Where_and_how_are_the_products_of_services_sold'));
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['alter']['trim_whitespace'] = TRUE;
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['alter']['strip_tags'] = TRUE;
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['hide_empty'] = TRUE;
-$handler->display->display_options['fields']['where_and_how_are_the_products_o_88']['empty_zero'] = TRUE;
 /* Field: CiviCRM Custom: Customer Data: In which year did your organisation started operations? */
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['id'] = 'in_which_year_did_your_organisat_96';
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['table'] = $table;
