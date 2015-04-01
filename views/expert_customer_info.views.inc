@@ -298,7 +298,7 @@ $handler->display->display_options['fields']['fieldset_6']['fieldset']['collapse
 $handler->display->display_options['fields']['projects']['id'] = 'projects';
 $handler->display->display_options['fields']['projects']['table'] = 'views';
 $handler->display->display_options['fields']['projects']['field'] = 'view';
-$handler->display->display_options['fields']['projects']['label'] = 'Cases';
+$handler->display->display_options['fields']['projects']['label'] = 'Projects';
 $handler->display->display_options['fields']['projects']['element_label_type'] = 'h2';
 $handler->display->display_options['fields']['projects']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['projects']['view'] = 'customer_info_projects_for_expert_';
