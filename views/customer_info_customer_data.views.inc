@@ -56,6 +56,7 @@ $handler->display->display_options['fields']['in_which_year_did_your_organisat_9
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'In_which_year_was_your_organisation_founded_'));
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['empty_zero'] = TRUE;
+$handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['separator'] = '';
 /* Field: CiviCRM Custom: Customer Data: Legal form of the Organisation */
 $handler->display->display_options['fields']['legal_form_of_the_organisation_82']['id'] = 'legal_form_of_the_organisation_82';
 $handler->display->display_options['fields']['legal_form_of_the_organisation_82']['table'] = $table;
