@@ -4,11 +4,18 @@ $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
 $ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'info_for_travel_agency'));
+$pickup = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'pickup'));
 
 $dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_departure_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_return_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $destination = civicrm_api3('CustomField', 'getvalue', array('name' => 'destination', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $notes = civicrm_api3('CustomField', 'getvalue', array('name' => 'notes', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
+
+$pickup_name = civicrm_api3('CustomField', 'getvalue', array('name' => 'pickup_name', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
+$pickup_telephone = civicrm_api3('CustomField', 'getvalue', array('name' => 'pickup_telephone', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
+$accommodation_name = civicrm_api3('CustomField', 'getvalue', array('name' => 'accommodation_name', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
+$accommodation_telephone = civicrm_api3('CustomField', 'getvalue', array('name' => 'accommodation_telephone', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
+$pickup_notes = civicrm_api3('CustomField', 'getvalue', array('name' => 'pickup_notes', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
 
 $view = new view();
 $view->name = 'pickup_info_for_expert_';
@@ -147,40 +154,40 @@ $handler->display->display_options['fields']['requested_return_date']['element_l
 $handler->display->display_options['fields']['requested_return_date']['date_format'] = 'd_m_y';
 /* Field: CiviCRM Custom: Pickup Data: Name of pickup person */
 $handler->display->display_options['fields']['pickup_name']['id'] = 'pickup_name';
-$handler->display->display_options['fields']['pickup_name']['table'] = 'civicrm_value_pickup';
-$handler->display->display_options['fields']['pickup_name']['field'] = 'pickup_name';
+$handler->display->display_options['fields']['pickup_name']['table'] = $pickup['table_name'];
+$handler->display->display_options['fields']['pickup_name']['field'] = $pickup_name;
 $handler->display->display_options['fields']['pickup_name']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['pickup_name']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['pickup_name']['element_type'] = 'span';
 $handler->display->display_options['fields']['pickup_name']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Pickup Data: Telephone number of pickup person */
 $handler->display->display_options['fields']['pickup_telephone']['id'] = 'pickup_telephone';
-$handler->display->display_options['fields']['pickup_telephone']['table'] = 'civicrm_value_pickup';
-$handler->display->display_options['fields']['pickup_telephone']['field'] = 'pickup_telephone';
+$handler->display->display_options['fields']['pickup_telephone']['table'] = $pickup['table_name'];
+$handler->display->display_options['fields']['pickup_telephone']['field'] = $pickup_telephone;
 $handler->display->display_options['fields']['pickup_telephone']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['pickup_telephone']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['pickup_telephone']['element_type'] = 'span';
 $handler->display->display_options['fields']['pickup_telephone']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Pickup Data: Name and address details of Hotel or Guesthouse */
 $handler->display->display_options['fields']['accommodation_name']['id'] = 'accommodation_name';
-$handler->display->display_options['fields']['accommodation_name']['table'] = 'civicrm_value_pickup';
-$handler->display->display_options['fields']['accommodation_name']['field'] = 'accommodation_name';
+$handler->display->display_options['fields']['accommodation_name']['table'] = $pickup['table_name'];
+$handler->display->display_options['fields']['accommodation_name']['field'] = $accommodation_name;
 $handler->display->display_options['fields']['accommodation_name']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['accommodation_name']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['accommodation_name']['element_type'] = 'span';
 $handler->display->display_options['fields']['accommodation_name']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Pickup Data: Telephone number Hotel or Guesthouse */
 $handler->display->display_options['fields']['accommodation_telephone']['id'] = 'accommodation_telephone';
-$handler->display->display_options['fields']['accommodation_telephone']['table'] = 'civicrm_value_pickup';
-$handler->display->display_options['fields']['accommodation_telephone']['field'] = 'accommodation_telephone';
+$handler->display->display_options['fields']['accommodation_telephone']['table'] = $pickup['table_name'];
+$handler->display->display_options['fields']['accommodation_telephone']['field'] = $ccommodation_telephone;
 $handler->display->display_options['fields']['accommodation_telephone']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['accommodation_telephone']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['accommodation_telephone']['element_type'] = 'span';
 $handler->display->display_options['fields']['accommodation_telephone']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Pickup Data: Notes */
 $handler->display->display_options['fields']['notes']['id'] = 'notes';
-$handler->display->display_options['fields']['notes']['table'] = 'civicrm_value_pickup';
-$handler->display->display_options['fields']['notes']['field'] = 'notes';
+$handler->display->display_options['fields']['notes']['table'] = $pickup['table_name'];
+$handler->display->display_options['fields']['notes']['field'] = $pickup_notes;
 $handler->display->display_options['fields']['notes']['alter']['nl2br'] = TRUE;
 $handler->display->display_options['fields']['notes']['element_type'] = 'div';
 $handler->display->display_options['fields']['notes']['element_label_type'] = 'strong';
