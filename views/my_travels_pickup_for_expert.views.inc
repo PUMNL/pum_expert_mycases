@@ -179,7 +179,7 @@ $handler->display->display_options['fields']['accommodation_name']['element_labe
 /* Field: CiviCRM Custom: Pickup Data: Telephone number Hotel or Guesthouse */
 $handler->display->display_options['fields']['accommodation_telephone']['id'] = 'accommodation_telephone';
 $handler->display->display_options['fields']['accommodation_telephone']['table'] = $pickup['table_name'];
-$handler->display->display_options['fields']['accommodation_telephone']['field'] = $ccommodation_telephone;
+$handler->display->display_options['fields']['accommodation_telephone']['field'] = $accommodation_telephone;
 $handler->display->display_options['fields']['accommodation_telephone']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['accommodation_telephone']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['accommodation_telephone']['element_type'] = 'span';
