@@ -89,7 +89,7 @@ $handler->display->display_options['fields']['view_2']['field'] = 'view';
 $handler->display->display_options['fields']['view_2']['label'] = '';
 $handler->display->display_options['fields']['view_2']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['view_2']['hide_empty'] = TRUE;
-$handler->display->display_options['fields']['view_2']['view'] = 'contacts_websites';
+$handler->display->display_options['fields']['view_2']['view'] = 'customer_websites';
 $handler->display->display_options['fields']['view_2']['arguments'] = '!1';
 /* Field: Global: Fieldset */
 $handler->display->display_options['fields']['fieldset_1']['id'] = 'fieldset_1';
