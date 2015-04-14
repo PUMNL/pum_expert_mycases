@@ -183,9 +183,25 @@ $handler->display->display_options['fields']['status']['label'] = 'Status';
 /* Field: CiviCRM DSA Compose: Amount DSA */
 $handler->display->display_options['fields']['amount_dsa']['id'] = 'amount_dsa';
 $handler->display->display_options['fields']['amount_dsa']['table'] = 'civicrm_dsa_compose';
-$handler->display->display_options['fields']['amount_dsa']['field'] = 'amount_dsa';
+$handler->display->display_options['fields']['amount_dsa']['field'] = 'total_amount';
 $handler->display->display_options['fields']['amount_dsa']['relationship'] = 'id';
 $handler->display->display_options['fields']['amount_dsa']['empty'] = '[bdsa_amount]';
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = '';
+$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+if ($row->amount_dsa != null) {
+   echo \'<a href="/expert/dsa/details/\'.$row->id.\'">View details</a>\';
+} elseif ($row->bdsa_amount != null)  {
+   echo \'<a href="/expert/dsa/business-dsa-details/\'.$row->id.\'">View details</a>\';
+}
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 /* Sort criterion: CiviCRM Activities: Scheduled Activity Date */
 $handler->display->display_options['sorts']['activity_date_time']['id'] = 'activity_date_time';
 $handler->display->display_options['sorts']['activity_date_time']['table'] = 'civicrm_activity';
