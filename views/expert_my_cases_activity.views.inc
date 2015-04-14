@@ -70,6 +70,21 @@ $handler->display->display_options['header']['area']['content'] = '<a href="/exp
 $handler->display->display_options['header']['area']['format'] = 'filtered_html';
 $handler->display->display_options['header']['area']['tokenize'] = TRUE;
 /* Header: Global: Text area */
+$handler->display->display_options['header']['area_ma']['id'] = 'area_ma';
+$handler->display->display_options['header']['area_ma']['table'] = 'views';
+$handler->display->display_options['header']['area_ma']['field'] = 'area';
+$handler->display->display_options['header']['area_ma']['empty'] = TRUE;
+$handler->display->display_options['header']['area_ma']['content'] = '<h3>Main activity info</h3>';
+$handler->display->display_options['header']['area_ma']['format'] = 'filtered_html';
+/* Header: Global: View area */
+$handler->display->display_options['header']['ma_view']['id'] = 'ma_view';
+$handler->display->display_options['header']['ma_view']['table'] = 'views';
+$handler->display->display_options['header']['ma_view']['field'] = 'view';
+$handler->display->display_options['header']['ma_view']['label'] = 'Main activity info';
+$handler->display->display_options['header']['ma_view']['empty'] = TRUE;
+$handler->display->display_options['header']['ma_view']['view_to_insert'] = 'main_activity_information_for_expert_:default';
+$handler->display->display_options['header']['ma_view']['inherit_arguments'] = TRUE;
+/* Header: Global: Text area */
 $handler->display->display_options['header']['area_1']['id'] = 'area_1';
 $handler->display->display_options['header']['area_1']['table'] = 'views';
 $handler->display->display_options['header']['area_1']['field'] = 'area';
@@ -172,26 +187,15 @@ $handler->display->display_options['fields']['activity_type']['id'] = 'activity_
 $handler->display->display_options['fields']['activity_type']['table'] = 'civicrm_activity';
 $handler->display->display_options['fields']['activity_type']['field'] = 'activity_type';
 $handler->display->display_options['fields']['activity_type']['relationship'] = 'activity_id';
-/* Field: CiviCRM Activities: Details */
-$handler->display->display_options['fields']['details']['id'] = 'details';
-$handler->display->display_options['fields']['details']['table'] = 'civicrm_activity';
-$handler->display->display_options['fields']['details']['field'] = 'details';
-$handler->display->display_options['fields']['details']['relationship'] = 'activity_id';
-$handler->display->display_options['fields']['details']['label'] = '';
-$handler->display->display_options['fields']['details']['exclude'] = TRUE;
-$handler->display->display_options['fields']['details']['alter']['trim_whitespace'] = TRUE;
-$handler->display->display_options['fields']['details']['alter']['nl2br'] = TRUE;
-$handler->display->display_options['fields']['details']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['details']['text_format'] = 'full_html';
 /* Field: CiviCRM Activities: Subject */
 $handler->display->display_options['fields']['subject']['id'] = 'subject';
 $handler->display->display_options['fields']['subject']['table'] = 'civicrm_activity';
 $handler->display->display_options['fields']['subject']['field'] = 'subject';
 $handler->display->display_options['fields']['subject']['relationship'] = 'activity_id';
-$handler->display->display_options['fields']['subject']['alter']['alter_text'] = TRUE;
-$handler->display->display_options['fields']['subject']['alter']['text'] = '<strong>[subject]</strong><br/ >
-[details]';
+$handler->display->display_options['fields']['subject']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['subject']['alter']['path'] = 'expert/my-cases/activitiy-detail/[id]';
 $handler->display->display_options['fields']['subject']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['subject']['empty'] = '<a href="/expert/my-cases/activitiy-detail/[id]">No subject</a>';
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
