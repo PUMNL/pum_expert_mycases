@@ -33,12 +33,14 @@ $handler->display->display_options['fields']['fieldset']['table'] = 'views';
 $handler->display->display_options['fields']['fieldset']['field'] = 'fieldset';
 $handler->display->display_options['fields']['fieldset']['label'] = 'General info';
 $handler->display->display_options['fields']['fieldset']['children'] = array(
-  0 => 'display_name',
-  1 => 'email',
-  2 => 'phone1',
-  3 => 'phone2',
-  4 => 'view_2',
-  5 => 'fieldset_2',
+  0 => 'id',
+  1 => 'display_name',
+  2 => 'email',
+  3 => 'phone1',
+  4 => 'phone2',
+  5 => 'view_2',
+  6 => 'fieldset_1',
+  7 => 'fieldset_2',
 );
 $handler->display->display_options['fields']['fieldset']['fieldset']['type'] = 'div';
 /* Field: CiviCRM Contacts: Contact ID */
@@ -103,7 +105,7 @@ $handler->display->display_options['fields']['fieldset_1']['children'] = array(
   3 => 'state_province',
   4 => 'country',
 );
-$handler->display->display_options['fields']['fieldset_1']['fieldset']['type'] = 'div';
+$handler->display->display_options['fields']['fieldset_1']['fieldset']['type'] = 'fieldset';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address']['id'] = 'street_address';
 $handler->display->display_options['fields']['street_address']['table'] = 'civicrm_address';
@@ -157,7 +159,7 @@ $handler->display->display_options['fields']['fieldset_2']['children'] = array(
   3 => 'state_province_1',
   4 => 'country_1',
 );
-$handler->display->display_options['fields']['fieldset_2']['fieldset']['type'] = 'div';
+$handler->display->display_options['fields']['fieldset_2']['fieldset']['type'] = 'fieldset';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address_1']['id'] = 'street_address_1';
 $handler->display->display_options['fields']['street_address_1']['table'] = 'civicrm_address';
