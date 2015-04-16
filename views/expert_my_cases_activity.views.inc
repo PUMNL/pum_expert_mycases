@@ -62,14 +62,6 @@ $handler->display->display_options['style_options']['info'] = array(
     ),
 );
 /* Header: Global: Text area */
-$handler->display->display_options['header']['area']['id'] = 'area';
-$handler->display->display_options['header']['area']['table'] = 'views';
-$handler->display->display_options['header']['area']['field'] = 'area';
-$handler->display->display_options['header']['area']['empty'] = TRUE;
-$handler->display->display_options['header']['area']['content'] = '<a href="/expert/my-cases">Go back to my cases</a>';
-$handler->display->display_options['header']['area']['format'] = 'filtered_html';
-$handler->display->display_options['header']['area']['tokenize'] = TRUE;
-/* Header: Global: Text area */
 $handler->display->display_options['header']['area_ma']['id'] = 'area_ma';
 $handler->display->display_options['header']['area_ma']['table'] = 'views';
 $handler->display->display_options['header']['area_ma']['field'] = 'area';
