@@ -6,18 +6,18 @@ $start_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_act
 $end_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_end_date', 'custom_group_id' => $main_activity_info['id']));
 
 $view = new view();
-$view->name = 'my_customers_for_expert_';
+$view->name = 'my_projects_by_customer_for_expert_';
 $view->description = '';
 $view->tag = 'default';
 $view->base_table = 'civicrm_contact';
-$view->human_name = 'My customers (for expert)';
+$view->human_name = 'My projects by customer (for expert)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'My customers';
+$handler->display->display_options['title'] = 'My projects by customer';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
@@ -191,9 +191,10 @@ $handler->display->display_options['filters']['uid_current']['value'] = '1';
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
-$handler->display->display_options['path'] = 'expert/my-customers';
+$handler->display->display_options['path'] = 'expert/my-projects-by-customer';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'My Customers';
+$handler->display->display_options['menu']['title'] = 'By Customers';
+$handler->display->display_options['menu']['name'] = 'menu-my-projects';
 $handler->display->display_options['menu']['weight'] = '0';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
