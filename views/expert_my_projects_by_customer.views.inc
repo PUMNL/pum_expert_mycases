@@ -1,5 +1,8 @@
 <?php
 
+$case_status = civicrm_api3('OptionGroup', 'getvalue', array('name' => 'case_status', 'return' => 'id'));
+$completed = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Completed', 'return' => 'value', 'option_group_id' => $case_status));
+
 $expert_rel_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Expert', 'return' => 'id'));
 $main_activity_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'main_activity_info'));
 $start_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_start_date', 'custom_group_id' => $main_activity_info['id']));
@@ -87,6 +90,13 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
 );
+/* No results behavior: Global: Text area */
+$handler->display->display_options['empty']['area']['id'] = 'area';
+$handler->display->display_options['empty']['area']['table'] = 'views';
+$handler->display->display_options['empty']['area']['field'] = 'area';
+$handler->display->display_options['empty']['area']['empty'] = TRUE;
+$handler->display->display_options['empty']['area']['content'] = 'There are no active projects';
+$handler->display->display_options['empty']['area']['format'] = 'filtered_html';
 /* Relationship: CiviCRM Contacts: Drupal ID */
 $handler->display->display_options['relationships']['drupal_id']['id'] = 'drupal_id';
 $handler->display->display_options['relationships']['drupal_id']['table'] = 'civicrm_contact';
@@ -112,6 +122,12 @@ $handler->display->display_options['relationships']['contact_id_a_']['field'] = 
 $handler->display->display_options['relationships']['contact_id_a_']['relationship'] = 'relationship_id_b';
 $handler->display->display_options['relationships']['contact_id_a_']['label'] = 'Customer';
 $handler->display->display_options['relationships']['contact_id_a_']['required'] = TRUE;
+/* Relationship: CiviCRM Case Project: Project ID */
+$handler->display->display_options['relationships']['project_id']['id'] = 'project_id';
+$handler->display->display_options['relationships']['project_id']['table'] = 'civicrm_case_project';
+$handler->display->display_options['relationships']['project_id']['field'] = 'project_id';
+$handler->display->display_options['relationships']['project_id']['relationship'] = 'case_id';
+$handler->display->display_options['relationships']['project_id']['required'] = TRUE;
 /* Field: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_contact';
@@ -125,7 +141,7 @@ $handler->display->display_options['fields']['id']['separator'] = '';
 $handler->display->display_options['fields']['id_1']['id'] = 'id_1';
 $handler->display->display_options['fields']['id_1']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['id_1']['field'] = 'id';
-$handler->display->display_options['fields']['id_1']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['id_1']['relationship'] = 'project_id';
 $handler->display->display_options['fields']['id_1']['label'] = '';
 $handler->display->display_options['fields']['id_1']['exclude'] = TRUE;
 $handler->display->display_options['fields']['id_1']['element_label_colon'] = FALSE;
@@ -144,12 +160,12 @@ $handler->display->display_options['fields']['display_name']['link_to_civicrm_co
 $handler->display->display_options['fields']['title']['id'] = 'title';
 $handler->display->display_options['fields']['title']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['title']['field'] = 'title';
-$handler->display->display_options['fields']['title']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['title']['relationship'] = 'project_id';
 /* Field: CiviCRM Project: Start date */
 $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['start_date']['field'] = 'start_date';
-$handler->display->display_options['fields']['start_date']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['start_date']['relationship'] = 'project_id';
 $handler->display->display_options['fields']['start_date']['date_format'] = 'custom';
 $handler->display->display_options['fields']['start_date']['custom_date_format'] = 'Y-m-d';
 $handler->display->display_options['fields']['start_date']['second_date_format'] = 'long';
@@ -157,7 +173,7 @@ $handler->display->display_options['fields']['start_date']['second_date_format']
 $handler->display->display_options['fields']['end_date']['id'] = 'end_date';
 $handler->display->display_options['fields']['end_date']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['end_date']['field'] = 'end_date';
-$handler->display->display_options['fields']['end_date']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['fields']['end_date']['relationship'] = 'project_id';
 $handler->display->display_options['fields']['end_date']['date_format'] = 'custom';
 $handler->display->display_options['fields']['end_date']['custom_date_format'] = 'Y-m-d';
 $handler->display->display_options['fields']['end_date']['second_date_format'] = 'long';
@@ -180,7 +196,7 @@ $handler->display->display_options['sorts']['display_name']['relationship'] = 'c
 $handler->display->display_options['sorts']['start_date']['id'] = 'start_date';
 $handler->display->display_options['sorts']['start_date']['table'] = 'civicrm_project';
 $handler->display->display_options['sorts']['start_date']['field'] = 'start_date';
-$handler->display->display_options['sorts']['start_date']['relationship'] = 'contact_id_a_';
+$handler->display->display_options['sorts']['start_date']['relationship'] = 'project_id';
 $handler->display->display_options['sorts']['start_date']['order'] = 'DESC';
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
@@ -188,12 +204,21 @@ $handler->display->display_options['filters']['uid_current']['table'] = 'users';
 $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['relationship'] = 'drupal_id';
 $handler->display->display_options['filters']['uid_current']['value'] = '1';
+/* Filter criterion: CiviCRM Cases: Case Status */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'civicrm_case';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['relationship'] = 'case_id';
+$handler->display->display_options['filters']['status']['operator'] = 'not in';
+$handler->display->display_options['filters']['status']['value'] = array(
+  $completed => $completed,
+);
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/my-projects-by-customer';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'By Customers';
+$handler->display->display_options['menu']['title'] = 'By Customer';
 $handler->display->display_options['menu']['name'] = 'menu-my-projects';
 $handler->display->display_options['menu']['weight'] = '0';
 $handler->display->display_options['menu']['context'] = 0;
