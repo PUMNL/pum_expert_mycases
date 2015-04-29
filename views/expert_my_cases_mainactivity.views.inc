@@ -6,6 +6,11 @@ $end_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activ
 $result = civicrm_api3('CustomField', 'getsingle', array('name' => 'Expected_results', 'custom_group_id' => $main_activity_info['id']));
 $objective = civicrm_api3('CustomField', 'getsingle', array('name' => 'Objective_of_this_Activity', 'custom_group_id' => $main_activity_info['id']));
 
+$pum_case_number = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'PUM_Case_number'));
+$sequence = civicrm_api3('CustomField', 'getsingle', array('name' => 'Case_sequence', 'custom_group_id' => $pum_case_number['id']));
+$type = civicrm_api3('CustomField', 'getsingle', array('name' => 'Case_type', 'custom_group_id' => $pum_case_number['id']));
+$country = civicrm_api3('CustomField', 'getsingle', array('name' => 'Case_country', 'custom_group_id' => $pum_case_number['id']));
+
 $view = new view();
 $view->name = 'main_activity_information_for_expert_';
 $view->description = '';
@@ -30,6 +35,33 @@ $handler->display->display_options['pager']['type'] = 'some';
 $handler->display->display_options['pager']['options']['items_per_page'] = '1';
 $handler->display->display_options['style_plugin'] = 'default';
 $handler->display->display_options['row_plugin'] = 'fields';
+/* Field: CiviCRM Custom: PUM Case Number: Sequence */
+$handler->display->display_options['fields']['sequence']['id'] = 'sequence';
+$handler->display->display_options['fields']['sequence']['table'] = $pum_case_number['table_name'];
+$handler->display->display_options['fields']['sequence']['field'] = $sequence['column_name'];
+$handler->display->display_options['fields']['sequence']['label'] = '';
+$handler->display->display_options['fields']['sequence']['exclude'] = TRUE;
+$handler->display->display_options['fields']['sequence']['alter']['trim_whitespace'] = TRUE;
+$handler->display->display_options['fields']['sequence']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['sequence']['separator'] = '';
+/* Field: CiviCRM Custom: PUM Case Number: type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = $pum_case_number['table_name'];
+$handler->display->display_options['fields']['type']['field'] = $type['column_name'];
+$handler->display->display_options['fields']['type']['label'] = '';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['trim_whitespace'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['strip_tags'] = TRUE;
+/* Field: CiviCRM Custom: PUM Case Number: country */
+$handler->display->display_options['fields']['country']['id'] = 'country';
+$handler->display->display_options['fields']['country']['table'] = $pum_case_number['table_name'];
+$handler->display->display_options['fields']['country']['field'] = $country['column_name'];
+$handler->display->display_options['fields']['country']['label'] = 'PUM Case number';
+$handler->display->display_options['fields']['country']['alter']['alter_text'] = true;
+$handler->display->display_options['fields']['country']['alter']['text'] = '[sequence]-[type]-[country]';
+$handler->display->display_options['fields']['country']['element_label_type'] = 'strong';
+$handler->display->display_options['fields']['country']['alter']['trim_whitespace'] = TRUE;
+$handler->display->display_options['fields']['country']['alter']['strip_tags'] = TRUE;
 /* Field: CiviCRM Custom: (Main) Activity information: Activity Start Date */
 $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = $main_activity_info['table_name'];
