@@ -31,10 +31,11 @@ $handler->display->display_options['header']['php']['table'] = 'views';
 $handler->display->display_options['header']['php']['field'] = 'php';
 $handler->display->display_options['header']['php']['empty'] = TRUE;
 $handler->display->display_options['header']['php']['php_output'] = '<?php
-if (_pum_expert_has_user_role_on_case(reset($view->args)))
+$case_id = reset($view->args);
+if (_pum_expert_has_user_role_on_case(reset($case_id)))
 {
 ?>
-<a href="/expert/my-cases/new-contact-with-customer/!1?destination=/expert/my-cases/activities/!1" class="button">Add summary of contact with customer</a>
+<a href="/expert/my-cases/new-contact-with-customer/<?php echo $case_id ?>?destination=/expert/my-cases/activities/<?php echo $case_id ?>" class="button">Add summary of contact with customer</a>
 <?php
 }
 ?>';
