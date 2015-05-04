@@ -18,6 +18,7 @@ $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['distinct'] = TRUE;
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'none';
 $handler->display->display_options['style_plugin'] = 'table';
@@ -92,6 +93,7 @@ $handler->display->display_options['fields']['title']['field'] = 'title';
 $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
 $handler->display->display_options['fields']['title']['alter']['path'] = 'expert/project/[id]';
 $handler->display->display_options['fields']['title']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['title']['empty'] = 'No title';
 /* Field: CiviCRM Project: Start date */
 $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_project';
