@@ -43,14 +43,14 @@ $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['start_date']['field'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['start_date']['custom_date_format'] = 'd-m-Y';
+$handler->display->display_options['fields']['start_date']['custom_date_format'] = 'd F Y';
 $handler->display->display_options['fields']['start_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Project: End date */
 $handler->display->display_options['fields']['end_date']['id'] = 'end_date';
 $handler->display->display_options['fields']['end_date']['table'] = 'civicrm_project';
 $handler->display->display_options['fields']['end_date']['field'] = 'end_date';
 $handler->display->display_options['fields']['end_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['end_date']['custom_date_format'] = 'd-m-Y';
+$handler->display->display_options['fields']['end_date']['custom_date_format'] = 'd F Y';
 $handler->display->display_options['fields']['end_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Project: Reason */
 $handler->display->display_options['fields']['reason']['id'] = 'reason';
