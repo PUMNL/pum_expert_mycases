@@ -89,7 +89,7 @@ $handler->display->display_options['fields']['activity_date_time']['alter']['tex
 $handler->display->display_options['fields']['activity_date_time']['element_type'] = 'em';
 $handler->display->display_options['fields']['activity_date_time']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['activity_date_time']['date_format'] = 'custom';
-$handler->display->display_options['fields']['activity_date_time']['custom_date_format'] = 'd F Y';
+$handler->display->display_options['fields']['activity_date_time']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['activity_date_time']['second_date_format'] = 'long';
 /* Field: CiviCRM Custom: Intake: Comment Rep */
 $handler->display->display_options['fields']['comment_rep_139']['id'] = 'comment_rep_139';

@@ -146,7 +146,7 @@ $handler->display->display_options['fields']['requested_departure_date']['table'
 $handler->display->display_options['fields']['requested_departure_date']['field'] = $dep_date;
 $handler->display->display_options['fields']['requested_departure_date']['element_label_type'] = 'strong';
 $handler->display->display_options['fields']['requested_departure_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['requested_departure_date']['custom_date_format'] = 'd F Y';
+$handler->display->display_options['fields']['requested_departure_date']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['requested_departure_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Custom: Info for travel agency: Requested return date */
 $handler->display->display_options['fields']['requested_return_date']['id'] = 'requested_return_date';
@@ -154,7 +154,7 @@ $handler->display->display_options['fields']['requested_return_date']['table'] =
 $handler->display->display_options['fields']['requested_return_date']['field'] = $return_date;
 $handler->display->display_options['fields']['requested_return_date']['element_label_type'] = 'strong';
 $handler->display->display_options['fields']['requested_return_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['requested_return_date']['custom_date_format'] = 'd F Y';
+$handler->display->display_options['fields']['requested_return_date']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['requested_return_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Custom: Pickup Data: Name of pickup person */
 $handler->display->display_options['fields']['pickup_name']['id'] = 'pickup_name';
