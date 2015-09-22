@@ -68,6 +68,11 @@ $handler->display->display_options['relationships']['contact_id_2']['table'] = '
 $handler->display->display_options['relationships']['contact_id_2']['field'] = 'contact_id';
 $handler->display->display_options['relationships']['contact_id_2']['relationship'] = 'case_id';
 $handler->display->display_options['relationships']['contact_id_2']['label'] = 'Travel case client';
+/* Field: CiviCRM DSA Compose: Type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'civicrm_dsa_compose';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
 /* Field: CiviCRM Activities: Activity ID */
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_activity';
@@ -146,6 +151,32 @@ $handler->display->display_options['fields']['activity_type']['id'] = 'activity_
 $handler->display->display_options['fields']['activity_type']['table'] = 'civicrm_activity';
 $handler->display->display_options['fields']['activity_type']['field'] = 'activity_type';
 $handler->display->display_options['fields']['activity_type']['label'] = 'Type';
+$handler->display->display_options['fields']['activity_type']['exclude'] = TRUE;
+/* Field: Signed Case Type */
+$handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+$handler->display->display_options['fields']['php_2']['table'] = 'views';
+$handler->display->display_options['fields']['php_2']['field'] = 'php';
+$handler->display->display_options['fields']['php_2']['ui_name'] = 'Signed Case Type';
+$handler->display->display_options['fields']['php_2']['label'] = 'Type';
+$handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php
+$params = array(
+  \'version\' => 3,
+  \'sequential\' => 1,
+  \'value\' => $row->activity_type,
+);
+$result = civicrm_api(\'OptionValue\', \'get\', $params);
+
+if($row->type == 1) {
+echo "DSA";
+} elseif ($row->type == 3) {
+echo "Credit DSA";
+} else {
+echo $result[\'values\'][0][\'name\'];
+}
+?>';
+$handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name']['id'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
@@ -180,16 +211,49 @@ $handler->display->display_options['fields']['status']['id'] = 'status';
 $handler->display->display_options['fields']['status']['table'] = 'civicrm_activity';
 $handler->display->display_options['fields']['status']['field'] = 'status';
 $handler->display->display_options['fields']['status']['label'] = 'Status';
-/* Field: CiviCRM DSA Compose: Amount DSA */
+/* Field: CiviCRM DSA Compose: Total amount */
 $handler->display->display_options['fields']['amount_dsa']['id'] = 'amount_dsa';
 $handler->display->display_options['fields']['amount_dsa']['table'] = 'civicrm_dsa_compose';
 $handler->display->display_options['fields']['amount_dsa']['field'] = 'total_amount';
 $handler->display->display_options['fields']['amount_dsa']['relationship'] = 'id';
+$handler->display->display_options['fields']['amount_dsa']['exclude'] = TRUE;
 $handler->display->display_options['fields']['amount_dsa']['empty'] = '[bdsa_amount]';
-/* Field: Global: PHP */
+/* Field: Signed Amount */
+$handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['ui_name'] = 'Signed Amount';
+$handler->display->display_options['fields']['php_1']['label'] = 'Total amount';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+$params = array(
+  \'version\' => 3,
+  \'sequential\' => 1,
+  \'value\' => $row->activity_type,
+);
+$result = civicrm_api(\'OptionValue\', \'get\', $params);
+
+$currency  = "&euro;";
+
+if($row->type == 1) {
+echo $currency." ".$row->amount_dsa;
+} elseif ($row->type == 3) {
+echo "- ".$currency." ".$row->amount_dsa;
+} elseif ($result[\'values\'][0][\'name\'] == "Business DSA") {
+echo $currency." ".$row->bdsa_amount;
+} elseif ($result[\'values\'][0][\'name\'] == "Credit Business DSA") {
+echo "- ".$currency." ".$row->bdsa_amount;
+} else {
+echo "?";
+}
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+/* Field: View details link */
 $handler->display->display_options['fields']['php']['id'] = 'php';
 $handler->display->display_options['fields']['php']['table'] = 'views';
 $handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['ui_name'] = 'View details link';
 $handler->display->display_options['fields']['php']['label'] = '';
 $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
@@ -237,8 +301,9 @@ $handler->display->display_options['filters']['uid_current']['value'] = '1';
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/dsa';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'Daily Subsistence Allowance (DSA)';
+$handler->display->display_options['menu']['title'] = 'DSA (Expert)';
 $handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['name'] = 'menu-financials';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['dsa_expert_'] = array(
@@ -265,7 +330,7 @@ $translatables['dsa_expert_'] = array(
   t('[case_type_1]'),
   t('Date'),
   t('Status'),
-  t('Amount DSA'),
+  t('Total amount'),
   t('[bdsa_amount]'),
   t('Page'),
 );
