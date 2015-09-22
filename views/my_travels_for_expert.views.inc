@@ -3,7 +3,7 @@
 $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
-$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'info_for_travel_agency'));
+$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
 
 $dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_departure_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_return_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
@@ -177,6 +177,14 @@ $handler->display->display_options['fields']['requested_return_date']['label'] =
 $handler->display->display_options['fields']['requested_return_date']['date_format'] = 'custom';
 $handler->display->display_options['fields']['requested_return_date']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['requested_return_date']['second_date_format'] = 'long';
+/* Field: CiviCRM Custom: Pickup Data: Notes */
+$handler->display->display_options['fields']['notes_1']['id'] = 'notes_1';
+$handler->display->display_options['fields']['notes_1']['table'] = $ta_info['table_name'];
+$handler->display->display_options['fields']['notes_1']['label'] = 'Travel remarks';
+$handler->display->display_options['fields']['notes_1']['field'] = $notes;
+$handler->display->display_options['fields']['notes_1']['alter']['nl2br'] = TRUE;
+$handler->display->display_options['fields']['notes_1']['element_type'] = 'div';
+$handler->display->display_options['fields']['notes_1']['element_label_type'] = 'strong';
 /* Field: Global: Custom text */
 $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['table'] = 'views';
