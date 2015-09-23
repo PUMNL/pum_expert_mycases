@@ -3,8 +3,8 @@
 $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
-$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
-
+$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'info_for_travel_agency'));
+$td_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
 $dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_departure_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_return_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
 $destination = civicrm_api3('CustomField', 'getvalue', array('name' => 'destination', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
@@ -213,8 +213,9 @@ $handler->display->display_options['filters']['case_type']['value'] = array(
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/my-travels';
 $handler->display->display_options['menu']['type'] = 'normal';
-$handler->display->display_options['menu']['title'] = 'My travels';
+$handler->display->display_options['menu']['title'] = 'My Travels';
 $handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['name'] = 'menu-my-projects';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['travel_requests_for_bcd_'] = array(

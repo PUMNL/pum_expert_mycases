@@ -3,7 +3,8 @@
 $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
-$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
+$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'info_for_travel_agency'));
+$td_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
 $pickup = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'pickup'));
 
 $dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_departure_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
@@ -190,7 +191,7 @@ $handler->display->display_options['fields']['accommodation_telephone']['element
 $handler->display->display_options['fields']['accommodation_telephone']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Pickup Data: Notes */
 $handler->display->display_options['fields']['notes_1']['id'] = 'notes_1';
-$handler->display->display_options['fields']['notes_1']['table'] = $ta_info['table_name'];
+$handler->display->display_options['fields']['notes_1']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['notes_1']['label'] = 'Travel remarks';
 $handler->display->display_options['fields']['notes_1']['field'] = $notes;
 $handler->display->display_options['fields']['notes_1']['alter']['nl2br'] = TRUE;
