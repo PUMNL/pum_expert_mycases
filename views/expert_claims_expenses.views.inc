@@ -17,8 +17,26 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Claim/Expenses (Expert)';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = array(
-  7 => '7',
+$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array(
+	'Anamon',
+	'Business Development',
+	'Country Coordinator',
+	'CV Intake',
+	'Expert',
+	'Finance',
+	'Finance Admin',
+	'Gebruikers Vertegenwoordiger',
+	'Grant Coordinator',
+	'IT',
+	'P&O',
+	'PR',
+	'Prof',
+	'PUM Management',
+	'Recruitment Team Member',
+	'Representative',
+	'Secretariat',
+	'Sector Coordinator',
+	'SSO')
 );
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
@@ -101,6 +119,7 @@ $handler->display->display_options['fields']['pay_receive_390']['field'] = 'pay_
 $handler->display->display_options['fields']['pum_projectnumber_referencenumbe_387']['id'] = 'pum_projectnumber_referencenumbe_387';
 $handler->display->display_options['fields']['pum_projectnumber_referencenumbe_387']['table'] = 'civicrm_value_claiminformation_70';
 $handler->display->display_options['fields']['pum_projectnumber_referencenumbe_387']['field'] = 'pum_projectnumber_referencenumbe_387';
+$handler->display->display_options['fields']['pum_projectnumber_referencenumbe_387']['label'] = 'PUM Projectnumber';
 /* Field: CiviCRM Custom: Claiminformation: Currency */
 $handler->display->display_options['fields']['currency_388']['id'] = 'currency_388';
 $handler->display->display_options['fields']['currency_388']['table'] = 'civicrm_value_claiminformation_70';
@@ -110,7 +129,25 @@ $handler->display->display_options['fields']['total_expenses_389']['id'] = 'tota
 $handler->display->display_options['fields']['total_expenses_389']['table'] = 'civicrm_value_claiminformation_70';
 $handler->display->display_options['fields']['total_expenses_389']['field'] = 'total_expenses_389';
 $handler->display->display_options['fields']['total_expenses_389']['label'] = 'Amount';
+$handler->display->display_options['fields']['total_expenses_389']['exclude'] = TRUE;
 $handler->display->display_options['fields']['total_expenses_389']['alter']['text'] = '[currency_388] [total_expenses_389]';
+/* Field: Signed Amount */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['ui_name'] = 'Signed Amount';
+$handler->display->display_options['fields']['php']['label'] = 'Amount';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+dpm($row);
+if ($row->pay_receive_390 == "To receive from PUM") {
+echo $row->total_expenses_389;
+} else if ($row->pay_receive_390 == "To be paid to PUM") {
+echo "-".$row->total_expenses_389;
+}
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 /* Sort criterion: CiviCRM Activities: Scheduled Activity Date */
 $handler->display->display_options['sorts']['activity_date_time']['id'] = 'activity_date_time';
 $handler->display->display_options['sorts']['activity_date_time']['table'] = 'civicrm_activity';
@@ -136,6 +173,7 @@ $handler->display->display_options['path'] = 'expert/claim-expenses';
 $handler->display->display_options['menu']['type'] = 'normal';
 $handler->display->display_options['menu']['title'] = 'Claim/Expenses';
 $handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['name'] = 'menu-financials';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['claim_expenses_activity'] = array(
@@ -154,7 +192,7 @@ $translatables['claim_expenses_activity'] = array(
   t('Status'),
   t('Date'),
   t('Pay/Receive'),
-  t('PUM Projectnumber / Referencenumber'),
+  t('PUM Projectnumber'),
   t('Currency'),
   t('Amount'),
   t('[currency_388] [total_expenses_389]'),
