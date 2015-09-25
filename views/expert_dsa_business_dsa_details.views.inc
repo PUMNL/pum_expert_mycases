@@ -30,6 +30,11 @@ $handler->display->display_options['pager']['type'] = 'full';
 $handler->display->display_options['pager']['options']['items_per_page'] = '10';
 $handler->display->display_options['style_plugin'] = 'default';
 $handler->display->display_options['row_plugin'] = 'fields';
+/* Field: CiviCRM Activities: Activity Type */
+$handler->display->display_options['fields']['activity_type']['id'] = 'activity_type';
+$handler->display->display_options['fields']['activity_type']['table'] = 'civicrm_activity';
+$handler->display->display_options['fields']['activity_type']['field'] = 'activity_type';
+$handler->display->display_options['fields']['activity_type']['exclude'] = TRUE;
 /* Field: Global: Custom text */
 $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
 $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -53,7 +58,36 @@ $handler->display->display_options['fields']['bdsa_no_of_persons']['separator'] 
 $handler->display->display_options['fields']['bdsa_amount']['id'] = 'bdsa_amount';
 $handler->display->display_options['fields']['bdsa_amount']['table'] = $bdsa_cg['table_name'];
 $handler->display->display_options['fields']['bdsa_amount']['field'] = $bdsa_amount_field;
+$handler->display->display_options['fields']['bdsa_amount']['exclude'] = TRUE;
 $handler->display->display_options['fields']['bdsa_amount']['element_label_type'] = 'strong';
+/* Field: Signed Amount */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['ui_name'] = 'Signed Amount';
+$handler->display->display_options['fields']['php']['label'] = 'Total amount';
+$handler->display->display_options['fields']['php']['element_label_type'] = 'strong';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+$params = array(
+  \'version\' => 3,
+  \'sequential\' => 1,
+  \'value\' => $row->activity_type,
+);
+$result = civicrm_api(\'OptionValue\', \'get\', $params);
+
+$currency  = "&euro;";
+
+if ($result[\'values\'][0][\'name\'] == "Business DSA") {
+echo $currency." ".$row->bdsa_amount;
+} elseif ($result[\'values\'][0][\'name\'] == "Credit Business DSA") {
+echo "- ".$currency." ".$row->bdsa_amount;
+} else {
+echo "?";
+}
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 /* Contextual filter: CiviCRM Activities: Activity ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_activity';
@@ -83,10 +117,13 @@ $translatables['business_dsa_details_expert_'] = array(
   t('‹ previous'),
   t('next ›'),
   t('last »'),
+  t('Activity Type'),
+  t('<a href="/expert/dsa" class="button">Go back</a>'),
   t('Number of Days'),
   t('.'),
   t('Number of Persons'),
   t('Amount'),
+  t('Total amount'),
   t('All'),
   t('Page'),
 );
