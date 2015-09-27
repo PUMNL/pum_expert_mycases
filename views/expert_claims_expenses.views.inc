@@ -139,7 +139,6 @@ $handler->display->display_options['fields']['php']['ui_name'] = 'Signed Amount'
 $handler->display->display_options['fields']['php']['label'] = 'Amount';
 $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
 $handler->display->display_options['fields']['php']['php_output'] = '<?php
-dpm($row);
 if ($row->pay_receive_390 == "To receive from PUM") {
 echo $row->total_expenses_389;
 } else if ($row->pay_receive_390 == "To be paid to PUM") {
