@@ -142,7 +142,7 @@ $handler->display->display_options['fields']['php']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -175,7 +175,7 @@ $handler->display->display_options['fields']['php_1']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -204,7 +204,7 @@ $handler->display->display_options['fields']['php_2']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -233,7 +233,7 @@ $handler->display->display_options['fields']['php_3']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -262,7 +262,7 @@ $handler->display->display_options['fields']['php_4']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -291,7 +291,7 @@ $handler->display->display_options['fields']['php_5']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -320,7 +320,7 @@ $handler->display->display_options['fields']['php_6']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -349,7 +349,7 @@ $handler->display->display_options['fields']['php_7']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -378,7 +378,7 @@ $handler->display->display_options['fields']['php_8']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
@@ -409,7 +409,7 @@ $handler->display->display_options['fields']['php_9']['php_output'] = '<?php
 $params = array(
   \'version\' => 3,
   \'sequential\' => 1,
-  \'value\' => $row->activity_type,
+  \'value\' => $row->type,
 );
 $result = civicrm_api(\'OptionValue\', \'get\', $params);
 
