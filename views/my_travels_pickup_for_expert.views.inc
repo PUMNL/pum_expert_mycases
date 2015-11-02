@@ -3,14 +3,13 @@
 $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
-$ta_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'info_for_travel_agency'));
 $td_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
 $pickup = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'pickup'));
 
-$dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_departure_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
-$return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'requested_return_date', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
-$destination = civicrm_api3('CustomField', 'getvalue', array('name' => 'destination', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
-$notes = civicrm_api3('CustomField', 'getvalue', array('name' => 'notes', 'return' => 'column_name', 'custom_group_id' => $ta_info['id']));
+$dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'departure_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
+$return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'return_departure_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
+$destination = civicrm_api3('CustomField', 'getvalue', array('name' => 'destination', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
+$notes = civicrm_api3('CustomField', 'getvalue', array('name' => 'notes', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
 
 $pickup_name = civicrm_api3('CustomField', 'getvalue', array('name' => 'pickup_name', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
 $pickup_telephone = civicrm_api3('CustomField', 'getvalue', array('name' => 'pickup_telephone', 'return' => 'column_name', 'custom_group_id' => $pickup['id']));
@@ -135,7 +134,7 @@ $handler->display->display_options['fields']['case_type']['element_type'] = 'spa
 $handler->display->display_options['fields']['case_type']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Info for travel agency: Destination */
 $handler->display->display_options['fields']['destination']['id'] = 'destination';
-$handler->display->display_options['fields']['destination']['table'] = $ta_info['table_name'];
+$handler->display->display_options['fields']['destination']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['destination']['field'] = $destination;
 $handler->display->display_options['fields']['destination']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['destination']['alter']['strip_tags'] = TRUE;
@@ -143,7 +142,7 @@ $handler->display->display_options['fields']['destination']['element_type'] = 's
 $handler->display->display_options['fields']['destination']['element_label_type'] = 'strong';
 /* Field: CiviCRM Custom: Info for travel agency: Requested departure date */
 $handler->display->display_options['fields']['requested_departure_date']['id'] = 'requested_departure_date';
-$handler->display->display_options['fields']['requested_departure_date']['table'] = $ta_info['table_name'];
+$handler->display->display_options['fields']['requested_departure_date']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['requested_departure_date']['field'] = $dep_date;
 $handler->display->display_options['fields']['requested_departure_date']['element_label_type'] = 'strong';
 $handler->display->display_options['fields']['requested_departure_date']['date_format'] = 'custom';
@@ -151,7 +150,7 @@ $handler->display->display_options['fields']['requested_departure_date']['custom
 $handler->display->display_options['fields']['requested_departure_date']['second_date_format'] = 'long';
 /* Field: CiviCRM Custom: Info for travel agency: Requested return date */
 $handler->display->display_options['fields']['requested_return_date']['id'] = 'requested_return_date';
-$handler->display->display_options['fields']['requested_return_date']['table'] = $ta_info['table_name'];
+$handler->display->display_options['fields']['requested_return_date']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['requested_return_date']['field'] = $return_date;
 $handler->display->display_options['fields']['requested_return_date']['element_label_type'] = 'strong';
 $handler->display->display_options['fields']['requested_return_date']['date_format'] = 'custom';
