@@ -136,6 +136,30 @@ $handler->display->display_options['header']['view_3']['label'] = 'Documents';
 $handler->display->display_options['header']['view_3']['empty'] = TRUE;
 $handler->display->display_options['header']['view_3']['view_to_insert'] = 'case_roles_for_expert_:default';
 $handler->display->display_options['header']['view_3']['inherit_arguments'] = TRUE;
+/* header: Global: PHP */
+$handler->display->display_options['header']['php']['id'] = 'php';
+$handler->display->display_options['header']['php']['table'] = 'views';
+$handler->display->display_options['header']['php']['field'] = 'php';
+$handler->display->display_options['header']['php']['label'] = 'Summary';
+$handler->display->display_options['header']['php']['php_output'] = '<?php
+$summary = pum_expert_mycases_get_mainactivity_summary($view->args[0]);
+if (!empty($summary)) {
+echo \'<h3>Summary</h3>\';
+echo \'<p>\'.nl2br($summary).\'</p>\';
+}
+?>';
+/* header: Global: PHP */
+$handler->display->display_options['header']['php_1']['id'] = 'php_1';
+$handler->display->display_options['header']['php_1']['table'] = 'views';
+$handler->display->display_options['header']['php_1']['field'] = 'php';
+$handler->display->display_options['header']['php_1']['label'] = 'Follow up activities';
+$handler->display->display_options['header']['php_1']['php_output'] = '<?php
+$follow_up = pum_expert_mycases_get_mainactivity_follow_up($view->args[0]);
+if (!empty($follow_up)) {
+echo \'<h3>Follow up activities</h3>\';
+echo \'<p>\'.nl2br($follow_up).\'</p>\';
+}
+?>';
 /* Header: Global: Text area */
 $handler->display->display_options['header']['area_5']['id'] = 'area_5';
 $handler->display->display_options['header']['area_5']['table'] = 'views';

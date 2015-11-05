@@ -56,3 +56,13 @@ function _pum_expert_has_user_role_on_case($case_id) {
 
   return $roles[$case_id];
 }
+
+function pum_expert_mycases_get_mainactivity_follow_up($case_id) {
+  $ma = civicrm_api3('MainActivity', 'DebriefingCC', array('case_id' => $case_id));
+  return $ma['follow_up'];
+}
+
+function pum_expert_mycases_get_mainactivity_summary($case_id) {
+  $ma = civicrm_api3('MainActivity', 'DebriefingCC', array('case_id' => $case_id));
+  return $ma['summary'];
+}
