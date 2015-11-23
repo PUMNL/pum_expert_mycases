@@ -4,8 +4,8 @@ $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
 
 $td_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
-$dep_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'departure_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
-$return_date = civicrm_api3('CustomField', 'getvalue', array('name' => 'return_departure_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
+$inboundArrivalTime = civicrm_api3('CustomField', 'getvalue', array('name' => 'arrival_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
+$outboundDepartureTime = civicrm_api3('CustomField', 'getvalue', array('name' => 'return_departure_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
 $destination = civicrm_api3('CustomField', 'getvalue', array('name' => 'destination', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
 $notes = civicrm_api3('CustomField', 'getvalue', array('name' => 'notes', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
 
@@ -162,19 +162,15 @@ $handler->display->display_options['fields']['destination']['alter']['strip_tags
 /* Field: CiviCRM Custom: Info for travel agency: Requested departure date */
 $handler->display->display_options['fields']['requested_departure_date']['id'] = 'requested_departure_date';
 $handler->display->display_options['fields']['requested_departure_date']['table'] = $td_info['table_name'];
-$handler->display->display_options['fields']['requested_departure_date']['field'] = $dep_date;
+$handler->display->display_options['fields']['requested_departure_date']['field'] = $inboundArrivalTime;
 $handler->display->display_options['fields']['requested_departure_date']['label'] = 'Departure date';
-$handler->display->display_options['fields']['requested_departure_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['requested_departure_date']['custom_date_format'] = 'j F Y';
-$handler->display->display_options['fields']['requested_departure_date']['second_date_format'] = 'long';
+$handler->display->display_options['fields']['requested_departure_date']['date_format'] = 'short';
 /* Field: CiviCRM Custom: Info for travel agency: Requested return date */
 $handler->display->display_options['fields']['requested_return_date']['id'] = 'requested_return_date';
 $handler->display->display_options['fields']['requested_return_date']['table'] = $td_info['table_name'];
-$handler->display->display_options['fields']['requested_return_date']['field'] = $return_date;
+$handler->display->display_options['fields']['requested_return_date']['field'] = $outboundDepartureTime;
 $handler->display->display_options['fields']['requested_return_date']['label'] = 'Return date';
-$handler->display->display_options['fields']['requested_return_date']['date_format'] = 'custom';
-$handler->display->display_options['fields']['requested_return_date']['custom_date_format'] = 'j F Y';
-$handler->display->display_options['fields']['requested_return_date']['second_date_format'] = 'long';
+$handler->display->display_options['fields']['requested_return_date']['date_format'] = 'short';
 /* Field: CiviCRM Custom: Pickup Data: Notes */
 $handler->display->display_options['fields']['notes_1']['id'] = 'notes_1';
 $handler->display->display_options['fields']['notes_1']['table'] = $td_info['table_name'];
