@@ -88,6 +88,12 @@ echo "?";
 ?>';
 $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
 $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Field: CiviCRM Activities: Subject */
+$handler->display->display_options['fields']['subject']['id'] = 'subject';
+$handler->display->display_options['fields']['subject']['table'] = 'civicrm_activity';
+$handler->display->display_options['fields']['subject']['field'] = 'subject';
+$handler->display->display_options['fields']['subject']['label'] = '';
+$handler->display->display_options['fields']['subject']['element_label_colon'] = FALSE;
 /* Contextual filter: CiviCRM Activities: Activity ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_activity';
