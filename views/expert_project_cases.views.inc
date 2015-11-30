@@ -2,6 +2,8 @@
 
 $case_status = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_status'));
 $error_case_status = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Error', 'option_group_id' => $case_status));
+// issue 2726
+$cancel_case_status = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Cancelled', 'option_group_id' => $case_status));
 
 $expert_rel_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Expert', 'return' => 'id'));
 $main_activity_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'main_activity_info'));
@@ -209,6 +211,8 @@ $handler->display->display_options['filters']['status']['relationship'] = 'case_
 $handler->display->display_options['filters']['status']['operator'] = 'not in';
 $handler->display->display_options['filters']['status']['value'] = array(
   $error_case_status => $error_case_status,
+  // issue 2726
+  $cancel_case_status => $cancel_case_status
 );
 
 /* Display: Page */
