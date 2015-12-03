@@ -18,6 +18,7 @@ $handler->display->display_options['title'] = 'Claim/Expenses (Expert)';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array(
+	'administrator',
 	'Anamon',
 	'Business Development',
 	'Country Coordinator',
@@ -28,6 +29,7 @@ $handler->display->display_options['access']['role'] = pum_expert_mycases_get_ro
 	'Gebruikers Vertegenwoordiger',
 	'Grant Coordinator',
 	'IT',
+	'Moderator',
 	'P&O',
 	'PR',
 	'Prof',
