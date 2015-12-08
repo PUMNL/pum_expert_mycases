@@ -61,7 +61,6 @@ class pum_expert_mycases_config {
         foreach($this->conditions as $cond) {
             $return[$cond['value']] = $cond['value'];
         }
-        $return[$this->getContactWithCustomerActivityTypeId()] = $this->getContactWithCustomerActivityTypeId();
 
         return $return;
     }

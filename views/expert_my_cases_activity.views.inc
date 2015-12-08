@@ -92,21 +92,6 @@ $handler->display->display_options['header']['view']['empty'] = TRUE;
 $handler->display->display_options['header']['view']['view_to_insert'] = 'expert_my_case_documents:default';
 $handler->display->display_options['header']['view']['inherit_arguments'] = TRUE;
 /* Header: Global: Text area */
-$handler->display->display_options['header']['area_2']['id'] = 'area_2';
-$handler->display->display_options['header']['area_2']['table'] = 'views';
-$handler->display->display_options['header']['area_2']['field'] = 'area';
-$handler->display->display_options['header']['area_2']['empty'] = TRUE;
-$handler->display->display_options['header']['area_2']['content'] = '<h2>Summary of contact with customer</h2>';
-$handler->display->display_options['header']['area_2']['format'] = 'full_html';
-/* Header: Global: View area */
-$handler->display->display_options['header']['view_1']['id'] = 'view_1';
-$handler->display->display_options['header']['view_1']['table'] = 'views';
-$handler->display->display_options['header']['view_1']['field'] = 'view';
-$handler->display->display_options['header']['view_1']['label'] = 'Documents';
-$handler->display->display_options['header']['view_1']['empty'] = TRUE;
-$handler->display->display_options['header']['view_1']['view_to_insert'] = 'contact_with_customer_expert_:default';
-$handler->display->display_options['header']['view_1']['inherit_arguments'] = TRUE;
-/* Header: Global: Text area */
 $handler->display->display_options['header']['area_3']['id'] = 'area_3';
 $handler->display->display_options['header']['area_3']['table'] = 'views';
 $handler->display->display_options['header']['area_3']['field'] = 'area';
@@ -167,6 +152,20 @@ $handler->display->display_options['header']['area_5']['field'] = 'area';
 $handler->display->display_options['header']['area_5']['empty'] = TRUE;
 $handler->display->display_options['header']['area_5']['content'] = '<h2>Activities</h2>';
 $handler->display->display_options['header']['area_5']['format'] = 'full_html';
+/* Header: Global: PHP */
+$handler->display->display_options['header']['php_2']['id'] = 'php_2';
+$handler->display->display_options['header']['php_2']['table'] = 'views';
+$handler->display->display_options['header']['php_2']['field'] = 'php';
+$handler->display->display_options['header']['php_2']['empty'] = TRUE;
+$handler->display->display_options['header']['php_2']['php_output'] = '<?php
+$case_id = reset($view->args);
+if (_pum_expert_has_user_role_on_case($case_id))
+{
+?>
+<a href="/expert/my-cases/new-contact-with-customer/<?php echo $case_id ?>?destination=/expert/my-cases/activities/<?php echo $case_id ?>" class="button">Add summary of contact with customer</a>
+<?php
+}
+?>';
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
