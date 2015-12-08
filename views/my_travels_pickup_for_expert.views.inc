@@ -158,7 +158,6 @@ $handler->display->display_options['fields']['requested_departure_date']['elemen
 $handler->display->display_options['fields']['flight_number']['id'] = 'flight_number';
 $handler->display->display_options['fields']['flight_number']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['flight_number']['field'] = $flight_nr;
-$handler->display->display_options['fields']['flight_number']['relationship'] = 'case_id';
 $handler->display->display_options['fields']['flight_number']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['flight_number']['element_wrapper_type'] = 'p';
 $handler->display->display_options['fields']['flight_number']['element_type'] = 'span';
@@ -167,7 +166,6 @@ $handler->display->display_options['fields']['flight_number']['element_label_typ
 $handler->display->display_options['fields']['return_travel_from']['id'] = 'return_travel_from';
 $handler->display->display_options['fields']['return_travel_from']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['return_travel_from']['field'] = $return_travel_from;
-$handler->display->display_options['fields']['return_travel_from']['relationship'] = 'case_id';
 $handler->display->display_options['fields']['return_travel_from']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['return_travel_from']['element_wrapper_type'] = 'p';
 $handler->display->display_options['fields']['return_travel_from']['element_type'] = 'span';
@@ -186,7 +184,6 @@ $handler->display->display_options['fields']['requested_return_date']['element_l
 $handler->display->display_options['fields']['return_flight_number']['id'] = 'return_flight_number';
 $handler->display->display_options['fields']['return_flight_number']['table'] = $td_info['table_name'];
 $handler->display->display_options['fields']['return_flight_number']['field'] = $return_flight_number;
-$handler->display->display_options['fields']['return_flight_number']['relationship'] = 'case_id';
 $handler->display->display_options['fields']['return_flight_number']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['return_flight_number']['element_wrapper_type'] = 'p';
 $handler->display->display_options['fields']['return_flight_number']['element_type'] = 'span';
