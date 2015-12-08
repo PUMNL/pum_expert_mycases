@@ -103,6 +103,13 @@ if (_pum_expert_has_user_role_on_case($case_id))
 <?php
 }
 ?>';
+/* No results behavior: Global: Text area */
+$handler->display->display_options['empty']['area']['id'] = 'area';
+$handler->display->display_options['empty']['area']['table'] = 'views';
+$handler->display->display_options['empty']['area']['field'] = 'area';
+$handler->display->display_options['empty']['area']['empty'] = TRUE;
+$handler->display->display_options['empty']['area']['content'] = 'No documents found';
+$handler->display->display_options['empty']['area']['format'] = 'filtered_html';
 /* Relationship: CiviCRM Document contact: Contact ID of document contact */
 $handler->display->display_options['relationships']['contact_id']['id'] = 'contact_id';
 $handler->display->display_options['relationships']['contact_id']['table'] = 'civicrm_document_contact';

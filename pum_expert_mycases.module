@@ -7,6 +7,26 @@ function pum_expert_mycases_views_api() {
     return array('api' => 3.0);
 }
 
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function pum_expert_mycases_theme_registry_alter(&$theme_registry) {
+    // Defined path to the current module.
+    $module_path = drupal_get_path('module', 'pum_expert_mycases');
+    // Find all .tpl.php files in this module's folder recursively.
+    $template_file_objects = drupal_find_theme_templates($theme_registry, '.tpl.php', $module_path);
+    // Iterate through all found template file objects.
+    foreach ($template_file_objects as $key => $template_file_object) {
+        // If the template has not already been overridden by a theme.
+        if (!isset($theme_registry[$key]['theme path']) || !preg_match('#/themes/#', $theme_registry[$key]['theme path'])) {
+            // Alter the theme path and template elements.
+            $theme_registry[$key]['theme path'] = $module_path;
+            $theme_registry[$key] = array_merge($theme_registry[$key], $template_file_object);
+            $theme_registry[$key]['type'] = 'module';
+        }
+    }
+}
+
 function pum_expert_mycases_views_default_views() {
   $files = file_scan_directory(drupal_get_path('module', 'pum_expert_mycases'). '/views', '/.inc/');
   $views = array();
@@ -55,6 +75,18 @@ function _pum_expert_has_user_role_on_case($case_id) {
   }
 
   return $roles[$case_id];
+}
+
+function _pum_expert_link_to_case_details($case_id, $case_type) {
+    $config = pum_expert_mycases_config::singleton();
+    $sep = CRM_Core_DAO::VALUE_SEPARATOR;
+    $case_type = trim(str_replace($sep, ',', $case_type), ',');
+    $case_types = explode(",", $case_type);
+    if (in_array($config->getProjectInatkeCaseTypeId(), $case_types)) {
+        return 'expert/my-cases/projectintake/'.$case_id;
+    } else {
+        return 'expert/my-cases/activities/'.$case_id;
+    }
 }
 
 function pum_expert_mycases_get_mainactivity_follow_up($case_id) {

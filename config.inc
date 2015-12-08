@@ -10,8 +10,13 @@ class pum_expert_mycases_config {
 
     protected $doNotIncludeInCaseActivityList = array();
 
+    protected $project_intake_case_type = array();
+
     protected function __construct() {
         civicrm_initialize();
+
+        $case_type_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
+        $this->project_intake_case_type = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Projectintake', 'option_group_id' => $case_type_option_group));
 
         $activity_type_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_type'));
         $this->contact_with_customer = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Customer', 'option_group_id' => $activity_type_option_group));
@@ -33,6 +38,10 @@ class pum_expert_mycases_config {
 
     public function getContactWithCustomerActivityTypeId() {
         return $this->contact_with_customer['value'];
+    }
+
+    public function getProjectInatkeCaseTypeId() {
+        return $this->project_intake_case_type['value'];
     }
 
     public function getConditions() {
