@@ -50,6 +50,14 @@ $handler->display->display_options['fields']['products_and_or_services_offered_8
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_offered_87']['empty_zero'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: Products and/or Services sold */
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['id'] = 'products_and_or_services_sold_87';
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['table'] = $table;
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Products_and_or_Services_sold'));
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['alter']['trim_whitespace'] = TRUE;
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['alter']['strip_tags'] = TRUE;
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['empty_zero'] = TRUE;
 /* Field: CiviCRM Custom: Customer Data: In which year did your organisation started operations? */
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['id'] = 'in_which_year_did_your_organisat_96';
 $handler->display->display_options['fields']['in_which_year_did_your_organisat_96']['table'] = $table;
@@ -139,6 +147,7 @@ $handler->display->display_options['fields']['percentage_of_ownership_other_85']
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Percentage_of_Ownership_Other'));
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['empty_zero'] = TRUE;
+
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';

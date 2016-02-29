@@ -2,6 +2,11 @@
 
 $postal_loc_type_id = civicrm_api3('LocationType', 'getvalue', array('return' => 'id', 'name' => 'Postaladdress'));
 
+$customer_data_custom_group = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Customers_Data'));
+$customer_data_table = $customer_data_custom_group['table_name'];
+$customer_data_gid = $customer_data_custom_group['id'];
+
+
 $view = new view();
 $view->name = 'expert_customer_info';
 $view->description = 'This view is used to show customer info in drupal. ';
@@ -264,6 +269,7 @@ $handler->display->display_options['fields']['fieldset_4']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['fieldset_4']['children'] = array(
   0 => 'customer_data',
   1 => 'yearly_information',
+  2 => 'customer_data_additional',
 );
 $handler->display->display_options['fields']['fieldset_4']['fieldset']['collapsible'] = 1;
 $handler->display->display_options['fields']['fieldset_4']['fieldset']['collapsed'] = 1;
@@ -285,6 +291,13 @@ $handler->display->display_options['fields']['yearly_information']['element_labe
 $handler->display->display_options['fields']['yearly_information']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['yearly_information']['view'] = 'yearly_information_for_expert_';
 $handler->display->display_options['fields']['yearly_information']['arguments'] = '!1';
+/* Field: Global: View */
+$handler->display->display_options['fields']['customer_data_additional']['id'] = 'customer_data_additional';
+$handler->display->display_options['fields']['customer_data_additional']['table'] = 'views';
+$handler->display->display_options['fields']['customer_data_additional']['field'] = 'view';
+$handler->display->display_options['fields']['customer_data_additional']['label'] = '';
+$handler->display->display_options['fields']['customer_data_additional']['view'] = 'customer_data_additional_for_expert_';
+$handler->display->display_options['fields']['customer_data_additional']['arguments'] = '!1';
 /* Field: Global: Fieldset */
 $handler->display->display_options['fields']['fieldset_6']['id'] = 'fieldset_6';
 $handler->display->display_options['fields']['fieldset_6']['table'] = 'views';
