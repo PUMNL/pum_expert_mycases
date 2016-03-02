@@ -163,6 +163,7 @@ $handler->display->display_options['fields']['start_date']['id'] = 'start_date';
 $handler->display->display_options['fields']['start_date']['table'] = $main_activity_info['table_name'];
 $handler->display->display_options['fields']['start_date']['field'] = $start_date['column_name'];
 $handler->display->display_options['fields']['start_date']['label'] = 'Start Date';
+$handler->display->display_options['fields']['start_date']['exclude'] = TRUE;
 $handler->display->display_options['fields']['start_date']['relationship'] = 'case_id';
 $handler->display->display_options['fields']['start_date']['date_format'] = 'custom';
 $handler->display->display_options['fields']['start_date']['custom_date_format'] = 'j F Y';
@@ -172,10 +173,35 @@ $handler->display->display_options['fields']['end_date']['id'] = 'end_date';
 $handler->display->display_options['fields']['end_date']['table'] = $main_activity_info['table_name'];
 $handler->display->display_options['fields']['end_date']['field'] = $end_date['column_name'];
 $handler->display->display_options['fields']['end_date']['label'] = 'End Date';
+$handler->display->display_options['fields']['end_date']['exclude'] = TRUE;
 $handler->display->display_options['fields']['end_date']['relationship'] = 'case_id';
 $handler->display->display_options['fields']['end_date']['date_format'] = 'custom';
 $handler->display->display_options['fields']['end_date']['custom_date_format'] = 'j F Y';
 $handler->display->display_options['fields']['end_date']['second_date_format'] = 'long';
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+$handler->display->display_options['fields']['php_2']['table'] = 'views';
+$handler->display->display_options['fields']['php_2']['field'] = 'php';
+$handler->display->display_options['fields']['php_2']['label'] = 'Start Date';
+$handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_2']['php_value'] = 'if (pum_expert_check_case_for_intake($row->case_type)) {
+  return \'N/A\';
+}
+return $row->start_date;';
+$handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php_3']['id'] = 'php_3';
+$handler->display->display_options['fields']['php_3']['table'] = 'views';
+$handler->display->display_options['fields']['php_3']['field'] = 'php';
+$handler->display->display_options['fields']['php_3']['label'] = 'End Date';
+$handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_3']['php_value'] = 'if (pum_expert_check_case_for_intake($row->case_type)) {
+  return \'N/A\';
+}
+return $row->end_date;';
+$handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_3']['php_click_sortable'] = '';
 /* Field: CiviCRM Contacts: Display Name */
 $handler->display->display_options['fields']['display_name_1']['id'] = 'display_name_1';
 $handler->display->display_options['fields']['display_name_1']['table'] = 'civicrm_contact';
@@ -183,16 +209,23 @@ $handler->display->display_options['fields']['display_name_1']['field'] = 'displ
 $handler->display->display_options['fields']['display_name_1']['relationship'] = 'contact_id_b_';
 $handler->display->display_options['fields']['display_name_1']['label'] = 'Expert';
 $handler->display->display_options['fields']['display_name_1']['link_to_civicrm_contact'] = 0;
-/* Field: Global: Custom text */
-$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['table'] = 'views';
-$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-$handler->display->display_options['fields']['nothing']['label'] = '';
-$handler->display->display_options['fields']['nothing']['alter']['text'] = 'View case';
-$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['nothing']['alter']['path'] = 'expert/my-cases/activities/[id]';
-$handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
-$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = '';
+$handler->display->display_options['fields']['php']['exclude'] = FALSE;
+$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_value'] = 'return _pum_expert_link_to_case_details($row->id, $row->case_type);';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+$handler->display->display_options['fields']['php']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['php']['alter']['text'] = 'View case';
+$handler->display->display_options['fields']['php']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['php']['alter']['path'] = '[php]';
+$handler->display->display_options['fields']['php']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
 /* Contextual filter: CiviCRM Project: Project ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_project';

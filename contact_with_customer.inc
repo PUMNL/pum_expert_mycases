@@ -34,7 +34,11 @@ function pum_expert_mycases_contact_with_customer_submit($form, &$form_state) {
     $config = pum_expert_mycases_config::singleton();
     $case_id = $form_state['values']['case_id'];
 
+    $case = civicrm_api3('Case', 'getsingle', array('id' => $case_id));
+    $contact_id = reset($case['contact_id']);
+
     $params['case_id'] = $case_id;
+    $params['target_contact_id'] = $contact_id;
     $params['subject'] = $form_state['values']['subject'];
     $params['details'] = $form_state['values']['details'];
     $params['activity_type_id'] = $config->getContactWithCustomerActivityTypeId();

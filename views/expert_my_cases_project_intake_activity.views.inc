@@ -4,11 +4,11 @@ $config = pum_expert_mycases_config::singleton();
 $activities = $config->getDoNotIncludeCaseActivityInList();
 
 $view = new view();
-$view->name = 'expert_my_cases_activities';
+$view->name = 'expert_my_cases_project_intake_activities';
 $view->description = '';
 $view->tag = 'default';
 $view->base_table = 'civicrm_case_activity';
-$view->human_name = 'Case activities (Expert)';
+$view->human_name = 'Case activities of project intake (Expert)';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -62,21 +62,6 @@ $handler->display->display_options['style_options']['info'] = array(
     ),
 );
 /* Header: Global: Text area */
-$handler->display->display_options['header']['area_ma']['id'] = 'area_ma';
-$handler->display->display_options['header']['area_ma']['table'] = 'views';
-$handler->display->display_options['header']['area_ma']['field'] = 'area';
-$handler->display->display_options['header']['area_ma']['empty'] = TRUE;
-$handler->display->display_options['header']['area_ma']['content'] = '<h2>Main activity info</h2>';
-$handler->display->display_options['header']['area_ma']['format'] = 'full_html';
-/* Header: Global: View area */
-$handler->display->display_options['header']['ma_view']['id'] = 'ma_view';
-$handler->display->display_options['header']['ma_view']['table'] = 'views';
-$handler->display->display_options['header']['ma_view']['field'] = 'view';
-$handler->display->display_options['header']['ma_view']['label'] = 'Main activity info';
-$handler->display->display_options['header']['ma_view']['empty'] = TRUE;
-$handler->display->display_options['header']['ma_view']['view_to_insert'] = 'main_activity_information_for_expert_:default';
-$handler->display->display_options['header']['ma_view']['inherit_arguments'] = TRUE;
-/* Header: Global: Text area */
 $handler->display->display_options['header']['area_1']['id'] = 'area_1';
 $handler->display->display_options['header']['area_1']['table'] = 'views';
 $handler->display->display_options['header']['area_1']['field'] = 'area';
@@ -91,21 +76,6 @@ $handler->display->display_options['header']['view']['label'] = 'Documents';
 $handler->display->display_options['header']['view']['empty'] = TRUE;
 $handler->display->display_options['header']['view']['view_to_insert'] = 'expert_my_case_documents:default';
 $handler->display->display_options['header']['view']['inherit_arguments'] = TRUE;
-/* Header: Global: Text area */
-$handler->display->display_options['header']['area_3']['id'] = 'area_3';
-$handler->display->display_options['header']['area_3']['table'] = 'views';
-$handler->display->display_options['header']['area_3']['field'] = 'area';
-$handler->display->display_options['header']['area_3']['empty'] = TRUE;
-$handler->display->display_options['header']['area_3']['content'] = '<h2>Conditions</h2>';
-$handler->display->display_options['header']['area_3']['format'] = 'full_html';
-/* Header: Global: View area */
-$handler->display->display_options['header']['view_2']['id'] = 'view_2';
-$handler->display->display_options['header']['view_2']['table'] = 'views';
-$handler->display->display_options['header']['view_2']['field'] = 'view';
-$handler->display->display_options['header']['view_2']['label'] = 'Documents';
-$handler->display->display_options['header']['view_2']['empty'] = TRUE;
-$handler->display->display_options['header']['view_2']['view_to_insert'] = 'expert_my_cases_conditions:default';
-$handler->display->display_options['header']['view_2']['inherit_arguments'] = TRUE;
 /* Header: Global: Text area */
 $handler->display->display_options['header']['area_4']['id'] = 'area_4';
 $handler->display->display_options['header']['area_4']['table'] = 'views';
@@ -152,20 +122,6 @@ $handler->display->display_options['header']['area_5']['field'] = 'area';
 $handler->display->display_options['header']['area_5']['empty'] = TRUE;
 $handler->display->display_options['header']['area_5']['content'] = '<h2>Activities</h2>';
 $handler->display->display_options['header']['area_5']['format'] = 'full_html';
-/* Header: Global: PHP */
-$handler->display->display_options['header']['php_2']['id'] = 'php_2';
-$handler->display->display_options['header']['php_2']['table'] = 'views';
-$handler->display->display_options['header']['php_2']['field'] = 'php';
-$handler->display->display_options['header']['php_2']['empty'] = TRUE;
-$handler->display->display_options['header']['php_2']['php_output'] = '<?php
-$case_id = reset($view->args);
-if (_pum_expert_has_user_role_on_case($case_id))
-{
-?>
-<a href="/expert/my-cases/new-contact-with-customer/<?php echo $case_id ?>?destination=/expert/my-cases/activities/<?php echo $case_id ?>" class="button">Add summary of contact with customer</a>
-<?php
-}
-?>';
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -277,7 +233,7 @@ $handler->display->display_options['filters']['is_deleted']['relationship'] = 'a
 $handler->display->display_options['filters']['is_deleted']['value'] = '0';
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
-$handler->display->display_options['path'] = 'expert/my-cases/activities';
+$handler->display->display_options['path'] = 'expert/my-cases/projectintake';
 $translatables['expert_my_cases_activities'] = array(
     t('Master'),
     t('Contact with customer'),

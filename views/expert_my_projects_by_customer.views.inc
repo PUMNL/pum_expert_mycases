@@ -1,8 +1,7 @@
-<?php
+  <?php
 
 $case_status = civicrm_api3('OptionGroup', 'getvalue', array('name' => 'case_status', 'return' => 'id'));
-$completed = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Completed', 'return' => 'value', 'option_group_id' => $case_status));
-
+$error = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Error', 'return' => 'value', 'option_group_id' => $case_status));
 $expert_rel_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Expert', 'return' => 'id'));
 $main_activity_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'main_activity_info'));
 $start_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_start_date', 'custom_group_id' => $main_activity_info['id']));
@@ -198,12 +197,17 @@ $handler->display->display_options['sorts']['start_date']['table'] = 'civicrm_pr
 $handler->display->display_options['sorts']['start_date']['field'] = 'start_date';
 $handler->display->display_options['sorts']['start_date']['relationship'] = 'project_id';
 $handler->display->display_options['sorts']['start_date']['order'] = 'DESC';
+$handler->display->display_options['filter_groups']['groups'] = array(
+  1 => 'AND',
+  2 => 'OR',
+);
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
 $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['relationship'] = 'drupal_id';
 $handler->display->display_options['filters']['uid_current']['value'] = '1';
+$handler->display->display_options['filters']['uid_current']['group'] = 1;
 /* Filter criterion: CiviCRM Cases: Case Status */
 $handler->display->display_options['filters']['status']['id'] = 'status';
 $handler->display->display_options['filters']['status']['table'] = 'civicrm_case';
@@ -211,8 +215,29 @@ $handler->display->display_options['filters']['status']['field'] = 'status';
 $handler->display->display_options['filters']['status']['relationship'] = 'case_id';
 $handler->display->display_options['filters']['status']['operator'] = 'not in';
 $handler->display->display_options['filters']['status']['value'] = array(
-  $completed => $completed,
+  $error => $error,
 );
+$handler->display->display_options['filters']['status']['group'] = 1;
+/* Filter criterion: CiviCRM Project: End date */
+$handler->display->display_options['filters']['end_date']['id'] = 'end_date';
+$handler->display->display_options['filters']['end_date']['table'] = 'civicrm_project';
+$handler->display->display_options['filters']['end_date']['field'] = 'end_date';
+$handler->display->display_options['filters']['end_date']['relationship'] = 'project_id';
+$handler->display->display_options['filters']['end_date']['operator'] = 'empty';
+$handler->display->display_options['filters']['end_date']['group'] = 2;
+$handler->display->display_options['filters']['end_date']['expose']['operator_id'] = 'end_date_op';
+$handler->display->display_options['filters']['end_date']['expose']['label'] = 'End date';
+$handler->display->display_options['filters']['end_date']['expose']['operator'] = 'end_date_op';
+$handler->display->display_options['filters']['end_date']['expose']['identifier'] = 'end_date';
+/* Filter criterion: CiviCRM Project: End date */
+$handler->display->display_options['filters']['end_date_1']['id'] = 'end_date_1';
+$handler->display->display_options['filters']['end_date_1']['table'] = 'civicrm_project';
+$handler->display->display_options['filters']['end_date_1']['field'] = 'end_date';
+$handler->display->display_options['filters']['end_date_1']['relationship'] = 'project_id';
+$handler->display->display_options['filters']['end_date_1']['operator'] = '>=';
+$handler->display->display_options['filters']['end_date_1']['value']['value'] = 'now';
+$handler->display->display_options['filters']['end_date_1']['value']['type'] = 'offset';
+$handler->display->display_options['filters']['end_date_1']['group'] = 2;
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
