@@ -4,6 +4,7 @@ $case_status = civicrm_api3('OptionGroup', 'getvalue', array('name' => 'case_sta
 $error = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Error', 'return' => 'value', 'option_group_id' => $case_status));
 $cancelled = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Cancelled', 'return' => 'value', 'option_group_id' => $case_status));
 $expert_rel_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Expert', 'return' => 'id'));
+$project_manager_rel_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Projectmanager', 'return' => 'id'));
 $main_activity_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'main_activity_info'));
 $start_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_start_date', 'custom_group_id' => $main_activity_info['id']));
 $end_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_end_date', 'custom_group_id' => $main_activity_info['id']));
@@ -102,13 +103,13 @@ $handler->display->display_options['relationships']['drupal_id']['id'] = 'drupal
 $handler->display->display_options['relationships']['drupal_id']['table'] = 'civicrm_contact';
 $handler->display->display_options['relationships']['drupal_id']['field'] = 'drupal_id';
 $handler->display->display_options['relationships']['drupal_id']['required'] = TRUE;
-/* Relationship: CiviCRM Contacts: CiviCRM Relationship (starting from Contact B) */
+/* Relationship: CiviCRM Contacts: CiviCRM Expert & Project manager relationship */
 $handler->display->display_options['relationships']['relationship_id_b']['id'] = 'relationship_id_b';
 $handler->display->display_options['relationships']['relationship_id_b']['table'] = 'civicrm_contact';
 $handler->display->display_options['relationships']['relationship_id_b']['field'] = 'relationship_id_b';
-$handler->display->display_options['relationships']['relationship_id_b']['label'] = 'Expert relationship';
+$handler->display->display_options['relationships']['relationship_id_b']['label'] = 'Expert and PM relationship';
 $handler->display->display_options['relationships']['relationship_id_b']['required'] = TRUE;
-$handler->display->display_options['relationships']['relationship_id_b']['relationship_type'] = $expert_rel_id;
+$handler->display->display_options['relationships']['relationship_id_b']['relationship_type'] = array($expert_rel_id, $project_manager_rel_id);
 /* Relationship: CiviCRM Relationships: Case ID */
 $handler->display->display_options['relationships']['case_id']['id'] = 'case_id';
 $handler->display->display_options['relationships']['case_id']['table'] = 'civicrm_relationship';
