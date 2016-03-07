@@ -184,10 +184,15 @@ $handler->display->display_options['fields']['php_2']['table'] = 'views';
 $handler->display->display_options['fields']['php_2']['field'] = 'php';
 $handler->display->display_options['fields']['php_2']['label'] = 'Start Date';
 $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
-$handler->display->display_options['fields']['php_2']['php_value'] = 'if (pum_expert_check_case_for_intake($row->case_type)) {
-  return \'N/A\';
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php
+if (pum_customer_check_case_for_intake($row->case_type)) {
+  echo \'N/A\';
+} else {
+  $date = new DateTime();
+  $date->setTimestamp($row->start_date);
+  echo $date->format(\'j F Y\');
 }
-return $row->start_date;';
+?>';
 $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
 $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
 /* Field: Global: PHP */
@@ -196,10 +201,15 @@ $handler->display->display_options['fields']['php_3']['table'] = 'views';
 $handler->display->display_options['fields']['php_3']['field'] = 'php';
 $handler->display->display_options['fields']['php_3']['label'] = 'End Date';
 $handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
-$handler->display->display_options['fields']['php_3']['php_value'] = 'if (pum_expert_check_case_for_intake($row->case_type)) {
-  return \'N/A\';
+$handler->display->display_options['fields']['php_3']['php_output'] = '<?php
+if (pum_customer_check_case_for_intake($row->case_type)) {
+  echo \'N/A\';
+} else {
+  $date = new DateTime();
+  $date->setTimestamp($row->end_date);
+  echo $date->format(\'j F Y\');
 }
-return $row->end_date;';
+?>';
 $handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '0';
 $handler->display->display_options['fields']['php_3']['php_click_sortable'] = '';
 /* Field: CiviCRM Contacts: Display Name */

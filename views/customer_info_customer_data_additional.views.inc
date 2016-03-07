@@ -40,6 +40,7 @@ $handler->display->display_options['fields']['id']['separator'] = '';
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['id'] = 'How_did_your_company_first_hear_about_CBI_PUM_';
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['table'] = $table;
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'How_did_your_company_first_hear_about_CBI_PUM_'));
+$handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['label'] = 'How did your company first hear about PUM?';
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['How_did_your_company_first_hear_about_CBI_PUM_']['hide_empty'] = TRUE;
@@ -50,9 +51,6 @@ $handler->display->display_options['fields']['Additional_comments_Projectrequest
 $handler->display->display_options['fields']['Additional_comments_Projectrequest']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Additional_comments_Projectrequest'));
 $handler->display->display_options['fields']['Additional_comments_Projectrequest']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['Additional_comments_Projectrequest']['alter']['strip_tags'] = TRUE;
-$handler->display->display_options['fields']['Additional_comments_Projectrequest']['hide_empty'] = TRUE;
-$handler->display->display_options['fields']['Additional_comments_Projectrequest']['empty_zero'] = TRUE;
-
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';
