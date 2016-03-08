@@ -55,7 +55,7 @@ $handler->display->display_options['fields']['products_and_or_services_offered_8
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['id'] = 'products_and_or_services_sold_87';
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['table'] = $table;
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Products_and_or_Services_sold'));
-$handler->display->display_options['fields']['products_and_or_services_sold_87']['table'] = 'Where and how are the products and/or services sold?';
+$handler->display->display_options['fields']['products_and_or_services_sold_87']['label'] = 'Where and how are the products and/or services sold?';
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['alter']['trim_whitespace'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['alter']['strip_tags'] = TRUE;
 $handler->display->display_options['fields']['products_and_or_services_sold_87']['hide_empty'] = TRUE;
