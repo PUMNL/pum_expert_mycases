@@ -185,7 +185,7 @@ $handler->display->display_options['fields']['php_2']['field'] = 'php';
 $handler->display->display_options['fields']['php_2']['label'] = 'Start Date';
 $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
 $handler->display->display_options['fields']['php_2']['php_output'] = '<?php
-if (pum_customer_check_case_for_intake($row->case_type)) {
+if (pum_expert_check_case_for_intake($row->case_type)) {
   echo \'N/A\';
 } else {
   $date = new DateTime();
@@ -202,7 +202,7 @@ $handler->display->display_options['fields']['php_3']['field'] = 'php';
 $handler->display->display_options['fields']['php_3']['label'] = 'End Date';
 $handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
 $handler->display->display_options['fields']['php_3']['php_output'] = '<?php
-if (pum_customer_check_case_for_intake($row->case_type)) {
+if (pum_expert_check_case_for_intake($row->case_type)) {
   echo \'N/A\';
 } else {
   $date = new DateTime();
