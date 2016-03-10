@@ -20,6 +20,14 @@ $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'none';
 $handler->display->display_options['style_plugin'] = 'table';
+/* Relationship: CiviCRM Contacts: CiviCRM Relationship (starting from Contact B) */
+$handler->display->display_options['relationships']['relationship_id_b']['id'] = 'relationship_id_b';
+$handler->display->display_options['relationships']['relationship_id_b']['table'] = 'civicrm_contact';
+$handler->display->display_options['relationships']['relationship_id_b']['field'] = 'relationship_id_b';
+$handler->display->display_options['relationships']['relationship_id_b']['label'] = 'relationship';
+$handler->display->display_options['relationships']['relationship_id_b']['required'] = TRUE;
+//$handler->display->display_options['relationships']['relationship_id_b']['relationship_type'] = '0';
+$handler->display->display_options['relationships']['relationship_id_b']['relationship_state'] = 0;
 /* Field: CiviCRM Relationships: Relationship Type A-to-B */
 $handler->display->display_options['fields']['relationship_type']['id'] = 'relationship_type';
 $handler->display->display_options['fields']['relationship_type']['table'] = 'civicrm_relationship';
