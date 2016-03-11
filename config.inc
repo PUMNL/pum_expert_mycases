@@ -39,11 +39,47 @@ class pum_expert_mycases_config {
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact about Expert', 'option_group_id' => $activity_type_option_group));
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Colleague', 'option_group_id' => $activity_type_option_group));
 
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing CC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing Customer', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing Representative', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing SC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Advice Debriefing CC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Advice Debriefing Customer', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Advice Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Advice Debriefing Representative', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Advice Debriefing SC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+
+          array('name' => 'Business Debriefing BC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Business Debriefing CC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Business Debriefing Customer', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Business Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
+
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Remote Coaching Debriefing CC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Remote Coaching Debriefing Customer', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Remote Coaching Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Remote Coaching Debriefing Representative', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Remote Coaching Debriefing SC', 'option_group_id' => $activity_type_option_group));
+
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Seminar Debriefing CC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Seminar Debriefing Customer', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Seminar Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Seminar Debriefing Representative', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
+          array('name' => 'Seminar Debriefing SC', 'option_group_id' => $activity_type_option_group));
     }
 
     public function getNoActivityDetailsList() {
