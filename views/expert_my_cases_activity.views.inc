@@ -196,7 +196,9 @@ $handler->display->display_options['fields']['activity_date_time']['relationship
 $handler->display->display_options['fields']['activity_date_time']['label'] = 'Date';
 $handler->display->display_options['fields']['activity_date_time']['alter']['text'] = '[display_name] ([activity_date_time])';
 $handler->display->display_options['fields']['activity_date_time']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['activity_date_time']['date_format'] = 'short';
+$handler->display->display_options['fields']['activity_date_time']['date_format'] = 'custom';
+$handler->display->display_options['fields']['activity_date_time']['custom_date_format'] = 'd M Y';
+$handler->display->display_options['fields']['activity_date_time']['second_date_format'] = 'short';
 /* Field: CiviCRM Activities: Activity Type */
 $handler->display->display_options['fields']['activity_type']['id'] = 'activity_type';
 $handler->display->display_options['fields']['activity_type']['table'] = 'civicrm_activity';
@@ -207,10 +209,8 @@ $handler->display->display_options['fields']['subject']['id'] = 'subject';
 $handler->display->display_options['fields']['subject']['table'] = 'civicrm_activity';
 $handler->display->display_options['fields']['subject']['field'] = 'subject';
 $handler->display->display_options['fields']['subject']['relationship'] = 'activity_id';
-$handler->display->display_options['fields']['subject']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['subject']['alter']['path'] = 'expert/my-cases/activitiy-detail/[id]';
 $handler->display->display_options['fields']['subject']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['subject']['empty'] = '<a href="/expert/my-cases/activitiy-detail/[id]">No subject</a>';
+$handler->display->display_options['fields']['subject']['empty'] = 'No subject';
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
@@ -241,6 +241,24 @@ $handler->display->display_options['fields']['status']['table'] = 'civicrm_activ
 $handler->display->display_options['fields']['status']['field'] = 'status';
 $handler->display->display_options['fields']['status']['relationship'] = 'activity_id';
 $handler->display->display_options['fields']['status']['label'] = 'Status';
+/* Field: View details */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = '';
+$handler->display->display_options['fields']['php']['exclude'] = FALSE;
+$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_value'] = 'return _pum_expert_show_activity_details($row->id, $row->activity_type);';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+$handler->display->display_options['fields']['php']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['php']['alter']['text'] = 'View details';
+$handler->display->display_options['fields']['php']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['php']['alter']['path'] = '[php]';
+$handler->display->display_options['fields']['php']['alter']['absolute'] = TRUE;
+$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+
 /* Sort criterion: CiviCRM Activities: Scheduled Activity Date */
 $handler->display->display_options['sorts']['activity_date_time']['id'] = 'activity_date_time';
 $handler->display->display_options['sorts']['activity_date_time']['table'] = 'civicrm_activity';

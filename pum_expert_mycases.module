@@ -88,6 +88,16 @@ function _pum_expert_has_user_role_on_case($case_id) {
   return $roles[$case_id];
 }
 
+function _pum_expert_show_activity_details($activity_id, $activity_type) {
+  $config = pum_expert_mycases_config::singleton();
+  $noDetailsActivityTypes = $config->getNoActivityDetailsList();
+  if (!isset($noDetailsActivityTypes[$activity_type])) {
+    return 'expert/my-cases/activitiy-detail/'.$activity_id;
+  } else {
+    return '';
+  }
+}
+
 function _pum_expert_link_to_case_details($case_id, $case_type) {
     $config = pum_expert_mycases_config::singleton();
     $sep = CRM_Core_DAO::VALUE_SEPARATOR;

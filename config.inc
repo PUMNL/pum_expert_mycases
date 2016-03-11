@@ -12,6 +12,8 @@ class pum_expert_mycases_config {
 
     protected $project_intake_case_type = array();
 
+    protected $noActivityDetailsList = array();
+
     protected function __construct() {
         civicrm_initialize();
 
@@ -34,6 +36,22 @@ class pum_expert_mycases_config {
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Status', 'option_group_id' => $activity_type_option_group));
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Type', 'option_group_id' => $activity_type_option_group));
         $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Tags', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact about Expert', 'option_group_id' => $activity_type_option_group));
+        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Colleague', 'option_group_id' => $activity_type_option_group));
+
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing CC', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing Customer', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing Representative', 'option_group_id' => $activity_type_option_group));
+        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Advice Debriefing SC', 'option_group_id' => $activity_type_option_group));
+    }
+
+    public function getNoActivityDetailsList() {
+    $return = array();
+    foreach($this->noActivityDetailsList as $act) {
+        $return[$act['value']] = $act['value'];
+    }
+    return $return;
     }
 
     public function getContactWithCustomerActivityTypeId() {
