@@ -189,8 +189,12 @@ if (pum_expert_check_case_for_intake($row->case_type)) {
   echo \'N/A\';
 } else {
   $date = new DateTime();
-  $date->setTimestamp($row->start_date);
-  echo $date->format(\'j F Y\');
+  if (empty($row->start_date)) {
+    echo \'\';
+  } else {
+    $date->setTimestamp($row->start_date);
+    echo $date->format(\'j F Y\');
+  }
 }
 ?>';
 $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -206,8 +210,12 @@ if (pum_expert_check_case_for_intake($row->case_type)) {
   echo \'N/A\';
 } else {
   $date = new DateTime();
-  $date->setTimestamp($row->end_date);
-  echo $date->format(\'j F Y\');
+  if (empty($row->end_date)) {
+    echo \'\';
+  } else {
+    $date->setTimestamp($row->end_date);
+    echo $date->format(\'j F Y\');
+  }
 }
 ?>';
 $handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '0';
