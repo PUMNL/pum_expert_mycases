@@ -213,6 +213,7 @@ $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
 $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
 $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
 $handler->display->display_options['fields']['nothing_1']['label'] = '';
+$handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
 $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'See proposal';
 $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
 $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'expert/see-proposal/[id_1]';
