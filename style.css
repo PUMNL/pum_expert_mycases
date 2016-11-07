@@ -1,0 +1,12 @@
+.button.accept-main-activity-proposal,
+.button.accept-main-activity-proposal:hover {
+    background-color: forestgreen;
+}
+.button.reject-main-activity-proposal,
+.button.reject-main-activity-proposal:hover{
+    background-color: red;
+}
+.button.question-main-activity-proposal,
+.button.question-main-activity-proposal:hover{
+    background-color: silver;
+}
