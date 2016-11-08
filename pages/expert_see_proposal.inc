@@ -85,28 +85,41 @@ function pum_expert_mycases_see_proposal($case_id) {
   $acceptProposalLink = false;
   $rejectProposalLink = false;
   if ($adviceCaseType == $case['case_type_id']) {
-    $acceptProposalLink = '/expert/accept-advisory-mission';
-    $rejectProposalLink = '/expert/reject-advice-proposal';
+    $acceptProposalLink = 'expert/accept-advisory-mission';
+    $rejectProposalLink = 'expert/reject-advice-proposal';
   } elseif ($seminarCaseType == $case['case_type_id']) {
-    $acceptProposalLink = '/expert/accept-seminar';
-    $rejectProposalLink = '/expert/reject-seminar-proposal';
+    $acceptProposalLink = 'expert/accept-seminar';
+    $rejectProposalLink = 'expert/reject-seminar-proposal';
   } elseif ($remoteCoachingCaseType == $case['case_type_id']) {
-    $acceptProposalLink = '/expert/accept-remote-coaching';
-    $rejectProposalLink = '/expert/reject-remote-coaching-proposal';
+    $acceptProposalLink = 'expert/accept-remote-coaching';
+    $rejectProposalLink = 'expert/reject-remote-coaching-proposal';
   } elseif ($businessCaseType == $case['case_type_id']) {
-    $acceptProposalLink = '/expert/accept-business';
-    $rejectProposalLink = '/expert/reject-business-proposal';
+    $acceptProposalLink = 'expert/accept-business';
+    $rejectProposalLink = 'expert/reject-business-proposal';
   }
   if ($acceptProposalLink) {
-    $acceptProposalLink .= '?cid1='.$customer['id'].'&cid2='.$expert['contact_id'].'&caseid='.$case_id;
+    $acceptProposalLink = url($acceptProposalLink, array(
+      'absolute'=> true,
+      'query' => array(
+        'cid1' => $customer['id'],
+        'cid2' => $expert['contact_id'],
+        'case_id' => $case_id,
+      ),
+    ));
+    $buttons['accept']['#markup'] = '<a href="'.$acceptProposalLink.'" class="button accept-main-activity-proposal">'.t("Accept").'</a>';
   }
   if ($rejectProposalLink) {
-    $rejectProposalLink .= '?cid1='.$customer['id'].'&cid2='.$expert['contact_id'].'&caseid='.$case_id;
+    $rejectProposalLink = url($rejectProposalLink, array(
+      'absolute'=> true,
+      'query' => array(
+        'cid1' => $customer['id'],
+        'cid2' => $expert['contact_id'],
+        'case_id' => $case_id,
+      ),
+    ));
+    $buttons['reject']['#markup'] = '<a href="'.$rejectProposalLink.'" class="button reject-main-activity-proposal">'.t("Reject").'</a>';
   }
   $questionLink = 'expert/see-proposal/'.$case_id.'/question';
-
-  $buttons['accept']['#markup'] = '<a href="'.url($acceptProposalLink, array('absolute'=>true)).'" class="button accept-main-activity-proposal">'.t("Accept").'</a>';
-  $buttons['reject']['#markup'] = '<a href="'.url($rejectProposalLink, array('absolute'=>true)).'" class="button reject-main-activity-proposal">'.t("Reject").'</a>';
   $buttons['questions']['#markup'] = '<a href="'.url($questionLink, array('absolute'=>true)).'" class="button question-main-activity-proposal">'.t("Questions?").'</a>';
 
   // Now we have all the relevant information build the page as a Drupal Render array.
