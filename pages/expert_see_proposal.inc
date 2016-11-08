@@ -134,6 +134,15 @@ function pum_expert_mycases_see_proposal($case_id) {
   $page['customer']['case_type']['#markup'] = '<p><strong>Case type:</strong> '.$caseTypeLabel.'</p>';
   $page['customer']['address']['#markup'] = '<p><strong>Address</strong><br>'.$address.'</p>';
 
+  $websites = civicrm_api3('Website', 'get', array('contact_id' => $customer['id']));
+  if (count($websites['values']) > 0) {
+    $page['customer']['website']['#markup'] = '<p><strong>Website:</strong> ';
+    foreach($websites['values'] as $website) {
+      $page['customer']['website']['#markup'] .= '<a href="' . $website['url'] . '">' . $website['url'] . '</a>';
+    }
+    $page['customer']['website']['#markup'] .= '</p>';
+  }
+
   if ($authorised_person) {
     $page['customer']['authorised']['#markup'] = '<br><strong>Contact person:</strong> '.$authorised_person['display_name'];
     if ($authorised_person['email']) {

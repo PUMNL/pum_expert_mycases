@@ -100,18 +100,12 @@ $handler->display->display_options['fields']['display_name']['id'] = 'display_na
 $handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
 $handler->display->display_options['fields']['display_name']['field'] = 'display_name';
 $handler->display->display_options['fields']['display_name']['label'] = 'Customer';
-$handler->display->display_options['fields']['display_name']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['display_name']['alter']['path'] = 'expert/customer/[id]';
-$handler->display->display_options['fields']['display_name']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: CiviCRM Cases: Case Type */
 $handler->display->display_options['fields']['case_type']['id'] = 'case_type';
 $handler->display->display_options['fields']['case_type']['table'] = 'civicrm_case';
 $handler->display->display_options['fields']['case_type']['field'] = 'case_type';
 $handler->display->display_options['fields']['case_type']['relationship'] = 'case_id';
-$handler->display->display_options['fields']['case_type']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['case_type']['alter']['path'] = 'expert/my-cases/activities/[id_1]';
-$handler->display->display_options['fields']['case_type']['alter']['absolute'] = TRUE;
 /* Field: Global: See proposal link */
 $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
 $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
