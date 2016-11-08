@@ -104,7 +104,7 @@ function pum_expert_mycases_see_proposal($case_id) {
       'query' => array(
         'cid1' => $customer['id'],
         'cid2' => $expert['contact_id'],
-        'case_id' => $case_id,
+        'caseid' => $case_id,
       ),
     ));
     $buttons['accept']['#markup'] = '<a href="'.$acceptProposalLink.'" class="button accept-main-activity-proposal">'.t("Accept").'</a>';
@@ -115,7 +115,7 @@ function pum_expert_mycases_see_proposal($case_id) {
       'query' => array(
         'cid1' => $customer['id'],
         'cid2' => $expert['contact_id'],
-        'case_id' => $case_id,
+        'caseid' => $case_id,
       ),
     ));
     $buttons['reject']['#markup'] = '<a href="'.$rejectProposalLink.'" class="button reject-main-activity-proposal">'.t("Reject").'</a>';
