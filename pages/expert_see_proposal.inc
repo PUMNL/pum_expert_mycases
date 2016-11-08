@@ -25,6 +25,7 @@ function pum_expert_mycases_see_proposal($case_id) {
   $customer = civicrm_api3('Contact', 'getsingle', array('id' => $customer_id));
   $address = $customer['street_address']."\n".$customer['postal_code']." ".$customer['city']."\n".$customer['country'];
   $address = preg_replace('/(\n+)/', '<br>', $address);
+  $caseTypeLabel = civicrm_api3('OptionValue', 'getvalue', array('value' => $case['case_type_id'], 'return' => 'label', 'option_group_id' => $caseTypeOptionGroupId));
 
   $expectedResults = '';
   $objective = '';
@@ -123,17 +124,15 @@ function pum_expert_mycases_see_proposal($case_id) {
   $buttons['questions']['#markup'] = '<a href="'.url($questionLink, array('absolute'=>true)).'" class="button question-main-activity-proposal">'.t("Questions?").'</a>';
 
   // Now we have all the relevant information build the page as a Drupal Render array.
-
   drupal_add_library('system', 'drupal.collapse');
   drupal_add_css(drupal_get_path('module', 'pum_expert_mycases') . '/style.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
-
+  drupal_set_title($customer['display_name']);
 
   $page['buttons_top'] = $buttons;
 
   $page['customer']['#type'] = 'fieldset';
-  $page['customer']['name']['#markup'] = '<p>'.$customer['display_name'].'</p>';
-  $page['customer']['address']['#markup'] = '<p>'.$address.'</p>';
-
+  $page['customer']['case_type']['#markup'] = '<p><strong>Case type:</strong> '.$caseTypeLabel.'</p>';
+  $page['customer']['address']['#markup'] = '<p><strong>Address</strong><br>'.$address.'</p>';
 
   if ($authorised_person) {
     $page['customer']['authorised']['#markup'] = '<br><strong>Contact person:</strong> '.$authorised_person['display_name'];

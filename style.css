@@ -1,12 +1,12 @@
-.button.accept-main-activity-proposal,
-.button.accept-main-activity-proposal:hover {
-    background-color: forestgreen;
+.section-portal .l-main .button.accept-main-activity-proposal,
+.section-portal .l-main .button.accept-main-activity-proposal:hover {
+    background-color: #43AC6A;;
 }
-.button.reject-main-activity-proposal,
-.button.reject-main-activity-proposal:hover{
-    background-color: red;
+.section-portal .l-main .button.reject-main-activity-proposal,
+.section-portal .l-main .button.reject-main-activity-proposal:hover{
+    background-color: #f04124;;
 }
-.button.question-main-activity-proposal,
-.button.question-main-activity-proposal:hover{
-    background-color: silver;
+.section-portal .l-main .button.question-main-activity-proposal,
+.section-portal .l-main .button.question-main-activity-proposal:hover{
+    background-color: #483493;
 }
