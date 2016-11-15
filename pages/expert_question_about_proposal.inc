@@ -9,12 +9,6 @@ function pum_expert_mycases_question_about_proposal($form, &$form_state, $case_i
   $form['case_id']['#name'] = 'case_id';
   $form['case_id']['#value'] = $case_id;
 
-  $form['subject'] = array(
-    '#type' => 'textfield',
-    '#required' => true,
-    '#title' => t('Subject'),
-  );
-
   $form['details'] = array(
     '#type' => 'textarea',
     '#required' => true,
@@ -44,6 +38,7 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
   $case = civicrm_api3('Case', 'getsingle', array('id' => $case_id));
   $proj_off = false;
   $expert = false;
+  $client = false;
   foreach($case['contacts'] as $role) {
     switch ($role['role']) {
       case 'Project Officer':
@@ -58,12 +53,14 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
   $from = CRM_Core_BAO_Domain::getNameAndEmail();
   $from = "$from[0] <$from[1]>";
 
+  $subject = 'Question about main activity proposal ('.$case['subject'].') from '.$expert['display_name'];
+
   $mailParams = array(
     'groupName' => 'Activity Email Sender',
     'from' => $from,
     'toName' => $proj_off['display_name'],
     'toEmail' => $proj_off['email'],
-    'subject' => $form_state['values']['subject'],
+    'subject' => $subject,
     'text' => $form_state['values']['details'],
     'html' => $form_state['values']['details'],
     'replyTo' => $expert['email'],
@@ -74,7 +71,7 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
     $params['source_contact_id'] = $expert['contact_id'];
     $params['target_contact_id'] = $proj_off['contact_id'];
     $params['assignee_contact_id'] = $proj_off['contact_id'];
-    $params['subject'] = $form_state['values']['subject'];
+    $params['subject'] = $subject;
     $params['details'] = $form_state['values']['details'];
     $params['activity_type_id'] = $emailActivityType;
     civicrm_api3('Activity', 'create', $params);

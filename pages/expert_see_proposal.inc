@@ -130,6 +130,9 @@ function pum_expert_mycases_see_proposal($case_id) {
 
   $page['buttons_top'] = $buttons;
 
+  $page['explain']['#type'] = 'markup';
+  $page['explain']['#markup'] = '<p>If you have any questions that need to be answered before you can accept/reject this proposal, please press \'questions\'. This will send an e-mail to the project officer.</p>';
+
   $page['customer']['#type'] = 'fieldset';
   $page['customer']['case_type']['#markup'] = '<p><strong>Case type:</strong> '.$caseTypeLabel.'</p>';
   $page['customer']['address']['#markup'] = '<p><strong>Address</strong><br>'.$address.'</p>';

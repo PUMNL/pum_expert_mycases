@@ -2,7 +2,7 @@ name = PUM Expert My Cases
 description = View and webforms for My Cases for an expert
 core = 7.x
 package = PUM
-version = "7.x-1.16.3"
+version = "7.x-1.16.4"
 dependencies[] = civicrm (>=4.4)
 dependencies[] = webform_civicrm (>=4.5)
 dependencies[] = webform (>=4.0-beta1)
