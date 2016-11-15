@@ -12,7 +12,7 @@ function pum_expert_mycases_question_about_proposal($form, &$form_state, $case_i
   $form['details'] = array(
     '#type' => 'textarea',
     '#required' => true,
-    '#title' => t('Details'),
+    '#title' => t('Your question'),
   );
 
   $form['submit_button'] = array(
@@ -38,7 +38,6 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
   $case = civicrm_api3('Case', 'getsingle', array('id' => $case_id));
   $proj_off = false;
   $expert = false;
-  $client = false;
   foreach($case['contacts'] as $role) {
     switch ($role['role']) {
       case 'Project Officer':
@@ -53,7 +52,7 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
   $from = CRM_Core_BAO_Domain::getNameAndEmail();
   $from = "$from[0] <$from[1]>";
 
-  $subject = 'Question about main activity proposal ('.$case['subject'].') from '.$expert['display_name'];
+  $subject = 'Question from '.$expert['display_name']. ' regarding '.$case['subject'];
 
   $mailParams = array(
     'groupName' => 'Activity Email Sender',
