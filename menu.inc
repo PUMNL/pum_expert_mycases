@@ -33,6 +33,16 @@ function _pum_expert_mycases_menu() {
     'access callback' => '_pum_expert_mycases_user_has_role',
     'access arguments' => array(array('Expert')),
   );
+  $items['expert/my-main-activity-history'] = array(
+    'title' => t('My Main Activity History'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'pages/my_main_activity_history.inc',
+    'page callback' => 'pum_expert_mycases_my_main_activity_history',
+    'access callback' => '_pum_expert_mycases_user_has_role',
+    'access arguments' => array(array('Expert')),
+    'menu_name' => 'menu-my-profile',
+    'weight' => -1,
+  );
   return $items;
 }
 
