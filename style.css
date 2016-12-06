@@ -1,3 +1,6 @@
+/**
+ * Styles for main activity proposal
+ */
 .section-portal .l-main .button.accept-main-activity-proposal,
 .section-portal .l-main .button.accept-main-activity-proposal:hover {
     background-color: #43AC6A;;
@@ -9,4 +12,12 @@
 .section-portal .l-main .button.question-main-activity-proposal,
 .section-portal .l-main .button.question-main-activity-proposal:hover{
     background-color: #483493;
+}
+
+/**
+ * Styles for business programme proposal
+ */
+form#pum-expert-mycases-business-programme-proposal #edit-proposed-period .container-inline-date {
+    float: left;
+    clear: none;
 }

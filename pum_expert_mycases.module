@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config.inc';
+require_once 'businessconfig.inc';
 require_once 'menu.inc';
 
 function pum_expert_mycases_views_api() {
@@ -8,8 +9,10 @@ function pum_expert_mycases_views_api() {
 }
 
 function pum_expert_mycases_preprocess_html(&$vars) {
-  if (in_array('page-expert-my-main-activity-history', $vars['classes_array']) ||
-  in_array('page-expert-see-proposal', $vars['classes_array'])) {
+  if (in_array('page-expert-my-main-activity-history', $vars['classes_array'])
+    || in_array('page-expert-see-proposal', $vars['classes_array'])
+    || in_array('page-expert-business-programme-proposal', $vars['classes_array'])
+  ) {
     $vars['classes_array'][] = 'section-portal';
   }
 }

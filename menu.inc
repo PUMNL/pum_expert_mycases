@@ -43,6 +43,15 @@ function _pum_expert_mycases_menu() {
     'menu_name' => 'menu-my-profile',
     'weight' => -1,
   );
+  $items['expert/business-programme-proposal/%'] = array(
+    'title' => t('Business programme proposal'),
+    'type' => MENU_CALLBACK,
+    'file' => 'pages/expert_business_programme_proposal.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pum_expert_mycases_business_programme_proposal', 2),
+    'access callback' => '_pum_expert_mycases_user_has_role',
+    'access arguments' => array(array('Expert')),
+  );
   return $items;
 }
 
