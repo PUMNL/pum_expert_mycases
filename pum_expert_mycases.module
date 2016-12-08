@@ -11,6 +11,7 @@ function pum_expert_mycases_views_api() {
 function pum_expert_mycases_preprocess_html(&$vars) {
   if (in_array('page-expert-my-main-activity-history', $vars['classes_array'])
     || in_array('page-expert-see-proposal', $vars['classes_array'])
+    || in_array('page-expert-complete-business-programme-visits', $vars['classes_array'])
     || in_array('page-expert-business-programme-proposal', $vars['classes_array'])
   ) {
     $vars['classes_array'][] = 'section-portal';

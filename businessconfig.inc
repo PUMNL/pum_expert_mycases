@@ -22,6 +22,8 @@ class pum_expert_mycases_businessconfig {
 
   public $mainActivityEndDateCustomFieldName;
 
+  public $business_case_type;
+
   protected function __construct() {
     civicrm_initialize();
     $this->custom_groups['Business_Programme'] = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Business_Programme'));
@@ -37,6 +39,10 @@ class pum_expert_mycases_businessconfig {
       'name' => 'Short_description_Aim_of_Visit',
       'custom_group_id' => $this->custom_groups['Business_Programme']['id']
     ));
+    $this->custom_groups['Business_Programme']['fields']['Visit_from'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Visit_from', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
+    $this->custom_groups['Business_Programme']['fields']['Visit_to'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Visit_ot', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
+    $this->custom_groups['Business_Programme']['fields']['Thank_you_Note_sent'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Thank_you_Note_sent', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
+    $this->custom_groups['Business_Programme']['fields']['Business_Visit_Cancelled'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Business_Visit_Cancelled', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
 
 
     $this->programme_activity_type_name = 'Business Programme';
@@ -64,6 +70,9 @@ class pum_expert_mycases_businessconfig {
 
     $activity_status_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_status'));
     $this->submitted_status = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Submitted', 'option_group_id' => $activity_status_option_group));
+
+    $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
+    $this->business_case_type = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Business', 'option_group_id' => $case_type_id, 'return' => 'value'));
   }
 
   /**

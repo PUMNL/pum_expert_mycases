@@ -1,6 +1,6 @@
 <?php
 
-$c = mainactivity_debriefing::singleton();
+$c = pum_expert_mycases_businessconfig::singleton();
 $expert_rel_type_id = civicrm_api3('RelationshipType', 'getvalue', array('name_a_b' => 'Expert', 'return' => 'id'));
 $main_activity_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'main_activity_info'));
 $start_date = civicrm_api3('CustomField', 'getsingle', array('name' => 'main_activity_start_date', 'custom_group_id' => $main_activity_info['id']));
@@ -121,7 +121,7 @@ $handler->display->display_options['filters']['case_type']['id'] = 'case_type';
 $handler->display->display_options['filters']['case_type']['table'] = 'civicrm_case';
 $handler->display->display_options['filters']['case_type']['field'] = 'case_type';
 $handler->display->display_options['filters']['case_type']['value'] = array(
-  $c->business, $c->business
+  $c->business_case_type, $c->business_case_type
 );
 $handler->display->display_options['filters']['case_type']['group'] = 1;
 /* Filter criterion: CiviCRM Cases: Case Status */

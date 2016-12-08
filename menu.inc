@@ -52,6 +52,33 @@ function _pum_expert_mycases_menu() {
     'access callback' => '_pum_expert_mycases_user_has_role',
     'access arguments' => array(array('Expert')),
   );
+  $items['expert/complete-business-programme-visits/%/%'] = array(
+    'title' => t('Complete Business programme visit'),
+    'type' => MENU_CALLBACK,
+    'file' => 'pages/expert_complete_business_programme_visit.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pum_expert_mycases_complete_business_programme_visit', 2, 3),
+    'access callback' => '_pum_expert_mycases_user_has_role',
+    'access arguments' => array(array('Expert')),
+  );
+  $items['expert/cancel-business-programme-visits/%/%'] = array(
+    'title' => t('Cancel Business programme visit'),
+    'type' => MENU_CALLBACK,
+    'file' => 'pages/expert_complete_business_programme_visit.inc',
+    'page callback' => 'pum_expert_mycases_cancel_business_programme_visit',
+    'page arguments' => array(2, 3),
+    'access callback' => '_pum_expert_mycases_user_has_role',
+    'access arguments' => array(array('Expert')),
+  );
+  $items['expert/complete-business-programme-visits/%'] = array(
+    'title' => t('Complete Business programme visit'),
+    'type' => MENU_CALLBACK,
+    'file' => 'pages/expert_complete_business_programme_visit.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('pum_expert_mycases_complete_business_programme_visit', 2),
+    'access callback' => '_pum_expert_mycases_user_has_role',
+    'access arguments' => array(array('Expert')),
+  );
   return $items;
 }
 
