@@ -74,7 +74,7 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
     $params['details'] = $form_state['values']['details'];
     $params['activity_type_id'] = $emailActivityType;
     civicrm_api3('Activity', 'create', $params);
-    drupal_set_message(t('Send an e-mail to the project officer'));
+    drupal_set_message(t('Sent an e-mail to the project officer'));
   } else {
     drupal_set_message(t('Could not send e-mail'), 'error');
   }
