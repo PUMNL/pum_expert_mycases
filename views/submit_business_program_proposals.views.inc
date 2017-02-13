@@ -10,6 +10,12 @@ $case_status = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', '
 $preparation = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Preparation', 'return' => 'value', 'option_group_id' => $case_status));
 $matching = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Matching', 'return' => 'value', 'option_group_id' => $case_status));
 
+$activity_status = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_status'));
+$scheduled = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Scheduled', 'return' => 'value', 'option_group_id' => $activity_status));
+
+$activity_type = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_type'));
+$request_business_programm = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Request Business Programme', 'return' => 'value', 'option_group_id' => $activity_type));
+
 $view = new view();
 $view->name = 'submit_programme_proposals_for_expert';
 $view->description = '';
@@ -77,6 +83,11 @@ $handler->display->display_options['relationships']['drupal_id']['table'] = 'civ
 $handler->display->display_options['relationships']['drupal_id']['field'] = 'drupal_id';
 $handler->display->display_options['relationships']['drupal_id']['relationship'] = 'contact_id_b_';
 $handler->display->display_options['relationships']['drupal_id']['required'] = TRUE;
+/* Relationship: CiviCRM Case Activity: Case Activity's Activity ID */
+$handler->display->display_options['relationships']['activity_id']['id'] = 'activity_id';
+$handler->display->display_options['relationships']['activity_id']['table'] = 'civicrm_case_activity';
+$handler->display->display_options['relationships']['activity_id']['field'] = 'activity_id';
+$handler->display->display_options['relationships']['activity_id']['required'] = TRUE;
 /* Field: CiviCRM Cases: Case ID */
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_case';
@@ -134,6 +145,24 @@ $handler->display->display_options['filters']['status']['value'] = array(
   $matching => $matching
 );
 $handler->display->display_options['filters']['status']['group'] = 1;
+/* Filter criterion: CiviCRM Activities: Activity Status */
+$handler->display->display_options['filters']['status_1']['id'] = 'status_1';
+$handler->display->display_options['filters']['status_1']['table'] = 'civicrm_activity';
+$handler->display->display_options['filters']['status_1']['field'] = 'status';
+$handler->display->display_options['filters']['status_1']['relationship'] = 'activity_id';
+$handler->display->display_options['filters']['status_1']['value'] = array(
+  $scheduled => $scheduled,
+);
+$handler->display->display_options['filters']['status_1']['group'] = 1;
+/* Filter criterion: CiviCRM Activities: Activity Type */
+$handler->display->display_options['filters']['activity_type']['id'] = 'activity_type';
+$handler->display->display_options['filters']['activity_type']['table'] = 'civicrm_activity';
+$handler->display->display_options['filters']['activity_type']['field'] = 'activity_type';
+$handler->display->display_options['filters']['activity_type']['relationship'] = 'activity_id';
+$handler->display->display_options['filters']['activity_type']['value'] = array(
+  $request_business_programm => $request_business_programm,
+);
+$handler->display->display_options['filters']['activity_type']['group'] = 1;
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
