@@ -110,7 +110,7 @@ function pum_expert_mycases_business_programme_proposal($form, &$form_state, $ca
     $form['proposed_period']['period']['#type'] = 'markup';
     $form['proposed_period']['period']['#markup'] = '<p>'.$startDate->format('Y-m-d').' to '.$endDate->format('Y-m-d').'</p>';
     $form['proposed_period']['period_description']['#type'] = 'markup';
-    $form['proposed_period']['period_description']['#markup'] = '<p><em>If you have questions about the period or want to propose a different period, please contact your project officer.</em></p>';
+    $form['proposed_period']['period_description']['#markup'] = '<p><em>If you have any questions about the period or you want to propose a different period, please contact your project officer</em></p>';
   }
 
   $form['visits']['#type'] = 'fieldset';
