@@ -21,3 +21,13 @@ form#pum-expert-mycases-business-programme-proposal #edit-proposed-period .conta
     float: left;
     clear: none;
 }
+
+.section-portal .l-main #pum-expert-mycases-business-programme-proposal button {
+    background-color: #FE7500;
+    border-color: #cb5e00;
+}
+
+.section-portal .l-main #pum-expert-mycases-business-programme-proposal button:hover{
+    background-color: #cb5e00;
+    border-color: #cb5e00;
+}
