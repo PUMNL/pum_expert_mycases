@@ -11,7 +11,7 @@ $preparation = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Preparat
 $matching = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Matching', 'return' => 'value', 'option_group_id' => $case_status));
 
 $activity_status = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_status'));
-$scheduled = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Scheduled', 'return' => 'value', 'option_group_id' => $activity_status));
+$completed = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Completed', 'return' => 'value', 'option_group_id' => $activity_status));
 
 $activity_type = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_type'));
 $request_business_programm = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Request Business Programme', 'return' => 'value', 'option_group_id' => $activity_type));
@@ -151,7 +151,7 @@ $handler->display->display_options['filters']['status_1']['table'] = 'civicrm_ac
 $handler->display->display_options['filters']['status_1']['field'] = 'status';
 $handler->display->display_options['filters']['status_1']['relationship'] = 'activity_id';
 $handler->display->display_options['filters']['status_1']['value'] = array(
-  $scheduled => $scheduled,
+  $completed => $completed,
 );
 $handler->display->display_options['filters']['status_1']['group'] = 1;
 /* Filter criterion: CiviCRM Activities: Activity Type */
