@@ -41,7 +41,7 @@ class pum_expert_mycases_businessconfig {
     ));
     $this->custom_groups['Business_Programme']['fields']['Visit_from'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Visit_from', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
     $this->custom_groups['Business_Programme']['fields']['Visit_to'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Visit_ot', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
-    $this->custom_groups['Business_Programme']['fields']['Thank_you_Note_sent'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Thank_you_Note_sent', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
+    $this->custom_groups['Business_Programme']['fields']['Thank_you_Note'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Thank_you_Note', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
     $this->custom_groups['Business_Programme']['fields']['Business_Visit_Cancelled'] = civicrm_api3('CustomField', 'getsingle', array('name' => 'Business_Visit_Cancelled', 'custom_group_id' => $this->custom_groups['Business_Programme']['id']));
 
 

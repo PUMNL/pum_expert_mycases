@@ -6,7 +6,7 @@ $location = $config->custom_groups['Business_Programme']['fields']['Location']['
 $from = $config->custom_groups['Business_Programme']['fields']['Visit_from']['column_name'];
 $to = $config->custom_groups['Business_Programme']['fields']['Visit_to']['column_name'];
 $aim = $config->custom_groups['Business_Programme']['fields']['Aim_of_Visit']['column_name'];
-$thank_you_note = $config->custom_groups['Business_Programme']['fields']['Thank_you_Note_sent']['column_name'];
+$thank_you_note = $config->custom_groups['Business_Programme']['fields']['Thank_you_Note']['column_name'];
 $cancelled = $config->custom_groups['Business_Programme']['fields']['Business_Visit_Cancelled']['column_name'];
 $submitted_status = $config->submitted_status['value'];
 
