@@ -41,6 +41,14 @@ $handler->display->display_options['footer']['area']['empty'] = TRUE;
 $handler->display->display_options['footer']['area']['content'] = '<a href="/expert/complete-business-programme-visits/!1" class="button">Add a visit</a>';
 $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
 $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area_1']['id'] = 'area_1';
+$handler->display->display_options['footer']['area_1']['table'] = 'views';
+$handler->display->display_options['footer']['area_1']['field'] = 'area';
+$handler->display->display_options['footer']['area_1']['empty'] = TRUE;
+$handler->display->display_options['footer']['area_1']['content'] = '<p>PUM would like to know the results of the Business link you have organised. We will use this information to find out what our overall impact is.</p><p>Please click on edit behind the name of the company you have visited and fill in the requested information. If the visit did not take place, please click on cancelled. In case you have visited more companies than indicated you can add these by clicking on ‘add a visit’.</p><p>We are not only thankful for your input but we also would like to express our gratitude to the hosting companies. We therefore would like to send the hosts a thank you note. Please indicate whether you would like us to do so on your behalf, or if you would rather do this personally yourself (than indicate ‘no’). Please be aware that we register the companies you have visited in our system. We do so to build up a database of potential partners and business link hosts for future business links. The action ‘Complete Business Programme’ will disappear under ‘my work’ when the Business link is totally completed.</p>';
+$handler->display->display_options['footer']['area_1']['format'] = 'full_html';
+$handler->display->display_options['footer']['area_1']['tokenize'] = TRUE;
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
