@@ -190,6 +190,6 @@ function pum_expert_mycases_complete_business_programme_visit_submit($form, &$fo
 
   civicrm_api3('Businesslink', 'completevisit', $params);
 
-  drupal_set_message('Business Programme completed');
+  drupal_set_message('Business programme visit completed.');
   drupal_goto('/expert/complete-business-programmes-details/'.$form_state['values']['case_id']);
 }
