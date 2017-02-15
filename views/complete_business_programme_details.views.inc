@@ -23,7 +23,7 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'Complete Business Programme Visits List';
+$handler->display->display_options['title'] = 'Complete Business Programme Visits';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
@@ -33,6 +33,20 @@ $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'full';
 $handler->display->display_options['pager']['options']['items_per_page'] = '10';
 $handler->display->display_options['style_plugin'] = 'table';
+/* Header: Global: Text area */
+$handler->display->display_options['header']['area_1']['id'] = 'area_1';
+$handler->display->display_options['header']['area_1']['table'] = 'views';
+$handler->display->display_options['header']['area_1']['field'] = 'area';
+$handler->display->display_options['header']['area_1']['empty'] = TRUE;
+$handler->display->display_options['header']['area_1']['content'] = '<p>PUM would like to know the results of the Business link you have organised. We will use this information to find out what our overall impact is.</p><p>Please click on edit behind the name of the company you have visited and fill in the requested information. If the visit did not take place, please click on cancelled. In case you have visited more companies than indicated you can add these by clicking on ‘add a visit’.</p><p>We are not only thankful for your input but we also would like to express our gratitude to the hosting companies. We therefore would like to send the hosts a thank you note. Please indicate whether you would like us to do so on your behalf, or if you would rather do this personally yourself (than indicate ‘no’). Please be aware that we register the companies you have visited in our system. We do so to build up a database of potential partners and business link hosts for future business links. The action ‘Complete Business Programme’ will disappear under ‘my work’ when the Business link is totally completed.</p>';
+$handler->display->display_options['header']['area_1']['format'] = 'full_html';
+/* Header: Global: Text area */
+$handler->display->display_options['header']['area']['id'] = 'area';
+$handler->display->display_options['header']['area']['table'] = 'views';
+$handler->display->display_options['header']['area']['field'] = 'area';
+$handler->display->display_options['header']['area']['content'] = '<h3>[display_name]</h3>';
+$handler->display->display_options['header']['area']['format'] = 'full_html';
+$handler->display->display_options['header']['area']['tokenize'] = TRUE;
 /* Footer: Global: Text area */
 $handler->display->display_options['footer']['area']['id'] = 'area';
 $handler->display->display_options['footer']['area']['table'] = 'views';
@@ -41,14 +55,6 @@ $handler->display->display_options['footer']['area']['empty'] = TRUE;
 $handler->display->display_options['footer']['area']['content'] = '<a href="/expert/complete-business-programme-visits/!1" class="button">Add a visit</a>';
 $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
 $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
-/* Footer: Global: Text area */
-$handler->display->display_options['footer']['area_1']['id'] = 'area_1';
-$handler->display->display_options['footer']['area_1']['table'] = 'views';
-$handler->display->display_options['footer']['area_1']['field'] = 'area';
-$handler->display->display_options['footer']['area_1']['empty'] = TRUE;
-$handler->display->display_options['footer']['area_1']['content'] = '<p>PUM would like to know the results of the Business link you have organised. We will use this information to find out what our overall impact is.</p><p>Please click on edit behind the name of the company you have visited and fill in the requested information. If the visit did not take place, please click on cancelled. In case you have visited more companies than indicated you can add these by clicking on ‘add a visit’.</p><p>We are not only thankful for your input but we also would like to express our gratitude to the hosting companies. We therefore would like to send the hosts a thank you note. Please indicate whether you would like us to do so on your behalf, or if you would rather do this personally yourself (than indicate ‘no’). Please be aware that we register the companies you have visited in our system. We do so to build up a database of potential partners and business link hosts for future business links. The action ‘Complete Business Programme’ will disappear under ‘my work’ when the Business link is totally completed.</p>';
-$handler->display->display_options['footer']['area_1']['format'] = 'full_html';
-$handler->display->display_options['footer']['area_1']['tokenize'] = TRUE;
 /* No results behavior: Global: Text area */
 $handler->display->display_options['empty']['area']['id'] = 'area';
 $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -61,6 +67,21 @@ $handler->display->display_options['relationships']['case_id']['id'] = 'case_id'
 $handler->display->display_options['relationships']['case_id']['table'] = 'civicrm_case_activity';
 $handler->display->display_options['relationships']['case_id']['field'] = 'case_id';
 $handler->display->display_options['relationships']['case_id']['required'] = TRUE;
+/* Relationship: CiviCRM Case Contact: Case Contact's Contact ID */
+$handler->display->display_options['relationships']['contact_id']['id'] = 'contact_id';
+$handler->display->display_options['relationships']['contact_id']['table'] = 'civicrm_case_contact';
+$handler->display->display_options['relationships']['contact_id']['field'] = 'contact_id';
+$handler->display->display_options['relationships']['contact_id']['relationship'] = 'case_id';
+$handler->display->display_options['relationships']['contact_id']['label'] = 'Customer';
+/* Field: CiviCRM Contacts: Display Name */
+$handler->display->display_options['fields']['display_name']['id'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['table'] = 'civicrm_contact';
+$handler->display->display_options['fields']['display_name']['field'] = 'display_name';
+$handler->display->display_options['fields']['display_name']['relationship'] = 'contact_id';
+$handler->display->display_options['fields']['display_name']['label'] = '';
+$handler->display->display_options['fields']['display_name']['exclude'] = TRUE;
+$handler->display->display_options['fields']['display_name']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['display_name']['link_to_civicrm_contact'] = 0;
 /* Field: CiviCRM Activities: Activity ID */
 $handler->display->display_options['fields']['id']['id'] = 'id';
 $handler->display->display_options['fields']['id']['table'] = 'civicrm_activity';
