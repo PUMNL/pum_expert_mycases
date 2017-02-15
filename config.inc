@@ -51,7 +51,7 @@ class pum_expert_mycases_config {
           array('name' => 'Advice Debriefing SC', 'option_group_id' => $activity_type_option_group));
         $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
 
-          array('name' => 'Business Debriefing BC', 'option_group_id' => $activity_type_option_group));
+          array('name' => 'Business Debriefing SC', 'option_group_id' => $activity_type_option_group));
         $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
           array('name' => 'Business Debriefing CC', 'option_group_id' => $activity_type_option_group));
         $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
