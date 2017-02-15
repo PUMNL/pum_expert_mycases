@@ -42,7 +42,6 @@ function pum_expert_mycases_see_proposal($case_id) {
   $proj_off = false;
   $cc = false;
   $sc = false;
-  $expert = false;
   foreach($case['contacts'] as $role) {
     switch ($role['role']) {
       case 'Representative for':
@@ -60,11 +59,12 @@ function pum_expert_mycases_see_proposal($case_id) {
       case 'Authorised contact for':
         $authorised_person = $role;
         break;
-      case 'Expert':
-        $expert = $role;
-        break;
     }
   }
+
+  $expert_relationship_type = civicrm_api3('RelationshipType', 'getvalue', array('return' => 'id', 'name_a_b' => 'Expert'));
+  $expert_relationship = civicrm_api3('Relationship', 'getsingle', array('relationship_type_id' => $expert_relationship_type, 'case_id' => $case_id));
+  $expert = civicrm_api3('Contact', 'getsingle', array('return' => 'display_name,sort_name,email,phone,birth_date', 'id' => $expert_relationship['contact_id_b']));
 
   $projectIntake = false;
   $assesmentProjectReqByRep = false;

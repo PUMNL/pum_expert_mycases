@@ -37,17 +37,17 @@ function pum_expert_mycases_question_about_proposal_submit($form, &$form_state) 
 
   $case = civicrm_api3('Case', 'getsingle', array('id' => $case_id));
   $proj_off = false;
-  $expert = false;
   foreach($case['contacts'] as $role) {
     switch ($role['role']) {
       case 'Project Officer':
         $proj_off = $role;
         break;
-      case 'Expert':
-        $expert = $role;
-        break;
     }
   }
+
+  $expert_relationship_type = civicrm_api3('RelationshipType', 'getvalue', array('return' => 'id', 'name_a_b' => 'Expert'));
+  $expert_relationship = civicrm_api3('Relationship', 'getsingle', array('relationship_type_id' => $expert_relationship_type, 'case_id' => $case_id));
+  $expert = civicrm_api3('Contact', 'getsingle', array('return' => 'display_name,sort_name,email,phone,birth_date', 'id' => $expert_relationship['contact_id_b']));
 
   $from = CRM_Core_BAO_Domain::getNameAndEmail();
   $from = "$from[0] <$from[1]>";
