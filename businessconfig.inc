@@ -12,6 +12,8 @@ class pum_expert_mycases_businessconfig {
 
   public $submitted_status;
 
+  public $in_progress_status;
+
   public $mainActivityInfoCustomGroup;
 
   public $mainActivityStartDateCustomField;
@@ -70,6 +72,7 @@ class pum_expert_mycases_businessconfig {
 
     $activity_status_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_status'));
     $this->submitted_status = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Submitted', 'option_group_id' => $activity_status_option_group));
+    $this->in_progress_status = civicrm_api3('OptionValue', 'getsingle', array('name' => 'In Progress', 'option_group_id' => $activity_status_option_group));
 
     $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
     $this->business_case_type = civicrm_api3('OptionValue', 'getvalue', array('name' => 'Business', 'option_group_id' => $case_type_id, 'return' => 'value'));

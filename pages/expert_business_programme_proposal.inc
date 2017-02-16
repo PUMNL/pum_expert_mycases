@@ -210,7 +210,7 @@ function pum_expert_mycases_business_programme_proposal_submit($form, &$form_sta
 
     $activityParams = array();
     $activityParams['case_id'] = $case_id;
-    $activityParams['status_id'] = $businessconfig->submitted_status['value'];
+    $activityParams['status_id'] = $businessconfig->in_progress_status['value'];
     $activityParams['subject'] = $form_state['input']['Naam_bedrijf'][$index];
     $activityParams['activity_type_id'] = $businessconfig->programme_activity_type_id;
     $activityParams['custom_'.$businessconfig->custom_groups['Business_Programme']['fields']['Naam_bedrijf']['id']] = $form_state['input']['Naam_bedrijf'][$index];
