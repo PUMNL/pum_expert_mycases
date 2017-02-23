@@ -32,7 +32,7 @@ function pum_expert_mycases_complete_business_programme_visit($form, &$form_stat
   $visit_to = false;
   $result_of_visit = '';
   $aim_of_visit = '';
-  $thank_you_send = false;
+  $thank_you_send = '';
 
   if ($activity_id) {
     $visit = civicrm_api3('Businesslink', 'getvisitdetails', array('activity_id' => $activity_id));
@@ -55,7 +55,9 @@ function pum_expert_mycases_complete_business_programme_visit($form, &$form_stat
     }
     $aim_of_visit = $visit['aim_of_visit'];
     $result_of_visit = $visit['result_of_visit'];
-    $thank_you_send = $visit['thank_you_send'];
+    if (isset($visit['thank_you_send'])) {
+        $thank_you_send = $visit['thank_you_send'];
+    }
   }
 
 
@@ -154,7 +156,7 @@ function pum_expert_mycases_complete_business_programme_visit($form, &$form_stat
   $form['visit']['thank_you_send']['#type'] = 'select';
   $form['visit']['thank_you_send']['#required'] = true;
   $form['visit']['thank_you_send']['#title'] = 'Send thank you note?';
-  $form['visit']['thank_you_send']['#default_value'] = $thank_you_send ? '1' : '0';
+  $form['visit']['thank_you_send']['#default_value'] = $thank_you_send;
   $form['visit']['thank_you_send']['#options'] = array('0' => 'No', '1' => 'Yes');
   $form['visit']['thank_you_send']['#empty_option'] = t(' - Select -');
 
