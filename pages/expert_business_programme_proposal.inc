@@ -30,13 +30,13 @@ function pum_expert_mycases_business_programme_proposal($form, &$form_state, $ca
   $visitSqlParams = array();
   $visitSqlParams[1] = array($case_id, 'Integer');
   $visitSql = "
-    SELECT civicrm_activity.id as activity_id, 
+    SELECT civicrm_activity.id as activity_id,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Naam_bedrijf']['column_name']} AS `Naam_bedrijf`,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Location']['column_name']} AS `Location`,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Aim_of_Visit']['column_name']} AS `Aim_of_Visit`
-    FROM civicrm_activity 
+    FROM civicrm_activity
     INNER JOIN civicrm_case_activity ON civicrm_case_activity.activity_id = civicrm_activity.id
-    INNER JOIN {$businessconfig->custom_groups['Business_Programme']['table_name']} ON {$businessconfig->custom_groups['Business_Programme']['table_name']}.entity_id = civicrm_activity.id  
+    INNER JOIN {$businessconfig->custom_groups['Business_Programme']['table_name']} ON {$businessconfig->custom_groups['Business_Programme']['table_name']}.entity_id = civicrm_activity.id
     WHERE civicrm_case_activity.case_id = %1 AND civicrm_activity.is_current_revision = '1' AND civicrm_activity.is_deleted != '1'";
 
   $dao = CRM_Core_DAO::executeQuery($visitSql, $visitSqlParams);
@@ -115,6 +115,7 @@ function pum_expert_mycases_business_programme_proposal($form, &$form_state, $ca
 
   $form['visits']['#type'] = 'fieldset';
   $form['visits']['#title'] = 'Visits';
+  $form['visits']['visits_legend']['#markup'] = '<p>'.t('Please use \'Add a Visit\' for each company to visit during the Business Link.').'</p>';
   $form['visits']['table']['#theme'] = 'table';
   $form['visits']['table']['#header'] = array('Company name', 'Location', 'Aim of visit', '');
   $form['visits']['table']['#attributes'] = array('width' => '100%', 'class' => array('visit_table'));
@@ -162,13 +163,13 @@ function pum_expert_mycases_business_programme_proposal_submit($form, &$form_sta
   $visitSqlParams = array();
   $visitSqlParams[1] = array($case_id, 'Integer');
   $visitSql = "
-    SELECT civicrm_activity.id as activity_id, 
+    SELECT civicrm_activity.id as activity_id,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Naam_bedrijf']['column_name']} AS `Naam_bedrijf`,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Location']['column_name']} AS `Location`,
     {$businessconfig->custom_groups['Business_Programme']['fields']['Aim_of_Visit']['column_name']} AS `Aim_of_Visit`
-    FROM civicrm_activity 
+    FROM civicrm_activity
     INNER JOIN civicrm_case_activity ON civicrm_case_activity.activity_id = civicrm_activity.id
-    INNER JOIN {$businessconfig->custom_groups['Business_Programme']['table_name']} ON {$businessconfig->custom_groups['Business_Programme']['table_name']}.entity_id = civicrm_activity.id  
+    INNER JOIN {$businessconfig->custom_groups['Business_Programme']['table_name']} ON {$businessconfig->custom_groups['Business_Programme']['table_name']}.entity_id = civicrm_activity.id
     WHERE civicrm_case_activity.case_id = %1 AND civicrm_activity.is_current_revision = '1' AND civicrm_activity.is_deleted != '1'";
 
   $dao = CRM_Core_DAO::executeQuery($visitSql, $visitSqlParams);

@@ -98,6 +98,7 @@ function pum_expert_mycases_complete_business_programme_visit($form, &$form_stat
   $form['contact_person']['contact_person_prefix']['#required'] = TRUE;
   $form['contact_person']['contact_person_prefix']['#title'] = 'Prefix';
   $form['contact_person']['contact_person_prefix']['#options'] = $prefixOptions;
+  $form['contact_person']['contact_person_prefix']['#empty_option'] = t(' - Select -');
   $form['contact_person']['contact_person_prefix']['#default_value'] = $contact_person_prefix;
   $form['contact_person']['contact_person_firstname']['#type'] = 'textfield';
   $form['contact_person']['contact_person_firstname']['#required'] = TRUE;
@@ -155,6 +156,7 @@ function pum_expert_mycases_complete_business_programme_visit($form, &$form_stat
   $form['visit']['thank_you_send']['#title'] = 'Send thank you note?';
   $form['visit']['thank_you_send']['#default_value'] = $thank_you_send ? '1' : '0';
   $form['visit']['thank_you_send']['#options'] = array('0' => 'No', '1' => 'Yes');
+  $form['visit']['thank_you_send']['#empty_option'] = t(' - Select -');
 
   $form['submit_button']['#type'] = 'submit';
   $form['submit_button']['#value'] = 'Submit';
