@@ -1,7 +1,13 @@
 <?php
+$case_status_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_status'));
+$error_status_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Error', 'option_group_id' => $case_status_id));
+$cancelled_status_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'Cancelled', 'option_group_id' => $case_status_id));
 
 $case_type_id = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
 $travel_case_type_id = civicrm_api3('OptionValue', 'getvalue', array('return' => 'value', 'name' => 'TravelCase', 'option_group_id' => $case_type_id));
+
+$info_for_dsa = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'Info_for_DSA'));
+$endDate = civicrm_api3('CustomField', 'getvalue', array('name' => 'End_date', 'return' => 'column_name', 'custom_group_id' => $info_for_dsa['id']));
 
 $td_info = civicrm_api3('CustomGroup', 'getsingle', array('name' => 'travel_data'));
 $inboundArrivalTime = civicrm_api3('CustomField', 'getvalue', array('name' => 'arrival_time', 'return' => 'column_name', 'custom_group_id' => $td_info['id']));
@@ -199,12 +205,17 @@ $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 
 $handler->display->display_options['fields']['nothing']['alter']['path'] = 'expert/my-travels/pickup/[id]';
 $handler->display->display_options['fields']['nothing']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+$handler->display->display_options['filter_groups']['groups'] = array(
+  1 => 'AND',
+  2 => 'OR',
+);
 /* Filter criterion: User: Current */
 $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['table'] = 'users';
 $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
 $handler->display->display_options['filters']['uid_current']['relationship'] = 'drupal_id';
 $handler->display->display_options['filters']['uid_current']['value'] = '1';
+$handler->display->display_options['filters']['uid_current']['group'] = 1;
 /* Filter criterion: CiviCRM Cases: Case Type */
 $handler->display->display_options['filters']['case_type']['id'] = 'case_type';
 $handler->display->display_options['filters']['case_type']['table'] = 'civicrm_case';
@@ -212,7 +223,31 @@ $handler->display->display_options['filters']['case_type']['field'] = 'case_type
 $handler->display->display_options['filters']['case_type']['value'] = array(
   $travel_case_type_id => $travel_case_type_id,
 );
-
+$handler->display->display_options['filters']['case_type']['group'] = 1;
+/* Filter criterion: CiviCRM Cases: Case Status */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'civicrm_case';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['operator'] = 'not in';
+$handler->display->display_options['filters']['status']['value'] = array(
+  $cancelled_status_id => $cancelled_status_id,
+  $error_status_id => $error_status_id,
+);
+$handler->display->display_options['filters']['status']['group'] = 1;
+/* Filter criterion: CiviCRM Custom: Info for DSA: End date */
+$handler->display->display_options['filters']['end_date']['id'] = 'end_date';
+$handler->display->display_options['filters']['end_date']['table'] = $info_for_dsa['table_name'];
+$handler->display->display_options['filters']['end_date']['field'] = $endDate;
+$handler->display->display_options['filters']['end_date']['operator'] = '>=';
+$handler->display->display_options['filters']['end_date']['value']['value'] = '+1 minute';
+$handler->display->display_options['filters']['end_date']['value']['type'] = 'offset';
+$handler->display->display_options['filters']['end_date']['group'] = 2;
+/* Filter criterion: CiviCRM Custom: Info for DSA: End date */
+$handler->display->display_options['filters']['end_date_2']['id'] = 'end_date_2';
+$handler->display->display_options['filters']['end_date_2']['table'] = $info_for_dsa['table_name'];
+$handler->display->display_options['filters']['end_date_2']['field'] = $endDate;
+$handler->display->display_options['filters']['end_date_2']['operator'] = 'empty';
+$handler->display->display_options['filters']['end_date_2']['group'] = 2;
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/my-travels';
