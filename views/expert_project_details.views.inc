@@ -122,8 +122,11 @@ $translatables['project_details_for_expert_'] = array(
   t('End date'),
   t('Reason'),
   t('Work description'),
+  t('Project plan'),
   t('Qualifications'),
   t('Expected results'),
+  t('Assesment by representative'),
+  t('Cases'),
   t('All'),
   t('Page'),
 );
