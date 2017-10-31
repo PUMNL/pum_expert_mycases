@@ -25,8 +25,35 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Complete Business Programme Visits';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
+$handler->display->display_options['access']['type'] = 'php';
+$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
+$url = $_SERVER["REQUEST_URI"];
+$url_path = parse_url($url, PHP_URL_PATH);
+$case_id = explode("/",$_GET[\'q\']);
+
+civicrm_initialize();
+$session = CRM_Core_Session::singleton();
+$contact_id = $session->get(\'userID\');
+$civi_config = CRM_Core_Config::singleton();
+$civi_dsn = DB::parseDSN($civi_config->dsn);
+$civicrm_db = $civi_dsn[\'database\'];
+
+if (!empty($civicrm_db) && !empty($case_id[2])) {
+$relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM local_localhost_o2_civicrm.civicrm_case_project cp
+LEFT JOIN local_localhost_o2_civicrm.civicrm_case c ON cp.case_id = c.id
+LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship rel ON c.id = rel.case_id
+LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
+LEFT JOIN local_localhost_o2_civicrm.civicrm_case_contact cc ON cc.case_id = c.id
+WHERE rel.case_id = :case_id AND rel.is_active = :is_active",
+array(\':case_id\'=>check_plain($case_id[2]),\':is_active\'=>\'1\'))->fetchAll();
+
+foreach($relationships as $rel) {
+	if ($rel->contact_id == $contact_id) {
+		$hasrole = TRUE;
+	}
+}
+}
+return $hasrole';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';

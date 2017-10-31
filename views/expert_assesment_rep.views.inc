@@ -22,8 +22,36 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Representative Assement';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
+$handler->display->display_options['access']['type'] = 'php';
+$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
+$url = $_SERVER["REQUEST_URI"];
+$url_path = parse_url($url, PHP_URL_PATH);
+$project_id = explode("/",$_GET[\'q\']);
+
+civicrm_initialize();
+$session = CRM_Core_Session::singleton();
+$contact_id = $session->get(\'userID\');
+$civi_config = CRM_Core_Config::singleton();
+$civi_dsn = DB::parseDSN($civi_config->dsn);
+$civicrm_db = $civi_dsn[\'database\'];
+
+if (!empty($civicrm_db) && !empty($project_id[2])) {
+	$project_relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM ".$civicrm_db.".civicrm_case_project cp
+LEFT JOIN ".$civicrm_db.".civicrm_case c ON cp.case_id = c.id
+LEFT JOIN ".$civicrm_db.".civicrm_relationship rel ON c.id = rel.case_id
+LEFT JOIN ".$civicrm_db.".civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
+LEFT JOIN ".$civicrm_db.".civicrm_case_contact cc ON cc.case_id = c.id
+WHERE cp.project_id = :project_id AND cp.is_active = :is_active",
+array(\':project_id\'=>check_plain($project_id[2]),\':is_active\'=>\'1\'))->fetchAll();
+
+  foreach($project_relationships as $rel) {
+	if ($rel->contact_id == $contact_id) {
+		$hasrole = TRUE;
+	}
+  }
+}
+
+return $hasrole;';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -119,17 +147,19 @@ $handler->display->display_options['filters']['is_deleted']['value'] = '0';
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/project-rep-assesment';
 $translatables['assesment_rep_for_expert_'] = array(
-t('Master'),
-t('Representative Assement'),
-t('more'),
-t('Apply'),
-t('Reset'),
-t('Sort by'),
-t('Asc'),
-t('Desc'),
-t('CiviCRM Case'),
-t('CiviCRM Project'),
-t('CiviCRM Activity, with custom fields'),
-t('Is active'),
-t('Page'),
+  t('Master'),
+  t('Representative Assement'),
+  t('more'),
+  t('Apply'),
+  t('Reset'),
+  t('Sort by'),
+  t('Asc'),
+  t('Desc'),
+  t('CiviCRM Case'),
+  t('CiviCRM Project'),
+  t('CiviCRM Activity, with custom fields'),
+  t('Reported by'),
+  t('Submitted assesment'),
+  t('All'),
+  t('Page'),
 );

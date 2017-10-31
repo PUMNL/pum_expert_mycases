@@ -17,8 +17,34 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Case activities';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
+$handler->display->display_options['access']['type'] = 'php';
+$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
+$url = $_SERVER["REQUEST_URI"];
+$url_path = parse_url($url, PHP_URL_PATH);
+$case_id = explode("/",$_GET[\'q\']);
+civicrm_initialize();
+$session = CRM_Core_Session::singleton();
+$contact_id = $session->get(\'userID\');
+$civi_config = CRM_Core_Config::singleton();
+$civi_dsn = DB::parseDSN($civi_config->dsn);
+$civicrm_db = $civi_dsn[\'database\'];
+
+if (!empty($civicrm_db) && !empty($case_id[3])) {
+	$project_relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM ".$civicrm_db.".civicrm_case_project cp
+LEFT JOIN ".$civicrm_db.".civicrm_case c ON cp.case_id = c.id
+LEFT JOIN ".$civicrm_db.".civicrm_relationship rel ON c.id = rel.case_id
+LEFT JOIN ".$civicrm_db.".civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
+LEFT JOIN ".$civicrm_db.".civicrm_case_contact cc ON cc.case_id = c.id
+WHERE cp.project_id = (SELECT ccp.project_id FROM ".$civicrm_db.".civicrm_case_project ccp WHERE ccp.case_id = :case_id) AND cp.is_active = :is_active AND c.is_deleted = :is_deleted",
+array(\':case_id\'=>check_plain($case_id[3]),\':is_active\'=>\'1\',\':is_deleted\'=>\'0\'))->fetchAll();
+
+foreach($project_relationships as $rel) {
+	if ($rel->contact_id == $contact_id) {
+		$hasrole = TRUE;
+	}
+}
+}
+return $hasrole;';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -121,7 +147,7 @@ $handler->display->display_options['header']['view_3']['label'] = 'Documents';
 $handler->display->display_options['header']['view_3']['empty'] = TRUE;
 $handler->display->display_options['header']['view_3']['view_to_insert'] = 'case_roles_for_expert_:default';
 $handler->display->display_options['header']['view_3']['inherit_arguments'] = TRUE;
-/* header: Global: PHP */
+/* Header: Global: PHP */
 $handler->display->display_options['header']['php']['id'] = 'php';
 $handler->display->display_options['header']['php']['table'] = 'views';
 $handler->display->display_options['header']['php']['field'] = 'php';
@@ -133,7 +159,7 @@ echo \'<h3>Summary</h3>\';
 echo \'<p>\'.nl2br($summary).\'</p>\';
 }
 ?>';
-/* header: Global: PHP */
+/* Header: Global: PHP */
 $handler->display->display_options['header']['php_1']['id'] = 'php_1';
 $handler->display->display_options['header']['php_1']['table'] = 'views';
 $handler->display->display_options['header']['php_1']['field'] = 'php';
@@ -247,7 +273,6 @@ $handler->display->display_options['fields']['php']['table'] = 'views';
 $handler->display->display_options['fields']['php']['field'] = 'php';
 $handler->display->display_options['fields']['php']['label'] = '';
 $handler->display->display_options['fields']['php']['exclude'] = FALSE;
-$handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
 $handler->display->display_options['fields']['php']['php_value'] = 'return _pum_expert_show_activity_details($row->id, $row->activity_type);';
 $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -297,17 +322,36 @@ $handler->display->display_options['filters']['is_deleted']['value'] = '0';
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/my-cases/activities';
 $translatables['expert_my_cases_activities'] = array(
-    t('Master'),
-    t('Contact with customer'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Activity'),
-    t('Reporter'),
-    t('[display_name] ([activity_date_time])'),
-    t('All'),
-    t('Page'),
+	t('Master'),
+  t('Case activities'),
+  t('more'),
+  t('Apply'),
+  t('Reset'),
+  t('Sort by'),
+  t('Asc'),
+  t('Desc'),
+  t('<h2>Main activity info</h2>'),
+  t('Main activity info'),
+  t('<h2>Documents</h2>'),
+  t('Documents'),
+  t('<h2>Conditions</h2>'),
+  t('<h2>Roles</h2>'),
+  t('Summary'),
+  t('Follow up activities'),
+  t('<h2>Activities</h2>'),
+  t('There are no activities for this case'),
+  t('Activity'),
+  t('.'),
+  t('Date'),
+  t('[display_name] ([activity_date_time])'),
+  t('Activity Type'),
+  t('Subject'),
+  t('No subject'),
+  t('With'),
+  t('Assigned to'),
+  t('Reported by'),
+  t('Status'),
+  t('View details'),
+  t('All'),
+  t('Page'),
 );

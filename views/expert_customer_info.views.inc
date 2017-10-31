@@ -22,8 +22,32 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Customer';
 $handler->display->display_options['css_class'] = 'pum-grid-view';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'role';
-$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Expert'));
+$handler->display->display_options['access']['type'] = 'php';
+$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
+$url = $_SERVER["REQUEST_URI"];
+$url_path = parse_url($url, PHP_URL_PATH);
+$customer_id = explode("/",$_GET[\'q\']);
+
+civicrm_initialize();
+$session = CRM_Core_Session::singleton();
+$contact_id = $session->get(\'userID\');
+$civi_config = CRM_Core_Config::singleton();
+$civi_dsn = DB::parseDSN($civi_config->dsn);
+$civicrm_db = $civi_dsn[\'database\'];
+
+if (!empty($civicrm_db) && !empty($customer_id[2])) {
+  $relationships = db_query("SELECT DISTINCT rel.contact_id_b AS \'contact_id\' FROM ".$civicrm_db.".civicrm_relationship rel
+WHERE rel.contact_id_a = :customer_id AND rel.is_active = :is_active",
+array(\':customer_id\'=>check_plain($customer_id[2]), \':is_active\'=>1))->fetchAll();
+
+foreach($relationships as $rel) {
+  if ($rel->contact_id == $contact_id) {
+    $hasrole = TRUE;
+  }
+}
+}
+
+return $hasrole;';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -110,7 +134,6 @@ $handler->display->display_options['fields']['fieldset_1']['children'] = array(
   3 => 'state_province',
   4 => 'country',
 );
-$handler->display->display_options['fields']['fieldset_1']['fieldset']['type'] = 'fieldset';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address']['id'] = 'street_address';
 $handler->display->display_options['fields']['street_address']['table'] = 'civicrm_address';
@@ -164,7 +187,6 @@ $handler->display->display_options['fields']['fieldset_2']['children'] = array(
   3 => 'state_province_1',
   4 => 'country_1',
 );
-$handler->display->display_options['fields']['fieldset_2']['fieldset']['type'] = 'fieldset';
 /* Field: CiviCRM Address: Full Street Address */
 $handler->display->display_options['fields']['street_address_1']['id'] = 'street_address_1';
 $handler->display->display_options['fields']['street_address_1']['table'] = 'civicrm_address';
@@ -339,23 +361,28 @@ $handler->display->display_options['filters']['contact_sub_type']['value'] = arr
 $handler = $view->new_display('page', 'Page', 'page');
 $handler->display->display_options['path'] = 'expert/customer';
 $translatables['expert_customer_info'] = array(
-    t('Master'),
-    t('Customer'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('General info'),
-    t('.'),
-    t('Email Address'),
-    t('Phone 1'),
-    t('Phone 2 (Mobile)'),
-    t('Primary address'),
-    t('Postal address'),
-    t('Authorised contacts'),
-    t('Representative'),
-    t('All'),
-    t('Page'),
+  t('Master'),
+  t('Customer'),
+  t('more'),
+  t('Apply'),
+  t('Reset'),
+  t('Sort by'),
+  t('Asc'),
+  t('Desc'),
+  t('General info'),
+  t('.'),
+  t('Email Address'),
+  t('Phone 1'),
+  t('Phone 2 (Mobile)'),
+  t('Primary address'),
+  t('Postal address'),
+  t('Contact persons'),
+  t('Authorised contacts'),
+  t('Representative'),
+  t('Documents'),
+  t('Customer data'),
+  t('Yearly information'),
+  t('Projects'),
+  t('All'),
+  t('Page'),
 );

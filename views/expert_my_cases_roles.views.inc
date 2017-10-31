@@ -14,7 +14,45 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Case roles';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'none';
+$handler->display->display_options['access']['type'] = 'php';
+$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
+$url = $_SERVER["REQUEST_URI"];
+$url_path = parse_url($url, PHP_URL_PATH);
+$case_id = explode("/",$_GET[\'q\']);
+
+civicrm_initialize();
+$contact_id = CRM_Core_Session::singleton()->getLoggedInContactID(); //$session->get(\'userID\');
+$civi_config = CRM_Core_Config::singleton();
+$civi_dsn = DB::parseDSN($civi_config->dsn);
+$civicrm_db = $civi_dsn[\'database\'];
+
+if (!empty($civicrm_db) && !empty($case_id[3])) {
+	$relationships = db_query("SELECT case_id, contact_id FROM (
+	SELECT rel.case_id AS \'case_id\', rel.contact_id_b AS \'contact_id\' FROM local_localhost_o2_civicrm.civicrm_case c
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship rel ON c.id = rel.case_id
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_case_contact cc ON cc.case_id = c.id
+	WHERE rel.case_id = :case_id OR rel.case_id = (SELECT case_id FROM local_localhost_o2_civicrm.civicrm_value_travel_parent WHERE entity_id = :case_id) AND rel.is_active = :is_active
+	GROUP BY rel.contact_id_b
+	UNION ALL
+	SELECT ccc.case_id, ccc.contact_id FROM local_localhost_o2_civicrm.civicrm_case_contact ccc WHERE ccc.case_id = :case_id OR ccc.case_id = (SELECT case_id FROM local_localhost_o2_civicrm.civicrm_value_travel_parent WHERE entity_id = :case_id) GROUP BY ccc.contact_id
+	UNION ALL
+	SELECT rel2.case_id AS \'case_id\', rel2.contact_id_b AS \'contact_id\' FROM local_localhost_o2_civicrm.civicrm_case c2
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship rel2 ON c2.id = rel2.case_id
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_relationship_type rt2 ON rel2.relationship_type_id = rt2.id
+	LEFT JOIN local_localhost_o2_civicrm.civicrm_case_contact cc2 ON cc2.case_id = c2.id
+	WHERE rel2.case_id = (SELECT case_id FROM local_localhost_o2_civicrm.civicrm_value_travel_parent WHERE entity_id = :case_id) AND rel2.is_active = :is_active
+) result
+GROUP BY contact_id",
+array(\':case_id\'=>check_plain($case_id[3]),\':is_active\'=>\'1\'))->fetchAll();
+
+foreach($relationships as $rel) {
+	if ($rel->contact_id == $contact_id) {
+		$hasrole = TRUE;
+	}
+}
+}
+return $hasrole;';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
