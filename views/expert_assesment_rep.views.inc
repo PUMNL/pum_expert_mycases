@@ -36,11 +36,11 @@ $civi_dsn = DB::parseDSN($civi_config->dsn);
 $civicrm_db = $civi_dsn[\'database\'];
 
 if (!empty($civicrm_db) && !empty($project_id[2])) {
-	$project_relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM ".$civicrm_db.".civicrm_case_project cp
-LEFT JOIN ".$civicrm_db.".civicrm_case c ON cp.case_id = c.id
-LEFT JOIN ".$civicrm_db.".civicrm_relationship rel ON c.id = rel.case_id
-LEFT JOIN ".$civicrm_db.".civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
-LEFT JOIN ".$civicrm_db.".civicrm_case_contact cc ON cc.case_id = c.id
+	$project_relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM $civicrm_db.civicrm_case_project cp
+LEFT JOIN $civicrm_db.civicrm_case c ON cp.case_id = c.id
+LEFT JOIN $civicrm_db.civicrm_relationship rel ON c.id = rel.case_id
+LEFT JOIN $civicrm_db.civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
+LEFT JOIN $civicrm_db.civicrm_case_contact cc ON cc.case_id = c.id
 WHERE cp.project_id = :project_id AND cp.is_active = :is_active",
 array(\':project_id\'=>check_plain($project_id[2]),\':is_active\'=>\'1\'))->fetchAll();
 
