@@ -149,7 +149,19 @@ $handler->display->display_options['fields']['percentage_of_ownership_other_85']
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'Percentage_of_Ownership_Other'));
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['hide_empty'] = TRUE;
 $handler->display->display_options['fields']['percentage_of_ownership_other_85']['empty_zero'] = TRUE;
-
+/* Field: CiviCRM Custom: Customer Data: What is the gender of the entrepreneur? */
+$handler->display->display_options['fields']['gender_entrepeneur']['id'] = 'gender_entrepeneur';
+$handler->display->display_options['fields']['gender_entrepeneur']['table'] = $table;
+$handler->display->display_options['fields']['gender_entrepeneur']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'gender_entrepeneur'));
+$handler->display->display_options['fields']['gender_entrepeneur']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['gender_entrepeneur']['empty_zero'] = TRUE;
+/* Field: CiviCRM Custom: Customer Data: What is the year of birth of the entrepreneur? */
+$handler->display->display_options['fields']['birthyear_entrepeneur']['id'] = 'birthyear_entrepeneur';
+$handler->display->display_options['fields']['birthyear_entrepeneur']['table'] = $table;
+$handler->display->display_options['fields']['birthyear_entrepeneur']['separator'] = '';
+$handler->display->display_options['fields']['birthyear_entrepeneur']['field'] = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'custom_group_id' => $gid, 'name' => 'birthyear_entrepeneur'));
+$handler->display->display_options['fields']['birthyear_entrepeneur']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['birthyear_entrepeneur']['empty_zero'] = TRUE;
 /* Contextual filter: CiviCRM Contacts: Contact ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_contact';
