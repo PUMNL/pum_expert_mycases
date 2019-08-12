@@ -103,8 +103,9 @@ function _pum_expert_show_activity_details($activity_id, $activity_type) {
   $config = pum_expert_mycases_config::singleton();
   $noDetailsActivityTypes = $config->getNoActivityDetailsList();
   if (!isset($noDetailsActivityTypes[$activity_type])) {
-    return 'expert/my-cases/activitiy-detail/'.$activity_id;
-  } else {
+    return 'expert/my-cases/activitiy-detail/' . $activity_id . '?destination=' . $destination;
+  }
+  else {
     return '';
   }
 }

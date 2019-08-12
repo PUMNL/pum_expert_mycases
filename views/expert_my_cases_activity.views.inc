@@ -248,7 +248,10 @@ $handler->display->display_options['fields']['php']['field'] = 'php';
 $handler->display->display_options['fields']['php']['label'] = '';
 $handler->display->display_options['fields']['php']['exclude'] = FALSE;
 $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-$handler->display->display_options['fields']['php']['php_value'] = 'return _pum_expert_show_activity_details($row->id, $row->activity_type);';
+$handler->display->display_options['fields']['php']['php_value'] = '
+   $destination = "/expert/my-cases/activities/" . $view->args[0];
+   return _pum_expert_show_activity_details($row->id, $row->activity_type, $destination);
+';
 $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
 $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 $handler->display->display_options['fields']['php']['alter']['alter_text'] = TRUE;

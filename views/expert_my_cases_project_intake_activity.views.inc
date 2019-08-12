@@ -190,9 +190,9 @@ $handler->display->display_options['fields']['subject']['table'] = 'civicrm_acti
 $handler->display->display_options['fields']['subject']['field'] = 'subject';
 $handler->display->display_options['fields']['subject']['relationship'] = 'activity_id';
 $handler->display->display_options['fields']['subject']['alter']['make_link'] = TRUE;
-$handler->display->display_options['fields']['subject']['alter']['path'] = 'expert/my-cases/activitiy-detail/[id]';
+$handler->display->display_options['fields']['subject']['alter']['path'] = 'expert/my-cases/activitiy-detail/[id]?destination=/expert/my-cases/projectintake/!1';
 $handler->display->display_options['fields']['subject']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['subject']['empty'] = '<a href="/expert/my-cases/activitiy-detail/[id]">No subject</a>';
+$handler->display->display_options['fields']['subject']['empty'] = '<a href="/expert/my-cases/activitiy-detail/[id]?destination=/expert/my-cases/projectintake/!1">No subject</a>';
 /* Field: Global: View */
 $handler->display->display_options['fields']['view']['id'] = 'view';
 $handler->display->display_options['fields']['view']['table'] = 'views';
