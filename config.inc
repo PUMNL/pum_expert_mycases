@@ -14,6 +14,8 @@ class pum_expert_mycases_config {
 
     protected $noActivityDetailsList = array();
 
+    protected $repActivityList = array();
+
     protected function __construct() {
         civicrm_initialize();
 
@@ -80,6 +82,31 @@ class pum_expert_mycases_config {
           array('name' => 'Seminar Debriefing Representative', 'option_group_id' => $activity_type_option_group));
         $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
           array('name' => 'Seminar Debriefing SC', 'option_group_id' => $activity_type_option_group));
+
+
+      $rep_activity_names = [
+        'Assessment Project Request by Rep',
+        'Condition',
+        'Advice Debriefing Representative',
+        'Representative payment',
+        'Seminar Debriefing Representative',
+        'Remote Coaching Debriefing Representative',
+        'Condition: Customer Contribution',
+        'Contact with Customer by Rep'
+      ];
+
+      $activities = civicrm_api3('OptionValue', 'get', [
+        'sequential' => 1,
+        'option_group_id' => "activity_type",
+        'options' => ['limit' => 0]
+      ])['values'];
+
+      $this->repActivityList = [];
+      foreach($activities as $activity){
+        if(in_array($activity['label'],$rep_activity_names)){
+          $this->repActivityList[$activity['value']] = $activity['value'];
+        }
+      }
     }
 
     public function getNoActivityDetailsList() {
@@ -120,6 +147,13 @@ class pum_expert_mycases_config {
     }
 
     /**
+    * @return array
+    */
+    public function getRepActivityList() {
+      return $this->repActivityList;
+    }
+
+  /**
      * @return pum_expert_mycases_config
      */
     public static function singleton() {
