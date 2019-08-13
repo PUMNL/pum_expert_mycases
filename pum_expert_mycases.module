@@ -99,7 +99,7 @@ function _pum_expert_has_user_role_on_case($case_id) {
   return $roles[$case_id];
 }
 
-function _pum_expert_show_activity_details($activity_id, $activity_type) {
+function _pum_expert_show_activity_details($activity_id, $activity_type, $destination) {
   $config = pum_expert_mycases_config::singleton();
   $noDetailsActivityTypes = $config->getNoActivityDetailsList();
   if (!isset($noDetailsActivityTypes[$activity_type])) {
