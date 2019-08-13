@@ -110,6 +110,17 @@ function _pum_expert_show_activity_details($activity_id, $activity_type, $destin
   }
 }
 
+function _pum_rep_show_activity_details($activity_id, $activity_type, $destination) {
+  $config = pum_expert_mycases_config::singleton();
+  $repActivityTypes = $config->getRepActivityList();
+  if (isset($repActivityTypes[$activity_type])) {
+    return 'rep/my-cases/activitity-detail/' . $activity_id . '?destination=' . $destination;
+  }
+  else {
+    return '';
+  }
+}
+
 function _pum_expert_link_to_case_details($case_id, $case_type) {
     $config = pum_expert_mycases_config::singleton();
     $sep = CRM_Core_DAO::VALUE_SEPARATOR;
