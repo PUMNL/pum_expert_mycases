@@ -17,34 +17,9 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Case activities';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'php';
-$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
-$url = $_SERVER["REQUEST_URI"];
-$url_path = parse_url($url, PHP_URL_PATH);
-$case_id = explode("/",$_GET[\'q\']);
-civicrm_initialize();
-$session = CRM_Core_Session::singleton();
-$contact_id = $session->get(\'userID\');
-$civi_config = CRM_Core_Config::singleton();
-$civi_dsn = DB::parseDSN($civi_config->dsn);
-$civicrm_db = $civi_dsn[\'database\'];
+$handler->display->display_options['access']['type'] = 'role';
+$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Representative','Expert'));
 
-if (!empty($civicrm_db) && !empty($case_id[3])) {
-	$project_relationships = db_query("SELECT c.id AS \'case_id\', rel.contact_id_b AS \'contact_id\', rt.label_b_a AS \'rel_description\' FROM $civicrm_db.civicrm_case_project cp
-LEFT JOIN $civicrm_db.civicrm_case c ON cp.case_id = c.id
-LEFT JOIN $civicrm_db.civicrm_relationship rel ON c.id = rel.case_id
-LEFT JOIN $civicrm_db.civicrm_relationship_type rt ON rel.relationship_type_id = rt.id
-LEFT JOIN $civicrm_db.civicrm_case_contact cc ON cc.case_id = c.id
-WHERE cp.project_id = (SELECT ccp.project_id FROM $civicrm_db.civicrm_case_project ccp WHERE ccp.case_id = :case_id) AND cp.is_active = :is_active AND c.is_deleted = :is_deleted",
-array(\':case_id\'=>check_plain($case_id[3]),\':is_active\'=>\'1\',\':is_deleted\'=>\'0\'))->fetchAll();
-
-foreach($project_relationships as $rel) {
-	if ($rel->contact_id == $contact_id) {
-		$hasrole = TRUE;
-	}
-}
-}
-return $hasrole;';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -238,6 +213,10 @@ $handler->display->display_options['arguments']['id']['default_argument_type'] =
 $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
 $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
 $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+$handler->display->display_options['arguments']['id']['validate']['type'] = 'php';
+$handler->display->display_options['arguments']['id']['validate_options']['code'] = 'return _pum_expert_has_user_role_on_case($handler->argument);';
+$handler->display->display_options['arguments']['id']['validate']['fail'] = 'access denied';
 /* Filter criterion: CiviCRM Activities: Activity Type */
 $handler->display->display_options['filters']['activity_type']['id'] = 'activity_type';
 $handler->display->display_options['filters']['activity_type']['table'] = 'civicrm_activity';

@@ -126,8 +126,14 @@ function _pum_expert_link_to_case_details($case_id, $case_type) {
     $sep = CRM_Core_DAO::VALUE_SEPARATOR;
     $case_type = trim(str_replace($sep, ',', $case_type), ',');
     $case_types = explode(",", $case_type);
+    $rep_role_id = reset(pum_expert_mycases_get_role_ids(['Representative']));
     if (in_array($config->getProjectInatkeCaseTypeId(), $case_types)) {
-        return 'expert/my-cases/projectintake/'.$case_id;
+      if(user_has_role($rep_role_id)) {
+        return 'expert/my-cases/projectintake/' . $case_id;
+      } else {
+        return false;
+      }
+
     } else {
         return 'expert/my-cases/activities/'.$case_id;
     }
