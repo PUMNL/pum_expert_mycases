@@ -92,6 +92,13 @@ $handler->display->display_options['fields']['details']['alter']['nl2br'] = TRUE
 $handler->display->display_options['fields']['details']['element_label_type'] = 'h3';
 $handler->display->display_options['fields']['details']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['details']['text_format'] = 'full_html';
+/* Field: CiviCRM Custom: Contribution: Amount */
+$handler->display->display_options['fields']['amount_379']['id'] = 'amount_379';
+$handler->display->display_options['fields']['amount_379']['table'] = 'civicrm_value_contribution_68';
+$handler->display->display_options['fields']['amount_379']['field'] = 'amount_379';
+$handler->display->display_options['fields']['amount_379']['relationship'] = 'activity_id';
+$handler->display->display_options['fields']['amount_379']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['amount_379']['empty_zero'] = TRUE;
 /* Contextual filter: CiviCRM Activities: Activity ID */
 $handler->display->display_options['arguments']['id']['id'] = 'id';
 $handler->display->display_options['arguments']['id']['table'] = 'civicrm_activity';
