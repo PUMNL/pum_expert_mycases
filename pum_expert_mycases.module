@@ -133,9 +133,12 @@ function _pum_expert_link_to_case_details($case_id, $case_type) {
       } else {
         return false;
       }
-
     } else {
+      if(_pum_expert_has_user_role_on_case($case_id)){
         return 'expert/my-cases/activities/'.$case_id;
+      } else {
+        return false;
+      }
     }
 }
 
