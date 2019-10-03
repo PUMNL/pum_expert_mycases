@@ -241,26 +241,22 @@ $handler->display->display_options['fields']['status']['table'] = 'civicrm_activ
 $handler->display->display_options['fields']['status']['field'] = 'status';
 $handler->display->display_options['fields']['status']['relationship'] = 'activity_id';
 $handler->display->display_options['fields']['status']['label'] = 'Status';
-/* Field: View details */
+/* Field: Global: PHP */
 $handler->display->display_options['fields']['php']['id'] = 'php';
 $handler->display->display_options['fields']['php']['table'] = 'views';
 $handler->display->display_options['fields']['php']['field'] = 'php';
 $handler->display->display_options['fields']['php']['label'] = '';
-$handler->display->display_options['fields']['php']['exclude'] = FALSE;
-$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-$handler->display->display_options['fields']['php']['php_value'] = '
-   $destination = "/expert/my-cases/activities/" . $view->args[0];
-   return _pum_expert_show_activity_details($row->id, $row->activity_type, $destination);
-';
-$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 $handler->display->display_options['fields']['php']['alter']['alter_text'] = TRUE;
 $handler->display->display_options['fields']['php']['alter']['text'] = 'View details';
 $handler->display->display_options['fields']['php']['alter']['make_link'] = TRUE;
 $handler->display->display_options['fields']['php']['alter']['path'] = '[php]';
 $handler->display->display_options['fields']['php']['alter']['absolute'] = TRUE;
 $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
-
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_value'] = '$destination = "/expert/my-cases/activities/" . $view->args[0];
+   return _pum_expert_show_activity_details($row->id, $row->activity_type, $destination);';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
 /* Sort criterion: CiviCRM Activities: Scheduled Activity Date */
 $handler->display->display_options['sorts']['activity_date_time']['id'] = 'activity_date_time';
 $handler->display->display_options['sorts']['activity_date_time']['table'] = 'civicrm_activity';
@@ -278,7 +274,7 @@ $handler->display->display_options['arguments']['id']['summary']['format'] = 'de
 $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
 $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
 $handler->display->display_options['arguments']['id']['validate']['type'] = 'php';
-$handler->display->display_options['arguments']['id']['validate_options']['code'] = 'return _pum_expert_has_user_role_on_case($handler->argument);';
+$handler->display->display_options['arguments']['id']['validate_options']['code'] = 'return _pum_expert_mycases_user_has_role_on_case_project($handler->argument);';
 $handler->display->display_options['arguments']['id']['validate']['fail'] = 'access denied';
 /* Filter criterion: CiviCRM Activities: Activity Type */
 $handler->display->display_options['filters']['activity_type']['id'] = 'activity_type';

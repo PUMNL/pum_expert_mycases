@@ -99,6 +99,43 @@ function _pum_expert_has_user_role_on_case($case_id) {
   return $roles[$case_id];
 }
 
+/**
+ * Return TRUE when the user has a certain drupal role and is has a role on at least one of the cases connected to the project of the specified case_id
+ *
+ * @param $roles
+ * @params $case_id
+ * @return bool
+ */
+function _pum_expert_mycases_user_has_role_on_case_project($case_id) {
+  $hasrole = FALSE;
+
+  civicrm_initialize();
+  $session = CRM_Core_Session::singleton();
+  $contact_id = $session->get('userID');
+  $civi_config = CRM_Core_Config::singleton();
+  $civi_dsn = DB::parseDSN($civi_config->dsn);
+  $civicrm_db = $civi_dsn['database'];
+
+  if (!empty($civicrm_db) && !empty($case_id)) {
+    $project_relationships = db_query("SELECT DISTINCT rel.contact_id_b AS 'contact_id', cc.case_id AS 'case_id', rt.label_b_a AS 'rel_description', proj.project_id FROM ".$civicrm_db.".civicrm_case_project cp
+                                LEFT JOIN ".$civicrm_db.".civicrm_project p ON p.id = cp.project_id
+                                LEFT JOIN ".$civicrm_db.".civicrm_case_project proj ON proj.project_id = p.id
+                                LEFT JOIN ".$civicrm_db.".civicrm_relationship rel ON rel.case_id = proj.case_id
+                                LEFT JOIN ".$civicrm_db.".civicrm_relationship_type rt ON rt.id = rel.relationship_type_id
+                                LEFT JOIN ".$civicrm_db.".civicrm_case_contact cc ON cc.case_id = proj.case_id
+                                WHERE cp.case_id = :case_id",
+                                array(':case_id'=>check_plain($case_id)))->fetchAll();
+  }
+
+  foreach($project_relationships as $rel) {
+    if ($rel->contact_id == $contact_id) {
+      $hasrole = TRUE;
+    }
+  }
+
+  return $hasrole;
+}
+
 function _pum_expert_show_activity_details($activity_id, $activity_type, $destination) {
   $config = pum_expert_mycases_config::singleton();
   $noDetailsActivityTypes = $config->getNoActivityDetailsList();
@@ -134,7 +171,7 @@ function _pum_expert_link_to_case_details($case_id, $case_type) {
         return false;
       }
     } else {
-      if(_pum_expert_has_user_role_on_case($case_id)){
+      if(_pum_expert_mycases_user_has_role_on_case_project($case_id)){
         return 'expert/my-cases/activities/'.$case_id;
       } else {
         return false;

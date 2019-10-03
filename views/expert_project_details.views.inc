@@ -131,6 +131,9 @@ $handler->display->display_options['arguments']['id']['default_argument_type'] =
 $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
 $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
 $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+$handler->display->display_options['arguments']['id']['validate']['type'] = 'php';
+$handler->display->display_options['arguments']['id']['validate_options']['code'] = 'return pum_customer_user_has_role_on_project($handler->argument);';
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
