@@ -230,7 +230,7 @@ function pum_expert_mycases_business_programme_proposal_submit($form, &$form_sta
     civicrm_api3('Activity', 'delete', array('id' => $activity_id));
   }
 
-  drupal_set_message('Businesse programme proposal is succesfully submitted.');
+  drupal_set_message('Business programme proposal is succesfully submitted.');
   drupal_goto('/portal');
 
 }
