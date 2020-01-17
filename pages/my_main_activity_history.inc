@@ -39,9 +39,10 @@ function pum_expert_mycases_my_main_activity_history() {
   $prinsHistoryFieldName = civicrm_api3('CustomField', 'getvalue', array('return' => 'column_name', 'name' => 'prins_history', 'custom_group_id' => $prinsHistoryCustomGroup['id']));
   // Build history from completed main activity cases.
 
-  $sql = "SELECT customer.display_name as customer, project.title as project, `case`.case_type_id as case_type_id,
+  $sql = "SELECT customer.id as customer_id,customer.display_name as customer, project.id as project_id, project.title as project, `case`.case_type_id as case_type_id,
   `ma_info`.`{$mainActivityStartDateCustomFieldName}` AS start_date, `ma_info`.`{$mainActivityEndDateCustomFieldName}` AS end_date,
-  country.name AS country, segment.label as sector
+  country.name AS country,
+  GROUP_CONCAT(segment.label SEPARATOR ', ') AS sector
   FROM civicrm_case `case`
   INNER JOIN civicrm_relationship expert_relation ON `case`.id = expert_relation.case_id
   INNER JOIN civicrm_case_contact client ON client.case_id = `case`.id
@@ -58,6 +59,7 @@ function pum_expert_mycases_my_main_activity_history() {
   AND `case`.status_id = %7
   AND address.location_type_id = %8
   AND civicrm_contact_segment.is_active = 1 AND civicrm_contact_segment.role_value = 'Customer'
+  GROUP BY customer.id
   ";
   $sqlParams = array();
   $sqlParams[1] = array('%'.CRM_Core_DAO::VALUE_SEPARATOR.$adviceCaseType['value'].CRM_Core_DAO::VALUE_SEPARATOR.'%', 'String');
@@ -98,8 +100,8 @@ function pum_expert_mycases_my_main_activity_history() {
     }
 
     $item = array(
-      'customer' => $dao->customer,
-      'project' => $dao->project,
+      'customer' => $dao->customer,//'<a href="/expert/customer/'.$dao->customer_id.'">'.$dao->customer.'</a>',
+      'project' => $dao->project,//'<a href="/expert/project/'.$dao->project_id.'">'.$dao->project.'</a>',
       'country' => $country,
       'sector' => $sector,
       'main_activity' => $case_type,
