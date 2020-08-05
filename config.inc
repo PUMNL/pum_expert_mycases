@@ -19,70 +19,116 @@ class pum_expert_mycases_config {
     protected function __construct() {
         civicrm_initialize();
 
-        $case_type_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'case_type'));
-        $this->project_intake_case_type = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Projectintake', 'option_group_id' => $case_type_option_group));
+        $case_type_option_group = 'case_type';
+        $this->project_intake_case_type = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Projectintake', 'option_group_name' => $case_type_option_group));
 
-        $activity_type_option_group = civicrm_api3('OptionGroup', 'getvalue', array('return' => 'id', 'name' => 'activity_type'));
-        $this->contact_with_customer = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Customer', 'option_group_id' => $activity_type_option_group));
+        $activity_type_option_group = 'activity_type';
+        $activity_type_option_values = civicrm_api3('OptionValue', 'get', array('option_group_name' => $activity_type_option_group,'rowCount' => 0));
 
-        $this->conditions[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Conditions', 'option_group_id' => $activity_type_option_group));
-        $this->conditions[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Condition: Customer Contribution.', 'option_group_id' => $activity_type_option_group));
+        foreach($activity_type_option_values['values'] as $key => $value){
+          if($value['name'] === 'Contact with Customer') {
+            $this->contact_with_customer = $value;
+          }
+          if($value['name'] === 'Conditions'){
+            $this->conditions[] = $value;
+          }
+          if($value['name'] === 'Condition: Customer Contribution.'){
+            $this->conditions[] = $value;
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'private_case_information'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Change Custom Data'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Representative payment'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Change Case Start Date'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Assign Case Role'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Remove Case Role'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Change Case Status'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Change Case Type'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Change Case Tags'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Contact about Expert'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
+          if($value['name'] === 'Contact with Colleague'){
+            $this->doNotIncludeInCaseActivityList[] = $value;
+          }
 
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Condition: Customer Contribution.', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'private_case_information', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Custom Data', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Representative payment', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Start Date', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Assign Case Role', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Remove Case Role', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Status', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Type', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Change Case Tags', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact about Expert', 'option_group_id' => $activity_type_option_group));
-        $this->doNotIncludeInCaseActivityList[] = civicrm_api3('OptionValue', 'getsingle', array('name' => 'Contact with Colleague', 'option_group_id' => $activity_type_option_group));
 
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Advice Debriefing CC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Advice Debriefing Customer', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Advice Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Advice Debriefing Representative', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Advice Debriefing SC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-
-          array('name' => 'Business Debriefing SC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Business Debriefing CC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Business Debriefing Customer', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Business Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
-
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Remote Coaching Debriefing CC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Remote Coaching Debriefing Customer', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Remote Coaching Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Remote Coaching Debriefing Representative', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Remote Coaching Debriefing SC', 'option_group_id' => $activity_type_option_group));
-
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Seminar Debriefing CC', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Seminar Debriefing Customer', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Seminar Debriefing PrOf', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Seminar Debriefing Representative', 'option_group_id' => $activity_type_option_group));
-        $this->noActivityDetailsList[] = civicrm_api3('OptionValue', 'getsingle',
-          array('name' => 'Seminar Debriefing SC', 'option_group_id' => $activity_type_option_group));
-
+          if($value['name'] === 'Advice Debriefing CC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Advice Debriefing Customer'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Advice Debriefing PrOf'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Advice Debriefing Representative'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Advice Debriefing SC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Business Debriefing SC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Business Debriefing CC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Business Debriefing Customer'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Business Debriefing PrOf'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Remote Coaching Debriefing CC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Remote Coaching Debriefing Customer'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Remote Coaching Debriefing PrOf'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Remote Coaching Debriefing PrOf'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Remote Coaching Debriefing SC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Seminar Debriefing CC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Seminar Debriefing Customer'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Seminar Debriefing PrOf'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Seminar Debriefing Representative'){
+            $this->noActivityDetailsList[] = $value;
+          }
+          if($value['name'] === 'Seminar Debriefing SC'){
+            $this->noActivityDetailsList[] = $value;
+          }
+        }
 
       $rep_activity_names = [
         'Assessment Project Request by Rep',
