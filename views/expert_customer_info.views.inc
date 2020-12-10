@@ -29,8 +29,17 @@ $url_path = parse_url($url, PHP_URL_PATH);
 $customer_id = explode("/",$_GET[\'q\']);
 
 civicrm_initialize();
-$session = CRM_Core_Session::singleton();
-$contact_id = $session->get(\'userID\');
+//$session = CRM_Core_Session::singleton();
+//$contact_id = $session->get(\'userID\');
+global $user;
+try {
+  if($user->uid > 0) {
+    $contact = civicrm_api3(\'UFMatch\', \'getsingle\', array(\'uf_id\' => $user->uid));
+    $contact[\'user\'] = $user;
+  }
+} catch (Exception $e){
+  CRM_Core_Error::debug_log_message(\'Unable to retrieve CiviCRM Contact for Drupal ID: \'.$user->uid);
+}
 $civi_config = CRM_Core_Config::singleton();
 $civi_dsn = DB::parseDSN($civi_config->dsn);
 $civicrm_db = $civi_dsn[\'database\'];
@@ -41,7 +50,7 @@ WHERE rel.contact_id_a = :customer_id AND rel.is_active = :is_active",
 array(\':customer_id\'=>check_plain($customer_id[2]), \':is_active\'=>1))->fetchAll();
 
 foreach($relationships as $rel) {
-  if ($rel->contact_id == $contact_id) {
+  if ($rel->contact_id == $contact[\'contact_id\']) {
     $hasrole = TRUE;
   }
 }

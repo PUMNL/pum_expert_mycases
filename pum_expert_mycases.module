@@ -86,11 +86,19 @@ function _pum_expert_has_user_role_on_case($case_id) {
     return $roles[$case_id];
   }
 
+  global $user;
+  try{
+    $current_user = civicrm_api3('UFMatch', 'getsingle', array('uf_id' => $user->uid));
+    $contact_id = $current_user['contact_id'];
+  } catch(Exception $e){
+    CRM_Core_Error::debug_log_message('Unable to retrieve CiviCRM Contact for Drupal ID: '.$user->uid);
+  }
+
   $roles[$case_id] = false;
   $session = CRM_Core_Session::singleton();
   $case = civicrm_api3('Case', 'getsingle', array('case_id' => $case_id));
   foreach($case['contacts'] as $contact) {
-    if ($contact['contact_id'] == $session->get('userID')) {
+    if ($contact['contact_id'] == $contact_id) {
       $roles[$case_id] = true;
       break;
     }
@@ -110,8 +118,13 @@ function _pum_expert_mycases_user_has_role_on_case_project($case_id) {
   $hasrole = FALSE;
 
   civicrm_initialize();
-  $session = CRM_Core_Session::singleton();
-  $contact_id = $session->get('userID');
+  global $user;
+  try{
+    $current_user = civicrm_api3('UFMatch', 'getsingle', array('uf_id' => $user->uid));
+    $contact_id = $current_user['contact_id'];
+  } catch(Exception $e){
+    CRM_Core_Error::debug_log_message('Unable to retrieve CiviCRM Contact for Drupal ID: '.$user->uid);
+  }
   $civi_config = CRM_Core_Config::singleton();
   $civi_dsn = DB::parseDSN($civi_config->dsn);
   $civicrm_db = $civi_dsn['database'];
