@@ -15,38 +15,8 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Activity details';
 $handler->display->display_options['css_class'] = 'pum-list-view';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'php';
-$handler->display->display_options['access']['php_access'] = '$hasrole = FALSE;
-$url = $_SERVER["REQUEST_URI"];
-$url_path = parse_url($url, PHP_URL_PATH);
-$activity_id = explode("/",$_GET[\'q\']);
-civicrm_initialize();
-//$session = CRM_Core_Session::singleton();
-//$contact_id = $session->get(\'userID\');
-global $user;
-try {
-  if($user->uid > 0) {
-    $contact = civicrm_api3(\'UFMatch\', \'getsingle\', array(\'uf_id\' => $user->uid));
-    $contact[\'user\'] = $user;
-  }
-} catch (Exception $e){
-  CRM_Core_Error::debug_log_message(\'Unable to retrieve CiviCRM Contact for Drupal ID: \'.$user->uid);
-}
-$civi_config = CRM_Core_Config::singleton();
-$civi_dsn = DB::parseDSN($civi_config->dsn);
-$civicrm_db = $civi_dsn[\'database\'];
-$project_relationships = "";
-
-if (!empty($civicrm_db) && !empty($activity_id[3])) {
-	$project_relationships = db_query("SELECT contact_id_b AS \'contact_id\' FROM $civicrm_db.civicrm_relationship WHERE case_id IN (SELECT case_id FROM $civicrm_db.civicrm_case_project WHERE project_id = (SELECT project_id FROM $civicrm_db.civicrm_case_project WHERE case_id = (SELECT case_id FROM $civicrm_db.civicrm_case_activity WHERE activity_id = :activity_id)))", array(\':activity_id\'=>check_plain($activity_id[3])))->fetchAll();
-
-	foreach($project_relationships as $rel) {
-		if ($rel->contact_id == $contact[\'contact_id\']) {
-			$hasrole = TRUE;
-		}
-	}
-}
-return $hasrole;';
+$handler->display->display_options['access']['type'] = 'role';
+$handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Customer (contact)','Expert','Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -130,6 +100,14 @@ $handler->display->display_options['arguments']['id']['default_argument_type'] =
 $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
 $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
 $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+$handler->display->display_options['arguments']['id']['validate']['type'] = 'php';
+$handler->display->display_options['arguments']['id']['validate_options']['code'] = '$activity_details_link = _pum_expert_show_activity_details($handler->argument,$handler->view->name,$_GET[\'destination\']);
+if(!empty($activity_details_link)){
+return TRUE;
+} else {
+return FALSE;
+}';
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');

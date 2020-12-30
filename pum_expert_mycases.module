@@ -86,19 +86,11 @@ function _pum_expert_has_user_role_on_case($case_id) {
     return $roles[$case_id];
   }
 
-  global $user;
-  try{
-    $current_user = civicrm_api3('UFMatch', 'getsingle', array('uf_id' => $user->uid));
-    $contact_id = $current_user['contact_id'];
-  } catch(Exception $e){
-    CRM_Core_Error::debug_log_message('Unable to retrieve CiviCRM Contact for Drupal ID: '.$user->uid);
-  }
-
   $roles[$case_id] = false;
   $session = CRM_Core_Session::singleton();
   $case = civicrm_api3('Case', 'getsingle', array('case_id' => $case_id));
   foreach($case['contacts'] as $contact) {
-    if ($contact['contact_id'] == $contact_id) {
+    if ($contact['contact_id'] == $session->get('userID')) {
       $roles[$case_id] = true;
       break;
     }
@@ -118,13 +110,8 @@ function _pum_expert_mycases_user_has_role_on_case_project($case_id) {
   $hasrole = FALSE;
 
   civicrm_initialize();
-  global $user;
-  try{
-    $current_user = civicrm_api3('UFMatch', 'getsingle', array('uf_id' => $user->uid));
-    $contact_id = $current_user['contact_id'];
-  } catch(Exception $e){
-    CRM_Core_Error::debug_log_message('Unable to retrieve CiviCRM Contact for Drupal ID: '.$user->uid);
-  }
+  $session = CRM_Core_Session::singleton();
+  $contact_id = $session->get('userID');
   $civi_config = CRM_Core_Config::singleton();
   $civi_dsn = DB::parseDSN($civi_config->dsn);
   $civicrm_db = $civi_dsn['database'];
@@ -152,10 +139,16 @@ function _pum_expert_mycases_user_has_role_on_case_project($case_id) {
 function _pum_expert_show_activity_details($activity_id, $activity_type, $destination) {
   $config = pum_expert_mycases_config::singleton();
   $noDetailsActivityTypes = $config->getNoActivityDetailsList();
-  if (!isset($noDetailsActivityTypes[$activity_type])) {
-    return 'expert/my-cases/activitiy-detail/' . $activity_id . '?destination=' . $destination;
-  }
-  else {
+
+  if(!empty($activity_id) && !isset($noDetailsActivityTypes[$activity_type])) {
+    $caseId = CRM_Core_DAO::singleValueQuery("SELECT case_id FROM civicrm_case_activity WHERE activity_id = %1", array(1=>array((int)$activity_id,'Integer')));
+
+    if(!empty($caseId)){
+      if(_pum_expert_mycases_user_has_role_on_case_project($caseId)) {
+        return 'expert/my-cases/activitiy-detail/' . $activity_id . '?destination=' . $destination;
+      }
+    }
+  } else {
     return '';
   }
 }

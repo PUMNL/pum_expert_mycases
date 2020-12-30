@@ -16,7 +16,6 @@ $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Activity details';
 $handler->display->display_options['css_class'] = 'pum-list-view';
 $handler->display->display_options['use_more_always'] = FALSE;
-$handler->display->display_options['access']['type'] = 'php';
 $handler->display->display_options['access']['type'] = 'role';
 $handler->display->display_options['access']['role'] = pum_expert_mycases_get_role_ids(array('Representative'));
 $handler->display->display_options['cache']['type'] = 'none';
@@ -109,6 +108,7 @@ $handler->display->display_options['arguments']['id']['default_argument_type'] =
 $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
 $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
 $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
 $handler->display->display_options['arguments']['id']['validate']['type'] = 'php';
 $handler->display->display_options['arguments']['id']['validate_options']['code'] = 'return pum_customer_rep_may_see_activity($handler->argument);';
 
